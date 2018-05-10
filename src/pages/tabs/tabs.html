@@ -1,5 +1,22 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" [tabTitle]="tab1Title" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" [tabTitle]="tab2Title" tabIcon="search"></ion-tab>
-  <ion-tab [root]="tab3Root" [tabTitle]="tab3Title" tabIcon="cog"></ion-tab>
+  <ion-tab [root]="tab1Root" [tab-hidden] = "true" [tabTitle]="tab1Title" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" [tab-hidden] = "true" [tabTitle]="tab2Title" tabIcon="search"></ion-tab>
+  <ion-tab [root]="tab3Root" [tab-hidden] = "true" [tabTitle]="tab3Title" tabIcon="cog"></ion-tab>
+
+  <ion-footer mode="ios" class="shrinking-header" *ngIf="show">
+    <ion-toolbar mode="ios" transparent no-border>
+      <ion-segment [(ngModel)]="selected" color="secondary" mode="ios" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="0">
+          tab-1
+        </ion-segment-button>
+        <ion-segment-button value="1">
+         tab-2
+        </ion-segment-button>
+        <ion-segment-button value="2">
+          <ion-icon name="camera"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-footer>
 </ion-tabs>
+

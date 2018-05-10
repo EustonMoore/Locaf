@@ -29,7 +29,7 @@
         </ion-select>
       </ion-item>
 
-      <button ion-item [navPush]="subSettings" [navParams]="profileSettings">
+      <button ion-item (click)="openPage(profileSettings)" >
         {{ 'SETTINGS_PROFILE_BUTTON' | translate }}
       </button>
     </ion-list>

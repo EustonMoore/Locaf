@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 
 import { Settings } from '../../providers';
 
@@ -38,6 +38,7 @@ export class SettingsPage {
     public settings: Settings,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
+    public app: App,
     public translate: TranslateService) {
   }
 
@@ -87,6 +88,16 @@ export class SettingsPage {
 
       this._buildForm();
     });
+  }
+
+
+  openPage(parmas) {
+    
+    this.app.getRootNavs()[0].push('SettingsPage', 
+      parmas
+     
+    );
+    
   }
 
   ngOnChanges() {

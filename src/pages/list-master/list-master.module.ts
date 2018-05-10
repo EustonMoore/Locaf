@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
-
+import { ShrinkHeaderModule } from '../../components/shrink-header/shrink-header.module';
 import { ListMasterPage } from './list-master';
 
 @NgModule({
@@ -10,10 +10,11 @@ import { ListMasterPage } from './list-master';
   ],
   imports: [
     IonicPageModule.forChild(ListMasterPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    ShrinkHeaderModule
   ],
   exports: [
-    ListMasterPage
+    ListMasterPage,
   ]
 })
 export class ListMasterPageModule { }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, App  } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
+
 
 @IonicPage()
 @Component({
@@ -11,8 +12,8 @@ import { Items } from '../../providers';
 })
 export class ListMasterPage {
   currentItems: Item[];
-
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+ 
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public app: App) {
     this.currentItems = this.items.query();
   }
 
@@ -47,8 +48,12 @@ export class ListMasterPage {
    * Navigate to the detail page for this item.
    */
   openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
+    
+    this.app.getRootNavs()[0].push('ItemDetailPage', {
       item: item
+     
     });
+    
   }
+ 
 }

@@ -13,7 +13,12 @@ export class SearchPage {
 
   currentItems: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) {
+
+    
+
+
+   }
 
   /**
    * Perform a service for the proper items.
