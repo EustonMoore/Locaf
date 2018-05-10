@@ -31,15 +31,7 @@ export class TabsPage {
       this.tab3Title = values['TAB3_TITLE'];
     });
 
-    window.addEventListener('keyboardWillShow', (ev) => {
-      // Describe your logic which will be run each time when keyboard is about to be shown.
-      this.show = false;
-  });
-
-  window.addEventListener('keyboardWillHide', () => {
-    // Describe your logic which will be run each time when keyboard is about to be closed.
-    this.show = true;
-});
+   
     
   }
 
