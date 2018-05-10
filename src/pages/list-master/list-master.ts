@@ -12,7 +12,6 @@ import { Items } from '../../providers';
 })
 export class ListMasterPage {
   currentItems: Item[];
- 
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public app: App) {
     this.currentItems = this.items.query();
   }
@@ -35,6 +34,7 @@ export class ListMasterPage {
       }
     })
     addModal.present();
+
   }
 
   /**

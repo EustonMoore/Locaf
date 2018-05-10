@@ -25,6 +25,9 @@ export class ShrinkHeader {
         this.contentBox =  this.elementRef.nativeElement.getElementsByClassName('scroll-content')[0];
         this.renderer.setElementStyle(this.contentBox, 'margin-top','0px !important');
         this.renderer.setElementStyle(this.contentBox, 'padding-top','100px');
+
+      
+      
     }
 
     ngAfterViewInit() {
@@ -32,8 +35,24 @@ export class ShrinkHeader {
         this.header = document.getElementsByClassName(this.headerToHide)[0];
         this.headerHeight = this.header.clientHeight;
 
+        
+        window.addEventListener('keyboardWillShow', (ev) => {
+            // Describe your logic which will be run each time when keyboard is about to be shown.
+            console.log('sdfsdf');
+            this.hideFooter();
+        });
+      
+        window.addEventListener('keyboardWillHide', () => {
+          // Describe your logic which will be run each time when keyboard is about to be closed.
+          console.log('sdfsdf22');
+          this.showFooter();
+        });
+
+
     }
 
+
+    
     onContentScroll(ev) {
         ev.domWrite(() => {
             this.updateHeader(ev);
@@ -44,15 +63,26 @@ export class ShrinkHeader {
         this.scrollPosition = ev.scrollTop;
         if (this.scrollPosition > this.lastScrollTop && this.scrollPosition >= 25) {
             // scrolling down
-            
-            this.renderer.setElementStyle(this.header, 'transform', 'translateY(' + this.headerHeight + 'px)');
+            this.hideFooter();
+          
         } else {
             // scrolling up
-            this.renderer.setElementStyle(this.header, 'transition', 'all 0.3s linear');
-            this.renderer.setElementStyle(this.header, 'transform', 'translateY(0px)');
+            this.showFooter();
         }
         // reset
         this.lastScrollTop = this.scrollPosition;
     }
+
+    hideFooter(){
+        this.renderer.setElementStyle(this.header, 'transform', 'translateY(' + this.headerHeight + 'px)');
+    }
+
+    showFooter(){
+
+        this.renderer.setElementStyle(this.header, 'transition', 'all 0.2s linear');
+        this.renderer.setElementStyle(this.header, 'transform', 'translateY(0px)');
+    }
+
+    
 
 }
