@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
+import { ShrinkFabModule } from '../../components/shrink-fab/shrink-fab.module';
 import { ShrinkHeaderModule } from '../../components/shrink-header/shrink-header.module';
-import { ListMasterPage } from './list-master';
+import { SocialPage } from './social';
 
 @NgModule({
   declarations: [
-    ListMasterPage,
+    SocialPage,
   ],
   imports: [
-    IonicPageModule.forChild(ListMasterPage),
+    IonicPageModule.forChild(SocialPage),
     TranslateModule.forChild(),
-    ShrinkHeaderModule
+    ShrinkHeaderModule,
+    ShrinkFabModule
   ],
   exports: [
-    ListMasterPage,
+    SocialPage
   ]
 })
-export class ListMasterPageModule { }
+export class SocialPageModule { }

@@ -3,7 +3,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 import { TabHiddenDirective } from '../../components/tab-hidden.directive'
 import { TabsPage } from './tabs';
-
 @NgModule({
   declarations: [
     TabsPage,

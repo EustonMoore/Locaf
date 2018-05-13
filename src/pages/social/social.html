@@ -1,0 +1,99 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end  [ngSwitch]="view">
+      <button ion-button icon-only *ngSwitchCase="'list'" 
+      (click)="view='grid'"
+      [class.active]="view === 'grid'">
+      <ion-icon name="list" class="dark"></ion-icon>
+      </button>
+      <button ion-button icon-only *ngSwitchCase="'grid'" 
+          (click)="view='list'"
+          [class.active]="view === 'list'">
+          <ion-icon name="grid" class="dark"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="openSocialSearchPage()">
+          <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content fullscreen="" shrink-header [headerToHide]="'shrinking-header'">
+  
+  <div *ngIf="view == 'list'">
+    리스트
+    <!-- <ion-card  *ngFor="let feed of feeds  | async">
+        <ion-item sticky>
+          <ion-avatar item-left>
+            <img [src]="feed.imgProfile">
+          </ion-avatar>
+          <h2>{{feed.name}}</h2>
+          <p>November 5, 1955</p>
+        </ion-item>
+        
+            <ion-slides  pager>
+              <ion-slide *ngFor="let images of  feed.images | async " [ngStyle]="{'background' : 'url(' + images.url + ')'}">
+              </ion-slide>
+            </ion-slides>
+          
+        <ion-card-content>
+          <ion-card-title>
+            {{feed.title}}
+          </ion-card-title>
+          <p>
+            {{feed.description}}
+          </p>
+        </ion-card-content>
+        
+        <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear color="gray">
+                <ion-icon name="md-heart"></ion-icon>
+                <div>{{feed.like}}</div>
+              </button>
+            </ion-col>
+            
+            <ion-col>
+              <button ion-button icon-left clear color="gray">
+                <ion-icon name="md-chatboxes"></ion-icon>
+                <div>{{feed.comment}}</div>
+              </button>
+            </ion-col>
+    
+            <ion-col center text-center> 
+              <button ion-button icon-left clear color="pink">     
+                <div>REPLY</div>
+              </button>
+            </ion-col>
+        </ion-row>
+    
+      </ion-card> -->
+  </div>
+
+  <div *ngIf="view == 'grid'">
+    그리드
+    <!-- <ion-row wrap color="gray">
+        <ion-col col-4 *ngFor="let image of imgGalleryArray , let i = index  " >
+          <img tappable class="expanded-image"  [src]="image.url"   (click)="fullscreenImage(i)" />
+        
+      </ion-col>
+    </ion-row> -->
+  </div>
+
+  <ion-fab bottom right #fab style="bottom: 60px;" [hideFabOnscroll]='content' >
+    <button ion-fab color="orange"> <ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+        <button ion-fab (click)="openSocialCreatePage()"> <ion-icon name="images"></ion-icon> </button>
+        <button ion-fab (click)="openSocialCreatePage()"> <ion-icon name="camera"></ion-icon> </button>
+      </ion-fab-list>
+  </ion-fab>
+</ion-content>

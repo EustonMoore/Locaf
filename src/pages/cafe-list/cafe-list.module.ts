@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
-
 import { ShrinkHeaderModule } from '../../components/shrink-header/shrink-header.module';
-import { SearchPage } from './search';
+import { ShrinkFabModule } from '../../components/shrink-fab/shrink-fab.module';
+import { CafeListPage } from './cafe-list';
 
 @NgModule({
   declarations: [
-    SearchPage,
+    CafeListPage,
   ],
   imports: [
-    IonicPageModule.forChild(SearchPage),
+    IonicPageModule.forChild(CafeListPage),
     TranslateModule.forChild(),
-    ShrinkHeaderModule
+    ShrinkHeaderModule,
+    ShrinkFabModule
   ],
   exports: [
-    SearchPage
+    CafeListPage,
   ]
 })
-export class SearchPageModule { }
+export class CafeListPageModule { }
