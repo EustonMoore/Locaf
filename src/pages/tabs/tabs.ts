@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, Tabs } from 'ionic-angular';
 
 import { Tab1Root, Tab2Root, Tab3Root } from '../';
 import { Subscription } from 'rxjs/Subscription';
@@ -11,12 +11,15 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild('tabs') tabsHandler: Tabs
+
   tab1Root: any = Tab1Root;
   tab2Root: any = Tab2Root;
   tab3Root: any = Tab3Root;
   
   private subscriptions: Subscription[];
   public selected = "0";
+  public selectedTab = 2;
   public show = true;
   tab1Title = " ";
   tab2Title = " ";
@@ -36,14 +39,8 @@ export class TabsPage {
   }
 
   segmentChanged(event){
-    this.navCtrl.getActiveChildNavs()[0].select(+event.value);
+    this.tabsHandler.select(+event.value);
   }
  
-  ionViewCanEnter(){
-    console.log('enter')
-  }
-
-  ionViewCanLeave(){
-    console.log('leave')
-  }
+  
 }

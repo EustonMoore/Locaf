@@ -1,3 +1,11 @@
 page-tabs {
-   
+   .segment-button{
+        color: white !important;
+        border-color: white !important;
+        background-color: rgba(0,0,0,0.3) !important;
+    
+   }
+   .segment-activated{
+    background-color: color($colors, orange) !important;
+    }
 }

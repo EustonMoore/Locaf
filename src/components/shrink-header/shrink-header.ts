@@ -24,10 +24,8 @@ export class ShrinkHeader {
     ngOnInit(){
         this.contentBox =  this.elementRef.nativeElement.getElementsByClassName('scroll-content')[0];
         this.renderer.setElementStyle(this.contentBox, 'margin-top','0px !important');
-        this.renderer.setElementStyle(this.contentBox, 'padding-top','100px');
+        this.renderer.setElementStyle(this.contentBox, 'padding-top','0px !important' );
 
-      
-      
     }
 
     ngAfterViewInit() {
