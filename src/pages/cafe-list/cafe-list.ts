@@ -73,7 +73,9 @@ export class CafeListPage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-
+    if(this.fabHandler._listsActive){
+      this.fabHandler.close();
+    }
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();

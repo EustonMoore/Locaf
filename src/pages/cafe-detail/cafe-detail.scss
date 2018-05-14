@@ -117,4 +117,23 @@ page-cafe-detail {
   .transition{
     transition: background-size .1s ease-in;
   }
+
+ ion-col{
+   padding: 1.5px !important;
+ }
+  
+
+ 
+
+  .square-image{
+ 
+    padding:1px;
+    float:left;
+    position: relative;
+    width: 100%;
+    padding-bottom : 100%; /* = width for a 1:1 aspect ratio */
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover; 
+  }
 }

@@ -41,6 +41,21 @@ export class TabsPage {
   segmentChanged(event){
     this.tabsHandler.select(+event.value);
   }
+
+  swipeEvent(event){
+    let tabs = +this.selected;
+
+    if(event.direction == 2 && tabs > 0){
+      
+      this.tabsHandler.select(tabs--);
+      this.selected = tabs.toString();
+    }
+    else if(event.direction == 4 && tabs < 2){
+      this.tabsHandler.select(tabs++);
+      this.selected = tabs.toString();
+
+    }
+  }
  
   
 }

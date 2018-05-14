@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { PhotoLibrary } from '@ionic-native/photo-library';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -14,7 +14,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { Items } from '../mocks/providers/items';
-import { Settings, User, Api, FirestoreProvider, TranslateProvider } from '../providers';
+import { Settings, User, Api, FirestoreProvider, TranslateProvider, StorageProvider } from '../providers';
 import { MyApp } from './app.component';
 
 import { Environment } from '../environment';
@@ -72,10 +72,11 @@ export function provideSettings(storage: Storage) {
     User,
     FirestoreProvider,
     TranslateProvider,
+    StorageProvider,
     Camera,
     SplashScreen,
     StatusBar,
-    PhotoLibrary,
+    ImagePicker,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

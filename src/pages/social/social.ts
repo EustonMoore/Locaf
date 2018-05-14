@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, FabContainer, App } from 'ionic-angular';
-
+import { ImagePicker } from '@ionic-native/image-picker';
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
 
@@ -16,15 +16,19 @@ export class SocialPage {
 
   public view = 'list';
   currentItems: any = [];
+  options = {
+    maximumImagesCount: 3,
+    width: 300,
+    height: 300,
+    quality: 80
+  }
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public app: App,
-    public items: Items) {
-
-    
-
+    public items: Items,
+    public imagePicker: ImagePicker) {
 
    }
 
@@ -57,10 +61,16 @@ export class SocialPage {
 
   openSocialCreatePage(item: Item) {
     
-    this.app.getRootNavs()[0].push('SocialCreatePage', {
-      item: item
+    this.imagePicker.getPictures({maximumImagesCount: 3}).then((results) => {
+      results.forEach(result => {
+        console.log(result);
+      })
+    })
+
+    // this.app.getRootNavs()[0].push('SocialCreatePage', {
+    //   item: item
      
-    });
+    // });
     
   }
 

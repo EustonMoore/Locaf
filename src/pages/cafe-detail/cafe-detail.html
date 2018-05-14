@@ -102,10 +102,12 @@
           <ion-card-header>
             Photos
           </ion-card-header>
-          <ion-grid>
-                <ion-row wrap color="gray">
-                  <ion-col tappable col-4 *ngFor="let image of cafe.images.imgGallery  ,let i = index" >
-                  <img class="expanded-image" [src]="image" (click)="openFullImage(i)"/>
+          <ion-grid no-padding >
+                <ion-row  wrap color="gray">
+                  <ion-col  tappable col-4 *ngFor="let image of cafe.images.imgGallery  ,let i = index" >
+                    
+                    <div class="square-image" [ngStyle]="{'background-image': 'url(' + image + ')'}" (click)="openFullImage(i)" ></div>
+                  <!-- <img class="square-image"  [src]="image" /> -->
                   </ion-col>
                 </ion-row>
           </ion-grid>
