@@ -4,7 +4,8 @@ import { IonicPage, ModalController, NavController, App, FabContainer, Content} 
 import { Item, Cafe } from '../../models';
 import { Items, FirestoreProvider } from '../../providers';
 import { Subscription } from 'rxjs/Subscription';
-
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 
 
 @IonicPage()
@@ -18,14 +19,19 @@ export class CafeListPage {
 
   private cafes: Cafe[];
   private subscriptions: Subscription[];
-
+  title = "test";
 
   constructor(
     public navCtrl: NavController, 
     public items: Items, 
     public modalCtrl: ModalController, 
     public app: App,
-    public firestore: FirestoreProvider) {
+    public firestore: FirestoreProvider,
+    public geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder
+    ) {
+      
+      
   }
 
   /**
@@ -36,6 +42,9 @@ export class CafeListPage {
       this.cafes = cafes;
       console.log(this.cafes[3]);
     })
+
+   
+
   }
 
   /**
@@ -73,7 +82,16 @@ export class CafeListPage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
+    if(this.fabHandler._listsActive){
+      this.fabHandler.close();
+    }
 
+    this.geolocation.getCurrentPosition().then((resp)=> {
+      
+      this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818).then((result: NativeGeocoderReverseResult) => {
+        this.title = result.countryName;
+      })
+    })
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();

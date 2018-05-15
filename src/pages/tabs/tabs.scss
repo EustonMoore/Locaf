@@ -1,5 +1,8 @@
 page-tabs {
+
    .segment-button{
+        height: 3.0rem !important;
+        line-height: 3,0rem;
         color: white !important;
         border-color: white !important;
         background-color: rgba(0,0,0,0.3) !important;
@@ -7,5 +10,6 @@ page-tabs {
    }
    .segment-activated{
     background-color: color($colors, orange) !important;
+    
     }
 }

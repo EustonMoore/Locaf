@@ -7,7 +7,9 @@
       </button>
     </ion-buttons>
     
-
+    <ion-title>
+      {{title}}
+    </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addItem()">
         <ion-icon name="star-outline"></ion-icon>
@@ -26,7 +28,7 @@
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
-      refreshingSpinner="circles"
+      refreshingSpinner="crescent"
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
@@ -35,13 +37,13 @@
 
   <ion-card tappable no-padding no-margin class="card-list " *ngFor="let cafe of cafes" (click)="openCafeDetailPage(cafes[3])">
     <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + cafe.images.background+ ')'}">
-      <h2 class="card-list-title" > {{cafe.cafeName}}</h2>              
+      <h2 class="card-list-title" > {{title}}</h2>              
     </div>
   </ion-card>
 
 
 
-  <ion-fab bottom right #fab style="bottom: 60px;" [hideFabOnscroll]='content' >
+  <ion-fab bottom right #fab style="bottom: 10%;" [hideFabOnscroll]='content' >
       <button ion-fab color="orange"> <ion-icon name="ios-funnel"></ion-icon></button>
       <ion-fab-list side="top">
           <button ion-fab>빈티지</button>

@@ -3,9 +3,9 @@
   <ion-tab [root]="tab2Root" [tab-hidden] = "true" [tabTitle]="tab2Title" tabIcon="search"></ion-tab>
   <ion-tab [root]="tab3Root" [tab-hidden] = "true" [tabTitle]="tab3Title" tabIcon="cog"></ion-tab>
 
-  <ion-footer mode="ios" class="shrinking-header" *ngIf="show">
+  <ion-footer mode="ios" class="shrinking-header" *ngIf="show"  >
     <ion-toolbar mode="ios" transparent no-border>
-      <ion-segment [(ngModel)]="selected" mode="ios" (ionChange)="segmentChanged($event)">
+      <ion-segment [(ngModel)]="selected" mode="ios"  (swipe)="swipeEvent($event)" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="0">
           tab-1
         </ion-segment-button>
