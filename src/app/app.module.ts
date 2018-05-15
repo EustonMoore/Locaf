@@ -2,19 +2,22 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, Toast } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { Items } from '../mocks/providers/items';
-import { Settings, User, Api, FirestoreProvider, TranslateProvider, StorageProvider } from '../providers';
+import { Settings, User, Api, FirestoreProvider, TranslateProvider, StorageProvider, LoadingProvider, ToastProvider } from '../providers';
 import { MyApp } from './app.component';
 
 import { Environment } from '../environment';
@@ -73,10 +76,15 @@ export function provideSettings(storage: Storage) {
     FirestoreProvider,
     TranslateProvider,
     StorageProvider,
+    LoadingProvider,
+    ToastProvider,
     Camera,
     SplashScreen,
     StatusBar,
     ImagePicker,
+    Geolocation,
+    NativeGeocoder,
+    File,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

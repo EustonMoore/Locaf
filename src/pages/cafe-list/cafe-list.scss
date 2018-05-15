@@ -9,7 +9,7 @@ page-cafe-list {
     }
     // ************ list view ************//  
         ion-card.card-list {
-            height: 33% !important;
+            width: 100%;
             margin: 0px 0px 0px 0px !important;
             //border-bottom: 1px solid #333333;         
         }
@@ -27,11 +27,13 @@ page-cafe-list {
         }
         .card-list-bg {
             position: relative;
-            height: 100% !important;
+            width: 100%;
+            padding-bottom:100%;
             // background: url(img/1.jpg) no-repeat;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
+            background-position: center;
             background-size: cover;
         }
         .card-list-bg .card-list-title {

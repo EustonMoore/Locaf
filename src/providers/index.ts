@@ -1,5 +1,6 @@
 export { TranslateProvider } from './translate/translate';
-
+export { LoadingProvider } from './loading/loading';
+export { ToastProvider } from './toast/toast';
 
 export { FirestoreProvider } from './firestore/firestore'
 export { StorageProvider } from './storage/storage';
