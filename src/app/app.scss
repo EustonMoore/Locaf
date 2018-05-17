@@ -16,6 +16,20 @@
 // automatically applied to the <body> element in the app.
 
 @import '../theme/animations';
+@import '../theme/customicon';
+
 
 //hide scrollbar
 ::-webkit-scrollbar{ display:none; }
+
+
+ion-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    text-align: center;
+}
+

@@ -8,14 +8,19 @@
     </ion-buttons>
     
     <ion-title>
-      {{title}}
+        <ion-buttons center>
+            <button ion-button >
+              <ion-icon name="navigate"></ion-icon>
+              &nbsp;&nbsp;{{ currentLocation }}
+            </button>
+          </ion-buttons>
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="star-outline"></ion-icon>
+        <ion-icon name="custom-search" color="primary"></ion-icon>
       </button>
       <button ion-button icon-only (click)="addItem()">
-          <ion-icon name="search"></ion-icon>
+        <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -37,7 +42,7 @@
 
   <ion-card tappable no-padding no-margin class="card-list " *ngFor="let cafe of cafes" (click)="openCafeDetailPage(cafes[3])">
     <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + cafe.images.background+ ')'}">
-      <h2 class="card-list-title" > {{title}}</h2>              
+      <h2 class="card-list-title" > {{cafe.cafeName}}</h2>              
     </div>
   </ion-card>
 
@@ -45,17 +50,18 @@
 
   <ion-fab bottom right #fab style="bottom: 10%;" [hideFabOnscroll]='content' >
       <button ion-fab color="orange"> <ion-icon name="ios-funnel"></ion-icon></button>
-      <ion-fab-list side="top">
+      <!-- <ion-fab-list side="top">
           <button ion-fab>빈티지</button>
           <button ion-fab>미니멀</button>
           <button ion-fab>에클레틱</button>
           <button ion-fab>모던</button>
-        </ion-fab-list>
+        </ion-fab-list> -->
 
-        <ion-fab-list side="left">
+        <ion-fab-list side="top">
             <button ion-fab>흡연</button>
             <button ion-fab>주차</button>
             <button ion-fab>WIFI</button>
+            <button ion-fab>가오픈</button>
           </ion-fab-list>
     </ion-fab>
 </ion-content>

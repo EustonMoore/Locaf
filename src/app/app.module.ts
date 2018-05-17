@@ -3,11 +3,12 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
+import { GoogleMaps, LocationService } from '@ionic-native/google-maps'
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { CameraPreview } from '@ionic-native/camera-preview';
 import { Geolocation } from '@ionic-native/geolocation';
-import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -58,7 +59,8 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp,{
-      backButtonText: ''
+      backButtonText: '',
+    
     }),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(Environment.firebase),
@@ -79,11 +81,13 @@ export function provideSettings(storage: Storage) {
     LoadingProvider,
     ToastProvider,
     Camera,
+    CameraPreview,
     SplashScreen,
     StatusBar,
     ImagePicker,
     Geolocation,
-    NativeGeocoder,
+    GoogleMaps,
+    LocationService,
     File,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development

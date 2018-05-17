@@ -59,13 +59,22 @@ export class SocialPage {
     
   }
 
-  openSocialCreatePage(item: Item) {
+  openSocialCreatePage(select) {
     
-    this.imagePicker.getPictures({maximumImagesCount: 3}).then((results) => {
-      results.forEach(result => {
-        console.log(result);
+    if(select == 'camera'){
+      this.app.getRootNavs()[0].push('SocialCreatePage');
+
+    }
+
+
+    else if(select == 'gallery'){
+      this.imagePicker.getPictures({maximumImagesCount: 3}).then((results) => {
+        results.forEach(result => {
+          console.log(result);
+        })
       })
-    })
+    }
+    
 
     // this.app.getRootNavs()[0].push('SocialCreatePage', {
     //   item: item
