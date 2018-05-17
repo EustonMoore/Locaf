@@ -1,11 +1,22 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, ModalController, NavController, App, FabContainer, Content} from 'ionic-angular';
+import { IonicPage, ModalController, NavController, App, FabContainer, Content, Platform} from 'ionic-angular';
 
 import { Item, Cafe } from '../../models';
 import { Items, FirestoreProvider } from '../../providers';
 import { Subscription } from 'rxjs/Subscription';
 import { Geolocation } from '@ionic-native/geolocation';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  GoogleMapsAnimation,
+  MyLocation,
+  Geocoder,
+  GeocoderResult,
+  ILatLng
+} from '@ionic-native/google-maps';
+
 
 
 @IonicPage()
@@ -19,7 +30,9 @@ export class CafeListPage {
 
   private cafes: Cafe[];
   private subscriptions: Subscription[];
-  title = "test";
+  public currentLocation = "";
+  mapReady: boolean = false;
+  map: GoogleMap;
 
   constructor(
     public navCtrl: NavController, 
@@ -28,7 +41,7 @@ export class CafeListPage {
     public app: App,
     public firestore: FirestoreProvider,
     public geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder
+    public platform: Platform
     ) {
       
       
@@ -46,6 +59,9 @@ export class CafeListPage {
    
 
   }
+
+ 
+
 
   /**
    * Prompt the user to add a new item. This shows our ItemCreatePage in a
@@ -80,25 +96,50 @@ export class CafeListPage {
     
   }
 
+  getCurrentLocation(){
+    if(this.platform.is('cordova')){
+      this.geolocation.getCurrentPosition().then((resp)=> {
+        let position = {
+          lat: resp.coords.latitude,
+          lng: resp.coords.longitude
+        }
+
+        Geocoder.geocode({
+          "position": position
+        }).then((results: GeocoderResult[]) => {
+          if (results.length == 0) {
+            // Not found
+            return null;
+          }
+          console.log(results[0]);
+          this.currentLocation = "";
+          let split= results[0].extra.lines[0].split(" ");
+          console.log(split);
+          for(let i = 1 ; i < 4; i ++){
+            this.currentLocation += split[i] + ' ';
+          }
+          
+         
+
+        });
+      })
+    }
+  }
+
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
     if(this.fabHandler._listsActive){
       this.fabHandler.close();
     }
-
-    this.geolocation.getCurrentPosition().then((resp)=> {
-      
-      this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818).then((result: NativeGeocoderReverseResult) => {
-        this.title = result.countryName;
-      })
-    })
+      this.getCurrentLocation();
+    
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
   }
 
-  closeFabList(){
+  closeFabList(){ 
    if(this.fabHandler._listsActive){
      this.fabHandler.close();
    }

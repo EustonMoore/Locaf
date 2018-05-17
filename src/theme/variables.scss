@@ -395,12 +395,12 @@ $colors: (
 
 @import "ionic.ionicons";
 
-
 // Fonts
 // --------------------------------------------------
 
 @import "roboto";
 @import "noto-sans";
+
 
 
 $text-input-ios-show-focus-highlight:      false;
@@ -414,3 +414,4 @@ $text-input-md-show-invalid-highlight:    false;
 $text-input-wp-show-focus-highlight:      false;
 $text-input-wp-show-valid-highlight:      false;
 $text-input-wp-show-invalid-highlight:    false;
+// $background-color: transparent;

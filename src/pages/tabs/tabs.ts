@@ -50,7 +50,7 @@ export class TabsPage {
       this.tabsHandler.select(tabs--);
       this.selected = tabs.toString();
     }
-    else if(event.direction == 4 && tabs < 2){
+    else if(event.direction == 4 && tabs < 1){
       this.tabsHandler.select(tabs++);
       this.selected = tabs.toString();
 

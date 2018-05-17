@@ -92,8 +92,8 @@
   <ion-fab bottom right #fab style="bottom: 10%;" [hideFabOnscroll]='content' >
     <button ion-fab color="orange"> <ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="top">
-        <button ion-fab (click)="openSocialCreatePage()"> <ion-icon name="images"></ion-icon> </button>
-        <button ion-fab (click)="openSocialCreatePage()"> <ion-icon name="camera"></ion-icon> </button>
+        <button ion-fab (click)="openSocialCreatePage('gallery')"> <ion-icon name="images"></ion-icon> </button>
+        <button ion-fab (click)="openSocialCreatePage('camera')"> <ion-icon name="camera"></ion-icon> </button>
       </ion-fab-list>
   </ion-fab>
 </ion-content>
