@@ -1,0 +1,73 @@
+ion-icon {
+    &[class*="lc-"] {
+      mask-size: contain;
+      mask-position: 50% 50%;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 1em;
+      height: 1em;
+    }
+  
+    &[class*="lc-telephone-1"] {mask-image: url(../assets/fonts/flaticon/001-telephone-1.svg);}
+    &[class*="lc-phone-1"] {mask-image: url(../assets/fonts/flaticon/002-phone-1.svg);}
+    &[class*="lc-telephone"] {mask-image: url(../assets/fonts/flaticon/003-telephone.svg);}
+    &[class*="lc-phone"] {mask-image: url(../assets/fonts/flaticon/004-phone.svg);}
+    &[class*="lc-cigar"] {mask-image: url(../assets/fonts/flaticon/005-cigar.svg);}
+    &[class*="lc-no-smoking"] {mask-image: url(../assets/fonts/flaticon/006-no-smoking.svg);}
+    &[class*="lc-bouquet"] {mask-image: url(../assets/fonts/flaticon/007-bouquet.svg);}
+    &[class*="lc-flowers"] {mask-image: url(../assets/fonts/flaticon/008-flowers.svg);}
+    &[class*="lc-flower"] {mask-image: url(../assets/fonts/flaticon/009-flower.svg);}
+    &[class*="lc-music"] {mask-image: url(../assets/fonts/flaticon/010-music.svg);}
+    &[class*="lc-parking"] {mask-image: url(../assets/fonts/flaticon/011-parking.svg);}
+    &[class*="lc-coffee-grinder"] {mask-image: url(../assets/fonts/flaticon/012-coffee-grinder.svg);}
+    &[class*="lc-coffee-cup-1"] {mask-image: url(../assets/fonts/flaticon/013-coffee-cup-1.svg);}
+    &[class*="lc-food-4"] {mask-image: url(../assets/fonts/flaticon/014-food-4.svg);}
+    &[class*="lc-can"] {mask-image: url(../assets/fonts/flaticon/015-can.svg);}
+    &[class*="lc-interface-1"] {mask-image: url(../assets/fonts/flaticon/016-interface-1.svg);}
+    &[class*="lc-food-3"] {mask-image: url(../assets/fonts/flaticon/017-food-3.svg);}
+    &[class*="lc-food-2"] {mask-image: url(../assets/fonts/flaticon/018-food-2.svg);}
+    &[class*="lc-glass"] {mask-image: url(../assets/fonts/flaticon/019-glass.svg);}
+    &[class*="lc-ice-cream"] {mask-image: url(../assets/fonts/flaticon/020-ice-cream.svg);}
+    &[class*="lc-cupcake"] {mask-image: url(../assets/fonts/flaticon/021-cupcake.svg);}
+    &[class*="lc-sandwich"] {mask-image: url(../assets/fonts/flaticon/022-sandwich.svg);}
+    &[class*="lc-cheese"] {mask-image: url(../assets/fonts/flaticon/023-cheese.svg);}
+    &[class*="lc-pencil"] {mask-image: url(../assets/fonts/flaticon/024-pencil.svg);}
+    &[class*="lc-social"] {mask-image: url(../assets/fonts/flaticon/025-social.svg);}
+    &[class*="lc-user"] {mask-image: url(../assets/fonts/flaticon/026-user.svg);}
+    &[class*="lc-picture"] {mask-image: url(../assets/fonts/flaticon/027-picture.svg);}
+    &[class*="lc-placeholder-2"] {mask-image: url(../assets/fonts/flaticon/028-placeholder-2.svg);}
+    &[class*="lc-placeholder-1"] {mask-image: url(../assets/fonts/flaticon/029-placeholder-1.svg);}
+    &[class*="lc-home"] {mask-image: url(../assets/fonts/flaticon/030-home.svg);}
+    &[class*="lc-placeholder"] {mask-image: url(../assets/fonts/flaticon/031-placeholder.svg);}
+    &[class*="lc-wifi"] {mask-image: url(../assets/fonts/flaticon/032-wifi.svg);}
+    &[class*="lc-business"] {mask-image: url(../assets/fonts/flaticon/033-business.svg);}
+    &[class*="lc-cogwheel"] {mask-image: url(../assets/fonts/flaticon/034-cogwheel.svg);}
+    &[class*="lc-share"] {mask-image: url(../assets/fonts/flaticon/035-share.svg);}
+    &[class*="lc-weather"] {mask-image: url(../assets/fonts/flaticon/036-weather.svg);}
+    &[class*="lc-search"] {mask-image: url(../assets/fonts/flaticon/037-search.svg);}
+    &[class*="lc-favorite"] {mask-image: url(../assets/fonts/flaticon/038-favorite.svg);}
+    &[class*="lc-star"] {mask-image: url(../assets/fonts/flaticon/039-star.svg);}
+    &[class*="lc-shapes-1"] {mask-image: url(../assets/fonts/flaticon/040-shapes-1.svg);}
+    &[class*="lc-shapes"] {mask-image: url(../assets/fonts/flaticon/041-shapes.svg);}
+    &[class*="lc-interface"] {mask-image: url(../assets/fonts/flaticon/042-interface.svg);}
+    &[class*="lc-hamburger"] {mask-image: url(../assets/fonts/flaticon/043-menu-2.svg);}
+    &[class*="lc-down-arrow"] {mask-image: url(../assets/fonts/flaticon/044-down-arrow.svg);}
+    &[class*="lc-left-arrow"] {mask-image: url(../assets/fonts/flaticon/045-left-arrow.svg);}
+    &[class*="lc-right-arrow"] {mask-image: url(../assets/fonts/flaticon/046-right-arrow.svg);}
+    &[class*="lc-next"] {mask-image: url(../assets/fonts/flaticon/047-next.svg);}
+    &[class*="lc-up-arrow"] {mask-image: url(../assets/fonts/flaticon/048-up-arrow.svg);}
+    &[class*="lc-cancel"] {mask-image: url(../assets/fonts/flaticon/049-cancel.svg);}
+    &[class*="lc-signs"] {mask-image: url(../assets/fonts/flaticon/050-signs.svg);}
+    &[class*="lc-check"] {mask-image: url(../assets/fonts/flaticon/051-check.svg);}
+    &[class*="lc-symbol"] {mask-image: url(../assets/fonts/flaticon/052-symbol.svg);}
+    &[class*="lc-food-1"] {mask-image: url(../assets/fonts/flaticon/053-food-1.svg);}
+    &[class*="lc-kettle"] {mask-image: url(../assets/fonts/flaticon/054-kettle.svg);}
+    &[class*="lc-menu"] {mask-image: url(../assets/fonts/flaticon/055-menu.svg);}
+    &[class*="lc-gps"] {mask-image: url(../assets/fonts/flaticon/056-gps.svg);}
+    &[class*="lc-coffee-cup"] {mask-image: url(../assets/fonts/flaticon/057-coffee-cup.svg);}
+    &[class*="lc-terrace"] {mask-image: url(../assets/fonts/flaticon/058-terrace.svg);}
+    &[class*="lc-menu-1"] {mask-image: url(../assets/fonts/flaticon/059-menu-1.svg);}
+    &[class*="lc-tea-cup"] {mask-image: url(../assets/fonts/flaticon/060-tea-cup.svg);}
+    &[class*="lc-juice"] {mask-image: url(../assets/fonts/flaticon/061-juice.svg);}
+    &[class*="lc-food"] {mask-image: url(../assets/fonts/flaticon/062-food.svg);}
+}
