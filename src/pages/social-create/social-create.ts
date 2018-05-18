@@ -1,7 +1,8 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, ToastController, ModalController, Gesture } from 'ionic-angular';
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview';
-
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { File, Entry } from '@ionic-native/file';
 /**
  * Generated class for the SocialCreatePage page.
  *
@@ -24,6 +25,13 @@ const cameraPreviewOpts: CameraPreviewOptions = {
   alpha: 1
 };
 
+const cameraOpts: CameraPreviewPictureOptions = {
+  width: window.screen.width,
+  height: window.screen.width,
+  quality: 85
+}
+
+
 @IonicPage()
 @Component({
   selector: 'page-social-create',
@@ -36,6 +44,11 @@ export class SocialCreatePage {
   thumbnailWidth = THUMBNAIL_WIDTH + 'px';
   thumbnailHeight = THUMBNAIL_HEIGHT + 'px';
   private gesture: Gesture;
+  public takedPicture;
+  public profilePhoto: CameraOptions;
+  
+ 
+
 
   constructor(
     public navCtrl: NavController, 
@@ -44,66 +57,80 @@ export class SocialCreatePage {
     private platform: Platform, 
     private cd: ChangeDetectorRef,
     private toastCtrl: ToastController, 
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private file: File,
+    private camera: Camera,
+    ) {
 
-      
-       
+    this.takedPicture = "data:image/jpeg;base64," + navParams.get('imageUri');
+    
         
      
   }
+
+ 
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SocialCreatePage');
     cameraPreviewOpts.y = document.getElementsByClassName('header_camera')[0].clientHeight;
-    this.cameraPreview.startCamera(cameraPreviewOpts).then(
-      (res) => {
+    let imgBlob = this.imgURItoBlob(this.takedPicture)
+    console.log(imgBlob);
+
+    // this.cameraPreview.startCamera(cameraPreviewOpts).then(
+    //   (res) => {
         
-        console.log(res)
+    //     console.log(res)
 
-        // let pinchArea = <HTMLAnchorElement> document.querySelector('#pinchArea');
-        // pinchArea.style.width = window.screen.width + 'px';
-        // pinchArea.style.height = window.screen.width + 'px';
+    //     // let pinchArea = <HTMLAnchorElement> document.querySelector('#pinchArea');
+    //     // pinchArea.style.width = window.screen.width + 'px';
+    //     // pinchArea.style.height = window.screen.width + 'px';
 
 
-        // this.gesture = new Gesture(this.element.nativeElement);
-        // this.gesture.listen();
-        // this.gesture.on('pinchstart', (e) => {
-        //   console.log('pinchstart event');
-        // });
+    //     // this.gesture = new Gesture(this.element.nativeElement);
+    //     // this.gesture.listen();
+    //     // this.gesture.on('pinchstart', (e) => {
+    //     //   console.log('pinchstart event');
+    //     // });
     
-        // // ... for the pinch event
-        // this.gesture.on('pinch', (e) => {
-        //   console.log(e.scale);
-        // });
+    //     // // ... for the pinch event
+    //     // this.gesture.on('pinch', (e) => {
+    //     //   console.log(e.scale);
+    //     // });
     
-        // // ... for the pinchend event
-        // this.gesture.on('pinchend', (e) => {
-        //   console.log('pinchend event')
-        // });
+    //     // // ... for the pinchend event
+    //     // this.gesture.on('pinchend', (e) => {
+    //     //   console.log('pinchend event')
+    //     // });
         
-      },
-      (err) => {
-        console.log(err)
-      });
-      this.cameraPreview.show();
+    //   },
+    //   (err) => {
+    //     console.log(err)
+    //   });
+    //   this.cameraPreview.show();
     
     
   }
 
-
   takePicture(){
-    this.cameraPreview.getSupportedPictureSizes().then(
-      (res) => {
-        console.log(res);
-      }, 
-      (rej) => {
-        console.log(rej);
-      })
+   
   }
 
   ionViewWillLeave(){
     this.cameraPreview.stopCamera();
+  }
+
+
+  imgURItoBlob(dataURI) {
+    var binary = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    var array = [];
+    for (var i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i));
+    }
+    return new Blob([new Uint8Array(array)], {
+      type: mimeString
+    });
   }
 
 
