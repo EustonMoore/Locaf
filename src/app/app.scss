@@ -18,10 +18,13 @@
 @import '../theme/animations';
 @import '../theme/customicon';
 
+//FLATICON//
+@import '../theme/locaficon';
+//HELVETICA//
+@import '../theme/locaf-fonts';
 
 //hide scrollbar
 ::-webkit-scrollbar{ display:none; }
-
 
 ion-title {
     position: absolute;

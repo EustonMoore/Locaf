@@ -1,27 +1,16 @@
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar class="lc-navbar">
     <ion-buttons left>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+      <button ion-button menuToggle><ion-icon name="lc-hamburger"></ion-icon></button>
     </ion-buttons>
-    
     <ion-title>
-        <ion-buttons center>
-            <button ion-button >
-              <ion-icon name="navigate"></ion-icon>
-              &nbsp;&nbsp;{{ currentLocation }}
-            </button>
-          </ion-buttons>
+      <ion-buttons center>
+        <button ion-button><ion-icon name="navigate"></ion-icon>&nbsp;&nbsp;{{ currentLocation }}</button>
+      </ion-buttons>
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="custom-search" color="primary"></ion-icon>
-      </button>
-      <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="search"></ion-icon>
-      </button>
+      <button ion-button icon-only (click)="addItem()"><ion-icon name="lc-search"></ion-icon></button>
+      <button ion-button icon-only (click)="addItem()"><ion-icon name="lc-placeholder"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 
@@ -42,7 +31,9 @@
 
   <ion-card tappable no-padding no-margin class="card-list " *ngFor="let cafe of cafes" (click)="openCafeDetailPage(cafes[3])">
     <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + cafe.images.background+ ')'}">
-      <h2 class="card-list-title" > {{cafe.cafeName}}</h2>              
+      <h2 class="card-list-title" > {{cafe.cafeName}}</h2>
+      <h2 class="card-list-subtitle">Sungshin Univ. Stn</h2>
+      <h2 class="card-list-like"><ion-icon name="lc-shapes"></ion-icon></h2>
     </div>
   </ion-card>
 

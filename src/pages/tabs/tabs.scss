@@ -1,15 +1,18 @@
 page-tabs {
-
-   .segment-button{
-        height: 3.0rem !important;
-        line-height: 3.0rem !important;
-        color: white !important;
-        border-color: white !important;
-        background-color: rgba(0,0,0,0.3) !important;
-    
-   }
-   .segment-activated{
-    background-color: color($colors, orange) !important;
-    
+    .segment {
+        margin-bottom:3vw !important;
+    }
+    .segment-button {
+        color: color($colors, lc-lightgray) !important;
+        border-color: color($colors, lc-white) !important;
+        font-family:-윤고딕310 !important;
+        font-weight:normal !important;
+        font-style:italic !important;
+    }
+   .segment-activated {
+        color: color($colors, lc-white) !important;
+        font-family: HelveticaNeueHv !important;
+        font-weight:bold !important;
+        font-style:italic !important;
     }
 }

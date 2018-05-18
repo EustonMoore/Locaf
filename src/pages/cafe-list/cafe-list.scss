@@ -10,7 +10,7 @@ page-cafe-list {
     // ************ list view ************//  
         ion-card.card-list {
             width: 100%;
-            margin: 0px 0px 0px 0px !important;
+            margin: 0px 0px 10px 0px !important;
             //border-bottom: 1px solid #333333;         
         }
     
@@ -37,14 +37,33 @@ page-cafe-list {
             background-size: cover;
         }
         .card-list-bg .card-list-title {
-            font-size: 28px;
-            font-weight: normal;
+            text-transform:uppercase;
+            font-family: HelveticaNeueHv !important;
+            font-size: 6vw;
+            font-style: italic;
             color: #FFFFFF;
             position: absolute;
-            top: 40%;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-            width: 100%;
+            top: 40vw;
+            width: 100vw;
             text-align: center;
+        }
+        .card-list-bg .card-list-subtitle {
+            font-family:-윤고딕310 !important;
+            text-transform:none !important;
+            font-size: 4vw;
+            font-style: italic;
+            position: absolute;
+            top: 50vw;
+            width: 100vw;
+            color: #FFFFFF;
+            text-align: center;
+        }
+        .card-list-bg .card-list-like {
+            font-size: 4vw;
+            color: rgba(255,255,255,0.5);
+            position: absolute;
+            top: 41vw;
+            right:8vw;
         }
 
     //************  grid view ************//
