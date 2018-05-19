@@ -35,8 +35,8 @@ $colors: (
   lc-green:#365a55,
   lc-black:#000,
   lc-white:#FFF,
-
- 
+  lc-white-50:rgba(255,255,255,0.5),
+  lc-green-50:rgba(54, 90, 85, 0.5),
 
   special-blue:(
     base: #0059B2,
@@ -366,17 +366,17 @@ $colors: (
 // iOS only Sass variables can go here
 $toolbar-ios-title-text-color : color($colors,lc-black) !important;
 
-$segment-button-ios-height : 7vw !important;
-$segment-button-ios-border-radius : 2vw !important;
-$segment-button-ios-font-size : 1.4rem !important;
-$segment-button-ios-background-color : color($colors, lc-black);
-$segment-button-ios-background-color-activated : color($colors, lc-green);
-$segment-button-ios-transition-activated : 1000ms;
+$segment-button-ios-height : 3.0rem !important;
+$segment-button-ios-border-radius : 1.1rem !important;
+// $segment-button-ios-font-size : 1.4rem !important;
+// $segment-button-ios-background-color : color($colors, lc-black);
+// $segment-button-ios-background-color-activated : color($colors, lc-green);
+// $segment-button-ios-transition-activated : 1000ms;
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
+// $fab-list-button-background-color : color($colors,lc-white-40);
 
 
 // App Windows Variables

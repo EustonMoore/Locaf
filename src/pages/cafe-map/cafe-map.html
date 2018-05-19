@@ -1,0 +1,32 @@
+<!--
+  Generated template for the CafeMapPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  
+    <!-- <ion-item no-padding no-lines class="searchBar">
+      <ion-input (input)="updateSearchResults()" [(ngModel)]="autocomplete.input" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-input>
+    </ion-item> -->
+    <ion-navbar color="transparent" >
+      <ion-searchbar no-margin no-lines [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{ autocomplete.lastInput }}"></ion-searchbar>
+    </ion-navbar>
+
+  <ion-list [hidden]="autocompleteItems.length == 0" class="searchList">
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+      {{item.structured_formatting.main_text}} <small>{{item.structured_formatting.secondary_text.replace('대한민국', '')}}</small>
+    </ion-item>
+  </ion-list>
+
+</ion-header>
+
+
+<ion-content fullscreen>
+  
+
+  <div id="map_canvas">
+    <!-- <button ion-button (click)="onButtonClick($event)">Demo</button> -->
+  </div>
+</ion-content>

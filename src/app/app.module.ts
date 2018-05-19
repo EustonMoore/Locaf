@@ -7,6 +7,7 @@ import { GoogleMaps, LocationService } from '@ionic-native/google-maps'
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { Keyboard } from '@ionic-native/keyboard'
 import { CameraPreview } from '@ionic-native/camera-preview';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicStorageModule, Storage } from '@ionic/storage';
@@ -59,6 +60,7 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp,{
+      autoFocusAssist: false,
       backButtonText: '',
     
     }),
@@ -80,6 +82,7 @@ export function provideSettings(storage: Storage) {
     StorageProvider,
     LoadingProvider,
     ToastProvider,
+    Keyboard,
     Camera,
     CameraPreview,
     SplashScreen,

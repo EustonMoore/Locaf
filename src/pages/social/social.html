@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-buttons left>
       <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
+        <ion-icon name="lc-hamburger"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -19,7 +19,7 @@
           <ion-icon name="grid" class="dark"></ion-icon>
       </button>
       <button ion-button icon-only (click)="openSocialSearchPage()">
-          <ion-icon name="search"></ion-icon>
+          <ion-icon name="lc-search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -27,7 +27,7 @@
 </ion-header>
 
 
-<ion-content fullscreen="" shrink-header [headerToHide]="'shrinking-header'">
+<ion-content fullscreen=""  >
   
   <div *ngIf="view == 'list'">
     리스트
@@ -90,7 +90,7 @@
   </div>
 
   <ion-fab bottom right #fab style="bottom: 10%;" [hideFabOnscroll]='content' >
-    <button ion-fab color="orange"> <ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="lc-green"> <ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="top">
         <button ion-fab (click)="openSocialCreatePage('gallery')"> <ion-icon name="images"></ion-icon> </button>
         <button ion-fab (click)="openSocialCreatePage('camera')"> <ion-icon name="camera"></ion-icon> </button>

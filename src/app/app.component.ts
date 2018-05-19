@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages';
-import { Settings } from '../providers';
+import { Settings, TranslateProvider } from '../providers';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
@@ -31,11 +31,12 @@ export class MyApp {
   ]
 
   constructor(
-    private translate: TranslateService, 
-    platform: Platform, 
-    settings: Settings, 
+    private translateService: TranslateService, 
+    private translate: TranslateProvider,
+    private platform: Platform, 
+    private settings: Settings, 
     private config: Config, 
-    private statusBar: StatusBar, 
+    private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private afs: AngularFirestore) {
     platform.ready().then(() => {
@@ -43,35 +44,23 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      
     });
     this.initTranslate();
   }
 
   initTranslate() {
     // Set the default language for translation strings, and the current language.
-    this.translate.setDefaultLang('en');
-    const browserLang = this.translate.getBrowserLang();
+    this.translateService.setDefaultLang('en');
+    const browserLang = this.translateService.getBrowserLang();
+    this.translateService.use('en');
+    this.translateService.getTranslation('en').subscribe(translations => {
+      this.translate.setTranslations(translations);
+    })
+    
 
-    if (browserLang) {
-      if (browserLang === 'zh') {
-        const browserCultureLang = this.translate.getBrowserCultureLang();
-
-        if (browserCultureLang.match(/-CN|CHS|Hans/i)) {
-          this.translate.use('zh-cmn-Hans');
-        } else if (browserCultureLang.match(/-TW|CHT|Hant/i)) {
-          this.translate.use('zh-cmn-Hant');
-        }
-      } else {
-        this.translate.use(this.translate.getBrowserLang());
-      }
-    } else {
-      this.translate.use('en'); // Set your language here
-    }
-
-    this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
-      this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
-    });
+    // this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
+    //   this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
+    // });
   }
 
   openPage(page) {

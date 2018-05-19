@@ -14,13 +14,19 @@
 
 
 <ion-content >
+<!-- 
+  <div id="takedPicture" style="width: 100%;" [ngStyle]="{'background-image': 'url(' + 'data:image/jpeg;base64,' + takedPicture + ')'}"> </div>
+   -->
+
+   <img [src] = "takedPicture" alt="tt" style="width:100%;" />
+
 
   <div text-center>
     <button class ="button" ion-button (click)="takePicture()">take picture</button>
   
   </div>
 
-  <p><div id="takedPiceture" style="width: 100%"></div></p>
+ 
   
 
 </ion-content>

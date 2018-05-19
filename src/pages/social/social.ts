@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, FabContainer, App } from 'ionic-angular';
-import { ImagePicker } from '@ionic-native/image-picker';
+import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { Item } from '../../models/item';
-import { Items } from '../../providers';
+import { Items, StorageProvider } from '../../providers';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 
 @IonicPage()
 @Component({
@@ -14,22 +16,38 @@ export class SocialPage {
   @ViewChild(Content) content: Content;
   @ViewChild("fab") fabHandler: FabContainer;
 
+  public cameraOptions: CameraOptions;
   public view = 'list';
+
   currentItems: any = [];
-  options = {
-    maximumImagesCount: 3,
-    width: 300,
-    height: 300,
-    quality: 80
-  }
+
+  // options: ImagePickerOptions = {
+  //   maximumImagesCount: 1,
+  //   width: 600,
+  //   height: 600,
+  //   quality: 100
+  // }
+
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public app: App,
     public items: Items,
-    public imagePicker: ImagePicker) {
+    public imagePicker: ImagePicker,
+    public storage: StorageProvider,
+    public camera: Camera) {
 
+      this.cameraOptions = {
+        quality: 100,
+        targetWidth: 900,
+        targetHeight: 900,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        saveToPhotoAlbum : true,
+        correctOrientation: true,
+        allowEdit: true
+      };
    }
 
   /**
@@ -62,16 +80,19 @@ export class SocialPage {
   openSocialCreatePage(select) {
     
     if(select == 'camera'){
-      this.app.getRootNavs()[0].push('SocialCreatePage');
+
+      this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA;
+      this.camera.getPicture(this.cameraOptions).then(imageUri => {
+        this.app.getRootNavs()[0].push('SocialCreatePage', {imageUri: imageUri});
+      })
 
     }
 
 
     else if(select == 'gallery'){
-      this.imagePicker.getPictures({maximumImagesCount: 3}).then((results) => {
-        results.forEach(result => {
-          console.log(result);
-        })
+      this.cameraOptions.sourceType = this.camera.PictureSourceType.SAVEDPHOTOALBUM;
+      this.camera.getPicture(this.cameraOptions).then(imageUri => {
+        this.app.getRootNavs()[0].push('SocialCreatePage', {imageUri: imageUri});
       })
     }
     
@@ -82,6 +103,9 @@ export class SocialPage {
     // });
     
   }
+
+  // Convert fileURI to Blob.
+ 
 
 
 }

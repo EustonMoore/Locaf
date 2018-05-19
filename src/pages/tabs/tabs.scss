@@ -1,18 +1,52 @@
 page-tabs {
-    .segment {
-        margin-bottom:3vw !important;
+
+    
+//     .segment-button {
+//         color: map-get($colors, lc-lightgray) !important;
+//         border-color: map-get($colors, lc-white) !important;
+//         font-family:-윤고딕310 !important;
+//         font-weight:normal !important;
+//         font-style:italic !important;
+//     }
+    
+
+//    .segment-activated {
+//         color: map-get($colors, lc-white) !important;
+//         font-family: HelveticaNeueHv !important;
+//         font-weight:bold !important;
+//         font-style:italic !important;
+//     }
+
+
+
+    ion-segment{
+        position: absolute;
+        bottom: 4%;
+        left: 20%;
+        margin: auto;
+        width:60%;
+        
     }
-    .segment-button {
-        color: color($colors, lc-lightgray) !important;
-        border-color: color($colors, lc-white) !important;
-        font-family:-윤고딕310 !important;
-        font-weight:normal !important;
-        font-style:italic !important;
+    .segment-ios{
+        .segment-button{
+            height: 3.0rem !important;
+            line-height: 3.0rem !important;
+            font-size: 1.4rem !important;
+            color: color($colors, lc-white) !important;
+            border-color: color($colors, lc-lightgray) !important;
+            background-color: rgba(0,0,0,0.5) !important;
+            font-family:-윤고딕310 !important;
+            font-style:italic !important;
+        }
+
+        .segment-activated{
+            background-color: color($colors, lc-green) !important;
+            font-family: HelveticaNeueHv !important;
+            font-weight:bold !important;
+            font-style:italic !important;
+        }
     }
-   .segment-activated {
-        color: color($colors, lc-white) !important;
-        font-family: HelveticaNeueHv !important;
-        font-weight:bold !important;
-        font-style:italic !important;
-    }
+
+    
+        
 }

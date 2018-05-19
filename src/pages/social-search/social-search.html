@@ -7,11 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    
-      <ion-item no-padding no-lines>
-        <ion-input (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" clearInput></ion-input>
-      </ion-item>
-
+      <ion-searchbar no-margin no-lines [(ngModel)]="input" (ionInput)="updateSearchResults()" placeholder="search"></ion-searchbar>
   </ion-navbar>
 
 </ion-header>
