@@ -36,14 +36,14 @@ export class ShrinkHeader {
         
         window.addEventListener('keyboardWillShow', (ev) => {
             // Describe your logic which will be run each time when keyboard is about to be shown.
-            console.log('sdfsdf');
+        
             this.hideFooter();
         });
       
         window.addEventListener('keyboardWillHide', () => {
           // Describe your logic which will be run each time when keyboard is about to be closed.
-          console.log('sdfsdf22');
-          this.showFooter();
+          
+            this.showFooter();
         });
 
 

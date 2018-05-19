@@ -28,9 +28,31 @@ export class CafeListPage {
   @ViewChild(Content) content: Content;
   @ViewChild("fab") fabHandler: FabContainer;
 
-  private cafes: Cafe[];
+  // private cafes: Cafe[];
+  private cafes: any[];
   private subscriptions: Subscription[];
+  private myCoords;
   public currentLocation = "";
+  private filter_1 = {
+    name: 'smoking',
+    value: false,
+    color:  'rgba(255, 255, 255, 0.3)'
+  };
+  private filter_2 = {
+    name: 'parking',
+    value: false,
+    color:  'rgba(255, 255, 255, 0.3)'
+  };
+  private filter_3 = {
+    name: 'wifi',
+    value: false,
+    color:  'rgba(255, 255, 255, 0.3)'
+  };
+  private filter_4 = {
+    name: 'preOpen',
+    value: false,
+    color:  'rgba(255, 255, 255, 0.3)'
+  };
   mapReady: boolean = false;
   map: GoogleMap;
 
@@ -51,11 +73,13 @@ export class CafeListPage {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
-    let subscription =  this.firestore.getCafes().valueChanges().take(1).subscribe((cafes :Cafe[]) => {
+    let subscription =  this.firestore.getCafes().valueChanges().take(1).subscribe((cafes :any[]) => {    // => cafes: Cafe[]
       this.cafes = cafes;
-      console.log(this.cafes[3]);
+      this.cafes.forEach(cafe => {
+        cafe.favorite = false;
+      })
     })
-
+    this.getCurrentLocation();
    
 
   }
@@ -96,34 +120,48 @@ export class CafeListPage {
     
   }
 
+  openCafeMapPage(){
+    this.app.getRootNavs()[0].push('CafeMapPage', {
+      coords: this.myCoords
+    });
+  }
+
   getCurrentLocation(){
+    
     if(this.platform.is('cordova')){
       this.geolocation.getCurrentPosition().then((resp)=> {
-        let position = {
+        this.myCoords = {
           lat: resp.coords.latitude,
           lng: resp.coords.longitude
         }
-
         Geocoder.geocode({
-          "position": position
+          "position": this.myCoords
         }).then((results: GeocoderResult[]) => {
+          console.log(results[0]);
           if (results.length == 0) {
             // Not found
             return null;
           }
-          console.log(results[0]);
           this.currentLocation = "";
           let split= results[0].extra.lines[0].split(" ");
-          console.log(split);
           for(let i = 1 ; i < 4; i ++){
             this.currentLocation += split[i] + ' ';
           }
-          
-         
-
         });
       })
     }
+    else{
+      this.geolocation.getCurrentPosition().then((resp)=> {
+        this.myCoords = {
+          lat: resp.coords.latitude,
+          lng: resp.coords.longitude
+        }
+      })
+    }
+  }
+
+  addToFav(cafe) {
+    cafe.favorite = !cafe.favorite;
   }
 
   doRefresh(refresher) {
@@ -131,8 +169,6 @@ export class CafeListPage {
     if(this.fabHandler._listsActive){
       this.fabHandler.close();
     }
-      this.getCurrentLocation();
-    
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();
@@ -143,6 +179,19 @@ export class CafeListPage {
    if(this.fabHandler._listsActive){
      this.fabHandler.close();
    }
+  }
+
+  checkFilter(filter){
+    console.log(filter);
+    if(filter.value){
+      filter.color = 'rgba(255, 255, 255, 0.3)';
+      filter.value = !filter.value;
+    }
+    else{
+      filter.color = 'rgba(54, 90, 85, 0.7)';
+      filter.value = !filter.value;
+    }
+    // fab.setAttribute('background-color', 'rgba(255, 255, 255, 0.5)' )
   }
  
 }

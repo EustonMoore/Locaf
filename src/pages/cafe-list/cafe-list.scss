@@ -13,6 +13,14 @@ page-cafe-list {
             margin: 0px 0px 10px 0px !important;
             //border-bottom: 1px solid #333333;         
         }
+
+        .card-list .card-list-like {
+            font-size: 5vw;
+            background-color: transparent !important;
+            color: rgba(255,255,255,0.5) !important;
+            box-shadow: none !important;
+          
+        }
     
         .card-list-bg:before {
             content: ' ';
@@ -58,13 +66,9 @@ page-cafe-list {
             color: #FFFFFF;
             text-align: center;
         }
-        .card-list-bg .card-list-like {
-            font-size: 4vw;
-            color: rgba(255,255,255,0.5);
-            position: absolute;
-            top: 41vw;
-            right:8vw;
-        }
+        
+
+        
 
     //************  grid view ************//
         ion-card.card-grid  {
@@ -112,6 +116,9 @@ page-cafe-list {
             width: 100%;
             text-align: center;
         }
+
+
+  
 
     
 }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ShrinkFabModule } from '../../components/shrink-fab/shrink-fab.module';
-import { ShrinkHeaderModule } from '../../components/shrink-header/shrink-header.module';
 import { SocialPage } from './social';
 
 @NgModule({
@@ -12,7 +11,6 @@ import { SocialPage } from './social';
   imports: [
     IonicPageModule.forChild(SocialPage),
     TranslateModule.forChild(),
-    ShrinkHeaderModule,
     ShrinkFabModule
   ],
   exports: [

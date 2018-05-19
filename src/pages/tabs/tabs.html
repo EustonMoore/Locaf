@@ -3,13 +3,14 @@
   <ion-tab [root]="tab2Root" [tab-hidden] = "true" [tabTitle]="tab2Title" tabIcon="search"></ion-tab>
   <ion-tab [root]="tab3Root" [tab-hidden] = "true" [tabTitle]="tab3Title" tabIcon="cog"></ion-tab>
 
-  <ion-footer mode="ios" class="shrinking-header" *ngIf="show">
-    <ion-toolbar mode="ios" transparent no-border>
-      <ion-segment [(ngModel)]="selected" mode="ios"  (swipe)="swipeEvent($event)" (ionChange)="segmentChanged($event)">
-        <ion-segment-button value="0">MY</ion-segment-button>
-        <ion-segment-button value="1">Feed</ion-segment-button>
-      </ion-segment>
-    </ion-toolbar>
-  </ion-footer>
+
+  <ion-segment [(ngModel)]="selected" mode="ios"  (swipe)="swipeEvent($event)" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="0">MY</ion-segment-button>
+    <ion-segment-button value="1">Feed</ion-segment-button>
+  </ion-segment>
+ 
+
+  
 </ion-tabs>
+
 
