@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-      <ion-searchbar no-margin no-lines [(ngModel)]="input" (ionInput)="updateSearchResults()" placeholder="search"></ion-searchbar>
+      <ion-searchbar #searchBar no-margin no-lines [(ngModel)]="input" (ionInput)="updateSearchResults()" placeholder="search"></ion-searchbar>
   </ion-navbar>
 
 </ion-header>

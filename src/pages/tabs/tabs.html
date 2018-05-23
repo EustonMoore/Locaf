@@ -5,8 +5,13 @@
 
 
   <ion-segment [(ngModel)]="selected" mode="ios"  (swipe)="swipeEvent($event)" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="0">MY</ion-segment-button>
-    <ion-segment-button value="1">Feed</ion-segment-button>
+    <ion-segment-button value="0">
+      <ion-icon *ngIf="selected == '1'" name="lc-location-outline"></ion-icon>
+      <ion-icon *ngIf="selected != '1'" name="lc-location"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="1">
+      <ion-icon name="lc-feed"></ion-icon>
+    </ion-segment-button>
   </ion-segment>
  
 

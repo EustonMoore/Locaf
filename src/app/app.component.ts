@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { Config, Nav, Platform } from 'ionic-angular';
+import { Config, Nav, Platform, MenuController } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages';
 import { Settings, TranslateProvider } from '../providers';
@@ -17,7 +17,9 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
-    { title: 'Tutorial', component: 'TutorialPage' },
+    { title: 'Tutorial', component: function(){
+      console.log('sdfd');
+    }},
     { title: 'Welcome', component: 'WelcomePage' },
     { title: 'Tabs', component: 'TabsPage' },
     { title: 'Cards', component: 'CardsPage' },
@@ -38,14 +40,18 @@ export class MyApp {
     private config: Config, 
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private afs: AngularFirestore) {
+    private menuCtrl: MenuController,
+    private afs: AngularFirestore,) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.menuCtrl.swipeEnable(true);
     });
     this.initTranslate();
+    
+   
   }
 
   initTranslate() {
@@ -66,6 +72,6 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(page);
   }
 }

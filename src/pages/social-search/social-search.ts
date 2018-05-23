@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, Input } from '@angular/core';
+import { IonicPage, NavController, NavParams, Searchbar } from 'ionic-angular';
 
 /**
  * Generated class for the SocialSearchPage page.
@@ -14,12 +14,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'social-search.html',
 })
 export class SocialSearchPage {
+  @ViewChild('searchBar') searchbar: Searchbar;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SocialSearchPage');
+    
+  }
+
+  ionViewDidEnter() {
+    setTimeout(()=>{
+        this.searchbar.setFocus();
+    }, 50);
   }
 
 }

@@ -1,13 +1,17 @@
 <ion-menu [content]="content" swipeEnabled="false">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
-      </ion-toolbar>
-    </ion-header>
 
-    <ion-content>
+  <ion-header>      
+    <div class="menu-header"> 
+    <img class="user-avatar round" src = "https://pbs.twimg.com/profile_images/834457277830541312/bYMCvtHD.jpg"/>
+    <p class="name">Locaf_7</p>
+    <p class="email">description</p>
+  </div>
+  
+  </ion-header>
+
+    <ion-content no-margin>
       <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <button menuClose ion-item *ngFor="let p of pages" (click)="p.component()">
           {{p.title}}
         </button>
       </ion-list>
