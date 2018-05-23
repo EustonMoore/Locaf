@@ -6,6 +6,7 @@ import { File } from '@ionic-native/file';
 import { GoogleMaps, LocationService } from '@ionic-native/google-maps'
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HeaderColor } from '@ionic-native/header-color'
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Keyboard } from '@ionic-native/keyboard'
 import { CameraPreview } from '@ionic-native/camera-preview';
@@ -86,6 +87,7 @@ export function provideSettings(storage: Storage) {
     Camera,
     CameraPreview,
     SplashScreen,
+    HeaderColor,
     StatusBar,
     ImagePicker,
     Geolocation,

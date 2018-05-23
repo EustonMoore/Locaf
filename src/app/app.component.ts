@@ -7,6 +7,7 @@ import { Config, Nav, Platform, MenuController } from 'ionic-angular';
 import { FirstRunPage } from '../pages';
 import { Settings, TranslateProvider } from '../providers';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { HeaderColor } from '@ionic-native/header-color';
 
 @Component({
   templateUrl: 'app.html'
@@ -41,12 +42,15 @@ export class MyApp {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private menuCtrl: MenuController,
+    private headerColor: HeaderColor,
     private afs: AngularFirestore,) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
+      this.statusBar.overlaysWebView(true);
+      this.statusBar.backgroundColorByHexString('#365a55');
       this.splashScreen.hide();
+      this.headerColor.tint('#365a55');
       this.menuCtrl.swipeEnable(true);
     });
     this.initTranslate();
