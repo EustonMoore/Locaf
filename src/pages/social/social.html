@@ -3,23 +3,44 @@
   <ion-navbar>
     <ion-buttons left>
       <button ion-button menuToggle>
-        <ion-icon name="lc-hamburger"></ion-icon>
+        <ion-icon name="lc-menu"></ion-icon>
       </button>
     </ion-buttons>
 
+
+    <ion-title>
+      <ion-buttons center (click)="openSocialSearchPage()">
+        <button ion-button><ion-icon name="search"></ion-icon>&nbsp;&nbsp;
+          <ion-slides #searchSlides autoplay="4000" direction="vertical" loop>
+            <ion-slide>
+              #상수동카페
+            </ion-slide>
+            <ion-slide>
+              #아메리카노
+            </ion-slide>
+            <ion-slide>
+              #로컬카페
+            </ion-slide>
+          </ion-slides>
+        </button>
+      </ion-buttons>
+    </ion-title>
+    
+
+
     <ion-buttons end  [ngSwitch]="view">
       <button ion-button icon-only *ngSwitchCase="'list'" 
-      (click)="view='grid'"
-      [class.active]="view === 'grid'">
-      <ion-icon name="list" class="dark"></ion-icon>
+        (click)="view='grid'"
+        [class.active]="view === 'grid'">
+        <ion-icon name="list" class="dark"></ion-icon>
       </button>
       <button ion-button icon-only *ngSwitchCase="'grid'" 
-          (click)="view='list'"
-          [class.active]="view === 'list'">
-          <ion-icon name="grid" class="dark"></ion-icon>
+        (click)="view='list'"
+        [class.active]="view === 'list'">
+        <ion-icon name="grid" class="dark"></ion-icon>
       </button>
       <button ion-button icon-only (click)="openSocialSearchPage()">
-          <ion-icon name="lc-search"></ion-icon>
+        <ion-icon name="lc-notifications"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

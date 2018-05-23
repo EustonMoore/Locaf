@@ -1,0 +1,78 @@
+<!--
+  Generated template for the CafeMapPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <!-- <ion-item no-padding no-lines class="searchBar">
+      <ion-input (input)="updateSearchResults()" [(ngModel)]="autocomplete.input" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-input>
+    </ion-item> -->
+    <ion-navbar color="transparent" >
+      <ion-searchbar no-margin no-lines [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{ autocomplete.lastInput }}"></ion-searchbar>
+    </ion-navbar>
+
+  <ion-list [hidden]="autocompleteItems.length == 0" class="searchList">
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+      {{item.structured_formatting.main_text}} <small>{{item.structured_formatting.secondary_text.replace('대한민국', '')}}</small>
+    </ion-item>
+  </ion-list>
+
+</ion-header>
+
+
+<ion-content fullscreen >
+ 
+
+
+  <div id="map_canvas">
+    <!-- <button ion-button (click)="onButtonClick($event)">Demo</button> -->
+
+
+    
+    <button ion-button class="list-button pop-in" color="lc-green" (click)="contentDrawer.showContent()">
+            리스트 보기 <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+
+    <ion-fab bottom right #fab style="bottom: 10%;" >
+        <button ion-fab color="lc-fab"> <ion-icon name="lc-filter"></ion-icon></button>
+        <!-- <ion-fab-list side="top">
+            <button ion-fab>빈티지</button>
+            <button ion-fab>미니멀</button>
+            <button ion-fab>에클레틱</button>
+            <button ion-fab>모던</button>
+          </ion-fab-list> -->
+        <ion-fab-list side="top">
+          <button  ion-fab *ngFor="let filter of filters" (click)="checkFilter(filter)" [ngStyle]="{'background-color': filter.color}"><ion-icon name="{{filter.name}}" color="white"></ion-icon></button>
+        </ion-fab-list>
+    </ion-fab>
+  </div>
+
+  
+
+
+</ion-content>
+
+<content-drawer [options]="drawerOptions">
+   
+  <ion-list margin-bottom>
+    <ion-item tappable  (click)="openCafeDetailPage(cafe)" *ngFor="let cafe of cafes">
+      <ion-thumbnail big item-left>
+        <img src="{{ cafe.images.background }}">
+      </ion-thumbnail>
+      <h2>{{ cafe.cafeName }}</h2>
+      <p> {{ cafe.subtitle }}</p>
+      <button ion-button icon-only clear item-right (click)="addToFav(cafe); $event.stopPropagation()">
+          <ion-icon *ngIf="!cafe.favorite" name="heart-outline" color="gray"></ion-icon>
+          <ion-icon class="pop-in" *ngIf="cafe.favorite" name="heart" color="gray"></ion-icon>
+      </button>
+    </ion-item>
+   
+  </ion-list>
+
+</content-drawer>
+
+
+
+

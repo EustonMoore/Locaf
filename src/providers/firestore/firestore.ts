@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import 'rxjs/add/operator/take';
+import { firestore } from 'firebase';
 import { User, Cafe } from '../../models';
 
 @Injectable()
@@ -68,6 +69,20 @@ export class FirestoreProvider {
 
   public getCafes(): AngularFirestoreCollection<{}>{
     return this.afs.collection('cafes');
+  }
+
+  public getCafesNearBy(myCoords, distance): AngularFirestoreCollection<{}> {
+    
+    let lat = 0.008983
+    let lng = 0.015060
+    
+    let minPoint = new firestore.GeoPoint(myCoords.lat - (lat * distance), myCoords.lng - (lng * distance))
+    let maxPoint = new firestore.GeoPoint(myCoords.lat + (lat * distance), myCoords.lng + (lng * distance))
+
+    console.log(minPoint);
+  
+    return this.afs.collection('/cafes', ref => ref.where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30) )
+    
   }
 
   // Get userData of a user given the username. Return the userData promise.

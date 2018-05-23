@@ -13,9 +13,11 @@ export class Cafe {
     public type: string,
     public web: string,
     public rate: number,
-    public location: firestore.GeoPoint
+    public location: string,
+    public coords: firestore.GeoPoint
     
   ) {
+    
     this.object = {
       cafeId: cafeId,
       images: this.images,
@@ -24,6 +26,7 @@ export class Cafe {
       phone: this.phone,
       description: this.description,
       type: this.type,
+      coords: this.coords,
       location: this.location,
       rate: this.rate,
       web: this.web

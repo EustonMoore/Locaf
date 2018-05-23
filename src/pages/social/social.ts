@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, FabContainer, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer, App, Slides } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { Item } from '../../models/item';
 import { Items, StorageProvider } from '../../providers';
@@ -14,6 +14,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 export class SocialPage {
 
   @ViewChild(Content) content: Content;
+  @ViewChild('searchSlides') searchSlides: Slides
   @ViewChild("fab") fabHandler: FabContainer;
 
   public cameraOptions: CameraOptions;
@@ -48,7 +49,14 @@ export class SocialPage {
         correctOrientation: true,
         allowEdit: true
       };
+
+      
    }
+
+  ionViewDidLoad(){
+    this.searchSlides.onlyExternal= true;
+    this.searchSlides.autoplayDisableOnInteraction = false;
+  }
 
   /**
    * Perform a service for the proper items.

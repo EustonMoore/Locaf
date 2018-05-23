@@ -35,3 +35,65 @@ ion-title {
     text-align: center;
 }
 
+.list-box{
+    margin-top:190px;
+  }
+
+  .menu-header:before {
+    content: ' ';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.menu-header {
+    position: relative;
+    width: 100%;
+    padding-bottom:66%;
+    background-image: url('../assets/img/cafe.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+.name {
+    position: absolute;
+    color: white;
+    font-weight: 400;
+    font-size:18px;
+    
+    padding-left:15px;
+    top:60%;
+}
+.email {
+    position: absolute;
+    color: white;
+    padding-left:15px;
+    top:75%;
+    margin-bottom: 5px;
+}
+
+.user-avatar {
+    position: absolute;
+    padding: .5em;
+    height: 12vh;
+    margin-top: 15px;
+    // border: 3px solid #fff;
+}
+.round {
+    border-radius: 50%;
+}
+
+
+h3, .label,
+{
+color: #616161;
+font-weight: 400;
+}
+

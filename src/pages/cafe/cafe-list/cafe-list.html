@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button menuToggle><ion-icon name="lc-menu"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>
+      <ion-buttons center (click)="openCafeMapPage()">
+        <button ion-button><ion-icon name="lc-location"></ion-icon>&nbsp;&nbsp;{{ currentLocation }}</button>
+      </ion-buttons>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()"><ion-icon name="md-locate"></ion-icon></button>
+      <button ion-button icon-only (click)="addItem()"><ion-icon name="lc-notifications"></ion-icon></button>
+     
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<!-- 
+<ion-content   shrink-header  (ionScroll)="closeFabList()"> -->
+<ion-content  (ionScroll)="closeFabList()">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card tappable no-padding no-margin class="card-list " *ngFor="let cafe of cafes" (click)="openCafeDetailPage(cafe)">
+    
+    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + cafe.images.background+ ')'}">
+      <h2 class="card-list-title" > {{cafe.cafeName}}</h2>
+      <h2 class="card-list-subtitle">{{ cafe.subtitle }}</h2>
+      
+      <!-- <h2 class="card-list-like"></ion-icon></h2> -->
+    </div>
+    <ion-fab right middle>
+        <button ion-fab class="card-list-like" *ngIf="!cafe.favorite" (click)="addToFav(cafe);  $event.stopPropagation()"> <ion-icon name="lc-heart-outline"></ion-icon></button>
+        <button ion-fab class="card-list-like pop-in" *ngIf="cafe.favorite" (click)="addToFav(cafe);  $event.stopPropagation()"> <ion-icon name="lc-heart"></ion-icon></button>
+    </ion-fab>
+  </ion-card>
+
+
+
+  <!-- <ion-fab bottom right #fab style="bottom: 10%;" [hideFabOnscroll]='content' > -->
+  <ion-fab bottom right #fab style="bottom: 10%;" >
+      <button ion-fab color="lc-fab"> <ion-icon name="lc-filter"></ion-icon></button>
+      <!-- <ion-fab-list side="top">
+          <button ion-fab>빈티지</button>
+          <button ion-fab>미니멀</button>
+          <button ion-fab>에클레틱</button>
+          <button ion-fab>모던</button>
+        </ion-fab-list> -->
+
+      <ion-fab-list side="top"  >
+        <button ion-fab *ngFor="let filter of filters" (click)="checkFilter(filter)" [ngStyle]="{'background-color': filter.color}"><ion-icon name="{{filter.name}}" color="white"></ion-icon></button>
+      </ion-fab-list>
+  </ion-fab>
+</ion-content>

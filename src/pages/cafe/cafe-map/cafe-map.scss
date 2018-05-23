@@ -1,0 +1,60 @@
+page-cafe-map {
+
+    .searchbar-search-icon { 
+        display:none; width:0; height:0; 
+    }
+
+    .searchbar-input {
+        background-color: rgba(0,0,0,0) !important; 
+        padding-left: 9px !important;
+        box-shadow: none !important;
+    }
+    
+    .searchList{
+        margin-bottom: -1px;
+    }
+
+
+    
+
+
+    #map_canvas::before {
+        content: ' ';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-size: cover;
+        background-position: center;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+
+    #map_canvas {
+        position: relative;
+        height: 100%;
+      }
+
+
+    .list-button{
+        
+        position: absolute;
+        bottom: 4%;
+        left: 20%;
+        width:60%;
+        border: solid 1px;
+        border-color: color($colors, white) !important;
+        height: 3.0rem !important;
+        box-shadow: none !important;
+        border-radius: 1.1rem;
+    }
+
+    
+    ion-fab{
+        .fab-close-active{
+            background-color: color($colors, lc-green);
+        }
+    }
+
+}
