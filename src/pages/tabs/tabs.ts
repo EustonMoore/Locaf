@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, Tabs } from 'ionic-angular';
-
-import { Tab1Root, Tab2Root, Tab3Root } from '../';
 import { Subscription } from 'rxjs/Subscription';
+import { animation } from '@angular/core/src/animation/dsl';
 
 @IonicPage()
 @Component({
@@ -13,9 +12,10 @@ import { Subscription } from 'rxjs/Subscription';
 export class TabsPage {
   @ViewChild('tabs') tabsHandler: Tabs
 
-  tab1Root: any = Tab1Root;
-  tab2Root: any = Tab2Root;
-  tab3Root: any = Tab3Root;
+
+  tab1Root: any = 'CafeListPage';
+  tab2Root: any = 'SocialPage';
+  tab3Root: any = 'SettingsPage';
   
   private subscriptions: Subscription[];
   public selected = "0";

@@ -3,8 +3,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform, MenuController } from 'ionic-angular';
-
-import { FirstRunPage } from '../pages';
 import { Settings, TranslateProvider } from '../providers';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { HeaderColor } from '@ionic-native/header-color';
@@ -13,7 +11,7 @@ import { HeaderColor } from '@ionic-native/header-color';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  rootPage = 'LoginPage';
 
   @ViewChild(Nav) nav: Nav;
 

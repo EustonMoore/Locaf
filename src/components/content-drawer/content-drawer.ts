@@ -47,6 +47,7 @@ export class ContentDrawer {
     });
  
   }
+
  
   handlePan(ev){
  

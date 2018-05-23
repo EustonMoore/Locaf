@@ -97,3 +97,35 @@ color: #616161;
 font-weight: 400;
 }
 
+
+
+
+.modal-login {
+    .modal-wrapper {
+        width:75%;
+        height:65%;
+        left: 12.5%;
+        top:17.5%;
+        border-radius: 8px;
+        position: absolute;
+        overflow: hidden;
+    }
+    ion-backdrop {
+        visibility: visible;
+    }
+}
+.modal-register {
+    .modal-wrapper {
+        width:75%;
+        height:65%;
+        left: 12.5%;
+        top:17.5% ;
+        border-radius: 8px;
+        position: absolute;
+        overflow: hidden;
+    }
+    ion-backdrop {
+        visibility: visible;
+}
+}
+

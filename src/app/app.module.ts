@@ -20,9 +20,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { Items } from '../mocks/providers/items';
-import { Settings, User, Api, FirestoreProvider, TranslateProvider, StorageProvider, LoadingProvider, ToastProvider } from '../providers';
+import { Settings, User, Api, FirestoreProvider, AuthProvider, TranslateProvider, StorageProvider, LoadingProvider, ToastProvider } from '../providers';
 import { MyApp } from './app.component';
 
+import { Facebook } from '@ionic-native/facebook';
 import { Environment } from '../environment';
 
 // The translate loader needs to know where to load i18n files
@@ -61,6 +62,7 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp,{
+      pageTransition: 'md-transition',
       autoFocusAssist: false,
       backButtonText: '',
     
@@ -78,6 +80,7 @@ export function provideSettings(storage: Storage) {
     Api,
     Items,
     User,
+    AuthProvider,
     FirestoreProvider,
     TranslateProvider,
     StorageProvider,
@@ -94,6 +97,7 @@ export function provideSettings(storage: Storage) {
     GoogleMaps,
     LocationService,
     File,
+    Facebook,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

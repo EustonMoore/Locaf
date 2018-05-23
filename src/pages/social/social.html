@@ -32,12 +32,12 @@
       <button ion-button icon-only *ngSwitchCase="'list'" 
         (click)="view='grid'"
         [class.active]="view === 'grid'">
-        <ion-icon name="list" class="dark"></ion-icon>
+        <ion-icon name="lc-list" class="dark"></ion-icon>
       </button>
       <button ion-button icon-only *ngSwitchCase="'grid'" 
         (click)="view='list'"
         [class.active]="view === 'list'">
-        <ion-icon name="grid" class="dark"></ion-icon>
+        <ion-icon name="lc-grid" class="dark"></ion-icon>
       </button>
       <button ion-button icon-only (click)="openSocialSearchPage()">
         <ion-icon name="lc-notifications"></ion-icon>
@@ -111,7 +111,7 @@
   </div>
 
   <ion-fab bottom right #fab style="bottom: 10%;" [hideFabOnscroll]='content' >
-    <button ion-fab color="lc-green"> <ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="primary"> <ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="top">
         <button ion-fab (click)="openSocialCreatePage('gallery')"> <ion-icon name="images"></ion-icon> </button>
         <button ion-fab (click)="openSocialCreatePage('camera')"> <ion-icon name="camera"></ion-icon> </button>
