@@ -9,7 +9,7 @@
     <!-- <ion-item no-padding no-lines class="searchBar">
       <ion-input (input)="updateSearchResults()" [(ngModel)]="autocomplete.input" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-input>
     </ion-item> -->
-    <ion-navbar color="transparent" >
+    <ion-navbar >
       <ion-searchbar no-margin no-lines [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="{{ autocomplete.lastInput }}"></ion-searchbar>
     </ion-navbar>
 
@@ -64,8 +64,8 @@
       <h2>{{ cafe.cafeName }}</h2>
       <p> {{ cafe.subtitle }}</p>
       <button ion-button icon-only clear item-right (click)="addToFav(cafe); $event.stopPropagation()">
-          <ion-icon *ngIf="!cafe.favorite" name="heart-outline" color="gray"></ion-icon>
-          <ion-icon class="pop-in" *ngIf="cafe.favorite" name="heart" color="gray"></ion-icon>
+          <ion-icon *ngIf="!cafe.favorite" name="heart-outline" color="lc-gray"></ion-icon>
+          <ion-icon class="pop-in" *ngIf="cafe.favorite" name="heart" color="lc-gray"></ion-icon>
       </button>
     </ion-item>
    

@@ -1,0 +1,25 @@
+
+
+
+<ion-content no-scroll mode='md'>
+ 
+  <div class="buttonLayout fadein-down" *ngIf="showButtons">
+
+    <ion-row class="buttonRow" >
+      <ion-col no-padding col-6 style="padding-right: 1%;"> <button mode='md' ion-button color="white"   outline (click)="login()"> 로그인</button></ion-col>
+      <ion-col no-padding col-6 style="padding-left: 1%;" > <button mode='md' ion-button color="white"  outline (click)="register()"> 이메일 가입</button></ion-col>
+      <ion-col no-padding col-12> <button mode='md' ion-button  color="facebook" (click)="loginWithFacebook()"><ion-icon left name="logo-facebook"></ion-icon>facebook 로그인</button></ion-col>
+      <ion-col no-padding col-12> <button mode='md' ion-button  color="kakao" (click)="loginWithFacebook()"><ion-icon left name="logo-facebook"></ion-icon>Kakao 로그인</button></ion-col>
+  
+      
+    </ion-row>
+
+    <ion-row class="transparent" align-items-center >
+        <ion-col no-padding col-6 > <button mode='md' ion-button color="white"   outline (click)="loginWithFacebook()"> 아이디 찾기</button></ion-col>
+      <ion-col no-padding col-6  > <button mode='md' ion-button color="white"  outline (click)="loginWithFacebook()"> 비밀번호 변경</button></ion-col>
+    </ion-row>
+   
+    
+    
+  </div>
+</ion-content>

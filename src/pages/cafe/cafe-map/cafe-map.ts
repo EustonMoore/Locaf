@@ -25,6 +25,32 @@ declare var google;
  * Ionic pages and navigation.
  */
 
+const marker_me = {
+  url: 'assets/img/marker-me.png',
+  size: {
+    width: 32,
+    height: 32
+  }
+};
+
+const marker = {
+  url: 'assets/img/marker.png',
+  size: {
+    width: 32,
+    height: 32
+  }
+};
+
+const marker_selected = {
+  url: 'assets/img/marker-selected.png',
+  size: {
+    width: 40,
+    height: 40
+  }
+};
+
+
+
 @IonicPage()
 @Component({
   selector: 'page-cafe-map',
@@ -72,8 +98,11 @@ export class CafeMapPage {
     this.loadMap();
   }
 
+  
+
   ionViewWillUnload(){
     console.log('unload');
+    
     this.map.clear();
   }
 
@@ -112,7 +141,7 @@ export class CafeMapPage {
        // Now you can use all methods safely.
        this.map.addMarker({
          title: 'Ionic',
-         icon: 'blue',
+         icon: marker_me,
          animation: 'DROP',
          position: this.myCoords
        })
@@ -132,14 +161,14 @@ export class CafeMapPage {
         
         this.map.addMarker({
           title: cafe.cafeName,
-          icon: 'red',
+          icon: marker,
           animation: 'DROP',
           position: coords
         })
         .then(marker => {
           marker.on(GoogleMapsEvent.MARKER_CLICK)
             .subscribe(() => {
-             
+             marker.setIcon(marker_selected);
             });
         });
        })
@@ -199,7 +228,7 @@ export class CafeMapPage {
           return null;
         }
         let marker: Marker = this.map.addMarkerSync({
-          icon: 'blue',
+          icon: marker_me,
           animation: 'DROP',
           position: results[0].position
         })
