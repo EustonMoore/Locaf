@@ -1,3 +1,42 @@
 page-login-modal {
 
+   
+
+    .scroll-content{
+        width:95%;
+        left:2.5%;
+        ion-input{
+            background-color:  #dfdbdb;
+            border-radius: 5px;
+            .text-input{
+                margin-left: 1rem !important;
+            }
+        }
+        
+        ion-item{
+            padding-left: 0;
+        }
+        
+        ion-label{
+            color: #dfdbdb;
+            padding-left: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+
+       
+        .item-block .item-inner{
+            
+            padding-right: 0 !important;
+        }
+
+        .button-confirm{
+            
+            width: 99%;
+        }
+
+        
+    }   
+
+   
 }

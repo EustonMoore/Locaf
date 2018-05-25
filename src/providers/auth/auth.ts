@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Subscription } from 'rxjs/Subscription';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-
+import { KakaoCordovaSDK } from 'kakao-sdk';
 import { TranslateProvider, FirestoreProvider } from '../../providers';
 import firebase from 'firebase';
 import { Environment } from '../../environment';
@@ -17,6 +17,7 @@ export class AuthProvider {
   constructor(private afAuth: AngularFireAuth,
     private platform: Platform,
     private facebook: Facebook,
+    private kakao: KakaoCordovaSDK,
     private translate: TranslateProvider,
     private firestore: FirestoreProvider) { }
 
@@ -34,6 +35,7 @@ export class AuthProvider {
       this.fbSubscription = this.afAuth.authState.subscribe((user: firebase.User) => {
         // User is logged in on Firebase.
         if (user) {
+          
           this.firestore.get('users/' + user.uid).then(ref => {
             if (this.fsSubscription) {
               this.fsSubscription.unsubscribe();
@@ -41,6 +43,7 @@ export class AuthProvider {
             // Update userData variable from Firestore.
             this.fsSubscription = ref.valueChanges().subscribe((user: User) => {
               this.user = user;
+              console.log(user);
             });
           }).catch(() => {
             reject();
@@ -88,12 +91,12 @@ export class AuthProvider {
   public loginWithFacebook(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.platform.is('cordova')) {
-        this.facebook.login(['public_profile', 'user_friends', 'email']).then((res: FacebookLoginResponse) => {
+        this.facebook.login(['public_profile', 'email']).then((res: FacebookLoginResponse) => {
           let credential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
           this.afAuth.auth.signInWithCredential(credential).then(res => {
             resolve(res);
           }).catch(err => {
-            reject(this.translate.get(err.code));
+            reject(err);
           });
         }).catch(err => {
           //User cancelled, don't show any error.
@@ -104,6 +107,21 @@ export class AuthProvider {
         reject(error);
       }
     });
+  }
+
+  public loginWithKakao(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if(this.platform.is('cordova')){
+        let options: {
+          authTypes: 'KAKAO_TALK'
+        }
+        this.kakao.login(options).then((res) => {
+
+        }).catch(err => {
+          console.log(err);
+        })
+      }
+    })
   }
 
   // // Login on Firebase using Google.

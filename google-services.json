@@ -2,7 +2,8 @@
   "project_info": {
     "project_number": "785993744461",
     "firebase_url": "https://locaf-5f731.firebaseio.com",
-    "project_id": "locaf-5f731"
+    "project_id": "locaf-5f731",
+    "storage_bucket": "locaf-5f731.appspot.com"
   },
   "client": [
     {
@@ -16,9 +17,17 @@
         {
           "client_id": "785993744461-6413ksu98u4pt6hgia7huchslveqghu2.apps.googleusercontent.com",
           "client_type": 3
+        },
+        {
+          "client_id": "785993744461-6413ksu98u4pt6hgia7huchslveqghu2.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
-      "api_key": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0t2P1NoLBKCL1Y5_y5CSYyEmp9oojg5A"
+        }
+      ],
       "services": {
         "analytics_service": {
           "status": 1

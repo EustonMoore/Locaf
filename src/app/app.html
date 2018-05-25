@@ -1,4 +1,4 @@
-<ion-menu [content]="content" swipeEnabled="false">
+<ion-menu [content]="content">
 
   <ion-header>      
     <div class="menu-header"> 
@@ -11,7 +11,7 @@
 
     <ion-content no-margin>
       <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="p.component()">
+        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button>
       </ion-list>

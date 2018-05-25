@@ -34,17 +34,17 @@ export class ShrinkHeader {
         this.headerHeight = this.header.clientHeight;
 
         
-        window.addEventListener('keyboardWillShow', (ev) => {
-            // Describe your logic which will be run each time when keyboard is about to be shown.
+        // window.addEventListener('keyboardWillShow', (ev) => {
+        //     // Describe your logic which will be run each time when keyboard is about to be shown.
         
-            this.hideFooter();
-        });
+        //     this.hideFooter();
+        // });
       
-        window.addEventListener('keyboardWillHide', () => {
-          // Describe your logic which will be run each time when keyboard is about to be closed.
+        // window.addEventListener('keyboardWillHide', () => {
+        //   // Describe your logic which will be run each time when keyboard is about to be closed.
           
-            this.showFooter();
-        });
+        //     this.showFooter();
+        // });
 
 
     }

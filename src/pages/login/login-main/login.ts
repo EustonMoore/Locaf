@@ -1,45 +1,39 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController, ModalController, MenuController } from 'ionic-angular';
-import { AuthProvider, LoadingProvider, ToastProvider, TranslateProvider } from '../../../providers';
+import { IonicPage, NavController, ToastController, ModalController, ModalOptions } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { AuthProvider, LoadingProvider, ToastProvider, TranslateProvider, FirestoreProvider } from '../../../providers';
+import { User } from '../../../models';
+import firebase from 'firebase';
 
-import { User } from '../../../providers';
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
-  };
-
-  // Our translated text strings
-  private loginErrorString: string;
+ 
   public showButtons = true;
+  private userId: string;
+  private profileForm: FormGroup;
+  private photo: string = 'assets/imag/noavatar.png';
 
   constructor(public navCtrl: NavController,
-    public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService,
-    public menuCtrl: MenuController,
-    public modalCtrl: ModalController,
+    private toastCtrl: ToastController,
+    private translateService: TranslateService,
+    private modalCtrl: ModalController,
     private auth: AuthProvider,
     private loading: LoadingProvider,
-    private toast: ToastProvider) {
+    private toast: ToastProvider,
+    private firestore: FirestoreProvider
+  ) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+   
   }
 
 
   ionviewDidLoad(){
-    this.menuCtrl.enable(false);
+    
   }
 
   login(){
@@ -54,17 +48,23 @@ export class LoginPage {
     modal.onDidDismiss(data => {
       this.showButtons = true;
       if(data){
-
+        this.navCtrl.setRoot('TabsPage');
       }
     })
 
-    modal.present();
+    modal.present({
+      keyboardClose: false
+    });
+  }
+
+  test(){
+    this.navCtrl.setRoot('TabsPage');
   }
 
   
   register(){
     this.showButtons = false;
-    let options = {
+    let options: ModalOptions = {
       showBackdrop: true,
       enableBackdropDismiss: true,
       cssClass:'modal-register'
@@ -74,10 +74,13 @@ export class LoginPage {
     modal.onDidDismiss(data => {
       this.showButtons = true;
       if(data){
-        
+        this.createProfile();
+        this.navCtrl.setRoot('TabsPage');
       }
     })
-    modal.present();
+    modal.present({
+      keyboardClose: false
+    });
   }
   
 
@@ -86,11 +89,55 @@ export class LoginPage {
     this.loading.show();
     this.auth.loginWithFacebook().then(res => {
       this.loading.hide();
-      this.navCtrl.setRoot('LoaderPage');
+      this.createProfile();
+      this.navCtrl.setRoot('TabsPage');
     }).catch(err => {
       this.toast.show(err);
       this.loading.hide();
     });
   }
+
+
+  private loginWithKakao(): void {
+    
+    this.auth.loginWithKakao().then(res => {
+      console.log(res);
+      this.loading.hide()
+    }).catch(err => {
+      console.log(err)
+      this.toast.show(err);
+      this.loading.hide();
+    })
+  }
+
+
+  private createProfile(): void {
+    this.loading.show();
+
+      this.auth.getUser().then((user: firebase.User) => {
+        this.userId = user.uid;
+          if (user.photoURL) {
+            this.photo = user.photoURL;
+          }
+          let idx = user.email.indexOf("@");
+          let username = user.email.substring(0, idx);
+          
+            // Create userData on Firestore.
+          this.firestore.get('users/' + this.userId).then(ref => {
+          // Formatting the first and last names to capitalized.
+          
+          let newUser = new User(this.userId, user.email.toLowerCase(),this.photo, username, null, null, null, null, '', true);
+        
+          ref.set(newUser.object).then(() => {
+            //this.notification.init();
+            this.loading.hide();
+            this.navCtrl.setRoot('TabsPage');
+          }).catch(() => { });
+        }).catch(() => { });
+
+      }).catch(() => { });
+
+
+    }
   
 }
