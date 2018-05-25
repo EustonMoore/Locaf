@@ -5,8 +5,6 @@ export class User {
   constructor(
     public userId: string,
     public email: string,
-    public firstName: string,
-    public lastName: string,
     public photo: string,
     public username: string,
     public bio: string,
@@ -19,8 +17,6 @@ export class User {
     this.object = {
       userId: userId,
       email: this.email,
-      firstName: this.firstName,
-      lastName: this.lastName,
       photo: this.photo,
       username: this.username,
       bio: this.bio,

@@ -16,23 +16,8 @@ page-cafe-map {
 
 
     
-
-
-    #map_canvas::before {
-        content: ' ';
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        background-size: cover;
-        background-position: center;
-        background-color: rgba(0, 0, 0, 0.2);
-      }
-
-
     #map_canvas {
-        position: relative;
+       
         height: 100%;
       }
 

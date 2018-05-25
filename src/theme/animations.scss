@@ -115,7 +115,7 @@ General Animations
 
 // FADE-IN DOWN ------------------------
 .fadein-down {
-    animation: fadein-down ease 1s;
+    animation: fadein-down ease 0.5s;
     animation-iteration-count: 1;
     transform-origin: 50% 50%;
     animation-fill-mode: forwards;

@@ -1,5 +1,6 @@
 page-login {
 
+  
 
     .scroll-content:before {
     
@@ -28,7 +29,7 @@ page-login {
         background-repeat: no-repeat;
         background-image: url("../assets/img/cafe.jpg");
         background-position: center center;
-
+        overflow: hidden !important;
 
         
     }
@@ -36,7 +37,7 @@ page-login {
     .buttonLayout{
         position: absolute;
         width:75%;
-        top:65%;
+        top:60%;
         left: 12.5%;
 
         .button{

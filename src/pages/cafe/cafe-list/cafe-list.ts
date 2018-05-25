@@ -3,7 +3,6 @@ import { IonicPage, ModalController, NavController, App, FabContainer, Content, 
 
 import { Item, Cafe } from '../../../models';
 import { Items, FirestoreProvider } from '../../../providers';
-import { Subscription } from 'rxjs/Subscription';
 import { Geolocation } from '@ionic-native/geolocation';
 import {
   GoogleMaps,
@@ -31,7 +30,6 @@ export class CafeListPage {
 
   // private cafes: Cafe[];
   private cafes: any[];
-  private subscriptions: Subscription[];
   private myCoords;
   public currentLocation = "";
   private filters = [{
@@ -89,12 +87,13 @@ export class CafeListPage {
     this.getCurrentLocation();
     
     
-   
-
   }
 
  
-
+  ionViewWillUnload() {
+    // Unsubscribe to Subscription.
+    
+  }
 
   /**
    * Prompt the user to add a new item. This shows our ItemCreatePage in a
@@ -138,16 +137,15 @@ export class CafeListPage {
           lat: resp.coords.latitude,
           lng: resp.coords.longitude
         }
-        console.log(this.myCoords)
         this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: any[]) => {
-          console.log(cafes);
+          
           this.cafes = cafes;
         })
-    
+        
         Geocoder.geocode({
           "position": this.myCoords
         }).then((results: GeocoderResult[]) => {
-          console.log(results[0]);
+         
           if (results.length == 0) {
             // Not found
             return null;
@@ -166,9 +164,9 @@ export class CafeListPage {
           lat: resp.coords.latitude,
           lng: resp.coords.longitude
         }
-        console.log(this.myCoords)
+  
         this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: any[]) => {
-          console.log(cafes);
+     
           this.cafes = cafes;
         })
     
@@ -199,7 +197,7 @@ export class CafeListPage {
   }
 
   checkFilter(filter){
-    console.log(filter);
+    
     if(filter.value){
       filter.color = 'rgba(255, 255, 255, 0.3)';
       filter.value = !filter.value;

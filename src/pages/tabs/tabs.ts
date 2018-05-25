@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, Tabs } from 'ionic-angular';
-import { Subscription } from 'rxjs/Subscription';
+import { IonicPage, NavController, Tabs, MenuController } from 'ionic-angular';
 import { animation } from '@angular/core/src/animation/dsl';
 
 @IonicPage()
@@ -17,7 +16,7 @@ export class TabsPage {
   tab2Root: any = 'SocialPage';
   tab3Root: any = 'SettingsPage';
   
-  private subscriptions: Subscription[];
+  
   public selected = "0";
   public selectedTab = 2;
   public show = true;
@@ -27,6 +26,7 @@ export class TabsPage {
 
   constructor(public navCtrl: NavController, 
               public translateService: TranslateService,
+              public menuCtrl: MenuController
               ) {
     translateService.get(['TAB1_TITLE', 'TAB2_TITLE', 'TAB3_TITLE']).subscribe(values => {
       this.tab1Title = values['TAB1_TITLE'];
@@ -34,9 +34,11 @@ export class TabsPage {
       this.tab3Title = values['TAB3_TITLE'];
     });
 
+    this.menuCtrl.enable(true);
    
     
   }
+
 
   segmentChanged(event){
     this.tabsHandler.select(+event.value);

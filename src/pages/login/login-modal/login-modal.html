@@ -1,18 +1,102 @@
-<!--
-  Generated template for the LoginModalPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>login-modal</ion-title>
+<ion-header no-border >
+  <ion-navbar transparent>
+      <ion-buttons left margin-left="3rem;">
+          <button ion-button icon-only (click)="viewCtrl.dismiss()">
+              <ion-icon name="arrow-back"></ion-icon>
+          </button>
+      </ion-buttons>
+    <ion-title>
+      {{ this.title }}
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content no-padding no-scroll text-center>
+  <div *ngIf="type=='login'">
+    <form [formGroup]="loginForm">
+      <ion-grid >
+        <ion-row >
+          <ion-col col-12>
+              <ion-item no-lines>
+                  <ion-label mode="md" stacked>이메일</ion-label>
+                  <ion-input #myInput type="email" [placeholder]="'이메일'" formControlName="email" autofocus></ion-input>
+                </ion-item>
+          </ion-col>
+          <ion-col col-12>
+              <ion-item no-lines>
+                  <ion-label mode="md" stacked>비밀번호</ion-label>
+                  <ion-input type="password" [placeholder]="'비밀번호'" formControlName="password"></ion-input>
+                </ion-item>
+          </ion-col>
+         
+          </ion-row>
+        
+        <ion-row >
+          
+            <ion-col col-12 padding-top="3rem;"><button ion-button class="button-confirm" color="lc-green" (click)="login()" [disabled]="!loginForm.valid">로그인 </button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
 
-<ion-content padding>
 
+  <div *ngIf="type=='register'">
+    <form [formGroup]="registerForm">
+      <ion-grid >
+        <ion-row >
+          <ion-col col-12>
+              <ion-item no-lines>
+                  <ion-label mode="md" stacked>이메일 <ion-icon *ngIf="registerForm.get('email').valid" name="md-checkmark" color="confirm"></ion-icon></ion-label>
+                  <ion-input #myInput type="email" [placeholder]="'이메일'" formControlName="email" autofocus> </ion-input> 
+                 
+                </ion-item>
+          </ion-col>
+          <ion-col col-12>
+              <ion-item no-lines>
+                  <ion-label mode="md" stacked>비밀번호 <ion-icon *ngIf="registerForm.get('password').valid" name="md-checkmark" color="confirm"></ion-icon></ion-label>
+                  <ion-input type="password" [placeholder]="'비밀번호'" formControlName="password"></ion-input>
+                </ion-item>
+          </ion-col>
+          <ion-col col-12>
+            <ion-item no-lines>
+                <ion-label mode="md" stacked>비밀번호확인 <ion-icon *ngIf="registerForm.get('password').valid && registerForm.value['password'] == registerForm.value['confirmPassword']" name="md-checkmark" color="confirm"></ion-icon></ion-label>
+                <ion-input type="password" [placeholder]="'비밀번호확인'" formControlName="confirmPassword"></ion-input>
+              </ion-item>
+        </ion-col>
+
+          </ion-row>
+        
+        <ion-row >
+            <ion-col col-12 padding-top="3rem;"><button ion-button class="button-confirm" color="lc-green"  (click)="register()" [disabled]="!registerForm.valid" >로그인 </button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+  <!-- <div *ngIf="type=='register'">
+    <form [formGroup]="registerForm">
+      <ion-grid no-padding class="x-login-intro">
+        <ion-row class="x-login-title-text-row">
+            <ion-col col-12 text-center>{{registerText}}</ion-col>
+          </ion-row>
+        <ion-row class="x-login-intro-text-row">
+          <ion-col col-12 text-center>
+            <ion-input type="email" class="x-login-intro-input" [placeholder]="translate.get('auth.form.email')" formControlName="email"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="x-login-intro-text-row">
+          <ion-col col-12 text-center>
+            <ion-input type="password" class="x-login-intro-input" [placeholder]="translate.get('auth.form.password')" formControlName="password"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="x-login-intro-text-row">
+          <ion-col col-12 text-center>
+            <ion-input type="password" class="x-login-intro-input" [placeholder]="translate.get('auth.form.confirm')" formControlName="confirmPassword"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row class="x-login-intro-btn-row">
+            <ion-col col-12 text-center><button ion-button class="x-login-intro-btn" (click)="register()" [disabled]="!registerForm.valid">{{ 'auth.button.register' | translate}}</button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div> -->
 </ion-content>

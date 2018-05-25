@@ -26,9 +26,9 @@ export class SocialSearchPage {
   }
 
   ionViewDidEnter() {
-    setTimeout(()=>{
-        this.searchbar.setFocus();
-    }, 50);
+  
+      this.searchbar.setFocus();
+   
   }
 
 }

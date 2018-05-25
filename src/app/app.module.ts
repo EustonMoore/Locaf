@@ -20,10 +20,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { Items } from '../mocks/providers/items';
-import { Settings, User, Api, FirestoreProvider, AuthProvider, TranslateProvider, StorageProvider, LoadingProvider, ToastProvider } from '../providers';
+import { Settings, Api, FirestoreProvider, AuthProvider, TranslateProvider, StorageProvider, LoadingProvider, ToastProvider, AlertProvider } from '../providers';
 import { MyApp } from './app.component';
 
 import { Facebook } from '@ionic-native/facebook';
+import { KakaoCordovaSDK } from 'kakao-sdk';
 import { Environment } from '../environment';
 
 // The translate loader needs to know where to load i18n files
@@ -63,8 +64,9 @@ export function provideSettings(storage: Storage) {
     }),
     IonicModule.forRoot(MyApp,{
       pageTransition: 'md-transition',
+      scrollAssist: false,
       autoFocusAssist: false,
-      backButtonText: '',
+      backButtonText: ''
     
     }),
     IonicStorageModule.forRoot(),
@@ -79,13 +81,13 @@ export function provideSettings(storage: Storage) {
   providers: [
     Api,
     Items,
-    User,
     AuthProvider,
     FirestoreProvider,
     TranslateProvider,
     StorageProvider,
     LoadingProvider,
     ToastProvider,
+    AlertProvider,
     Keyboard,
     Camera,
     CameraPreview,
@@ -98,6 +100,7 @@ export function provideSettings(storage: Storage) {
     LocationService,
     File,
     Facebook,
+    KakaoCordovaSDK,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

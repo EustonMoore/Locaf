@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, FabContainer, App, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer, App, Slides, NavOptions } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { Item } from '../../models/item';
 import { Items, StorageProvider } from '../../providers';
@@ -77,11 +77,14 @@ export class SocialPage {
    */
   
   openSocialSearchPage(item: Item) {
-    
+    let options : NavOptions = {
+      keyboardClose: false
+    }
+
     this.app.getRootNavs()[0].push('SocialSearchPage', {
       item: item
      
-    });
+    }, options);
     
   }
 
