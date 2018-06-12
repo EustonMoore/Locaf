@@ -1,0 +1,136 @@
+page-cafe-menu {
+
+    
+
+
+    .toolbar-title {
+        color:#FFFFFF !important;
+    }
+
+    .list-header{
+        border: none;
+        margin-bottom: 0px;
+        .label{
+            font-family: HelveticaNeue-LightItalic !important;
+            padding-left: 4%;
+            text-align: center;
+            color: #fff;
+        }
+        
+    }
+
+    ion-card  {
+        position: relative;
+        text-align: center;
+        width: 100% !important;
+        border-radius: 0px !important;
+    }
+    // ************ list view ************//  
+        ion-card.card-list {
+            width: 100%;
+            margin: 0px 0px 0px 0px !important;
+            box-shadow: none !important;
+            //border-bottom: 1px solid #333333;         
+        }
+
+        .card-list .card-list-like {
+            font-size: 5vw;
+            background-color: transparent !important;
+            color: rgba(255,255,255,0.5) !important;
+            box-shadow: none !important;
+          
+        }
+    
+        .card-list-bg:before {
+            content: ' ';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-list-bg {
+            position: relative;
+            width: 100%;
+            padding-bottom:100%;
+            // background: url(img/1.jpg) no-repeat;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .card-list-bg .card-list-title {
+            text-transform:uppercase;
+            font-family: HelveticaNeue-BlackItalic;
+            font-size: 4rem;
+            font-style: italic;
+            color: #FFFFFF;
+            position: absolute;
+            top: 45%;
+            width: 100%;
+            opacity: 0.2;
+            text-align: center;
+        }
+        .card-list-bg .card-list-subtitle {
+            
+            text-transform:none !important;
+            font-size: 1.2rem;
+            font-style: italic;
+            position: absolute;
+            top: 5%;
+            right: 7%;
+            width: 100%;
+            opacity: 0.7;
+            color: #FFFFFF;
+            text-align: right;
+        }
+        .card-list-bg .card-list-distance {
+            font-family: HelveticaNeue-LightItalic;
+            text-transform:none !important;
+            font-size: 1.2rem;
+            position: absolute;
+            top: 9%;
+            right: 7%;
+            width: 100%;
+            opacity: 0.7;
+            color: #FFFFFF;
+            text-align: right;
+        }
+        
+
+
+
+
+
+
+    ion-item{
+        
+        padding-left: 16px !important;
+        padding-right: 16px !important; 
+        .label{
+            text-align: center;
+        }
+
+        .item-inner{
+            padding-right: 0px !important;
+        }
+       
+        
+        
+    }
+
+
+
+    .drink {
+        background-color: color($colors, lc-green);
+    }
+    .desert {
+        background-color: color($colors, lc-orange);
+    }
+}

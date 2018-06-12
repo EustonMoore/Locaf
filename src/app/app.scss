@@ -25,7 +25,16 @@
 //hide scrollbar
 ::-webkit-scrollbar{ display:none; }
 
+
+
+ion-navbar{
+    .bar-buttons{
+        font-family: HelveticaNeue-LightItalic;
+    }
+}
+
 ion-title {
+    font-family: HelveticaNeue-LightItalic;
     position: absolute;
     top: 0;
     left: 0;
@@ -48,12 +57,12 @@ ion-title {
     bottom: 0;
     background-size: cover;
     background-position: center;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 .menu-header {
     position: relative;
     width: 100%;
-    padding-bottom:66%;
+    padding-bottom:60%;
     background-image: url('../assets/img/cafe.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -82,7 +91,7 @@ ion-title {
 .user-avatar {
     position: absolute;
     padding: .5em;
-    height: 12vh;
+    height: 55%;
     margin-top: 15px;
     // border: 3px solid #fff;
 }

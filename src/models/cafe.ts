@@ -19,6 +19,8 @@ export class Cafe {
   ) {
     
     this.object = {
+      distance: Number,
+      favorite: Boolean,
       cafeId: cafeId,
       images: this.images,
       cafeName: this.cafeName,

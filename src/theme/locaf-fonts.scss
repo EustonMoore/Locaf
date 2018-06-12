@@ -1,12 +1,19 @@
 @font-face{
-  font-family:HelveticaNeueHv;
-  src:url(../assets/fonts/helvetica/HelveticaNeueHv.ttf) format('truetype');
+  font-family:HelveticaNeue-BlackItalic;
+  src:url(../assets/fonts/helvetica/HelveticaNeue-BlackItalic.ttf) format('truetype');
   font-weight:bold;
   font-style:normal;
 }
 
-// @font-face{
-//   font-family:-윤고딕310;
-//   src:url(../assets/fonts/yoongothic/윤고딕310.ttf) format('truetype');
-//   font-style:normal;
-// }
+@font-face{
+  font-family:HelveticaNeue-LightItalic;
+  src:url(../assets/fonts/helvetica/HelveticaNeue-LightItalic.ttf) format('truetype');
+  font-weight:bold;
+  font-style:normal;
+}
+
+@font-face{
+  font-family:-윤고딕310;
+  src:url(../assets/fonts/yoongothic/윤고딕310.ttf) format('truetype');
+  font-style:normal;
+}

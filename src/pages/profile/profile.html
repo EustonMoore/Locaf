@@ -1,0 +1,140 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border >
+
+  <ion-navbar color="lc-green">
+    <ion-title>PROFILE</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only ><ion-icon name="md-more"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content parallax-header>
+
+  <div class="header-image">
+    <ion-item no-lines>
+    <ion-row>
+      
+        <ion-avatar >
+          <img src="assets/img/cafe.jpg"  alt="assets/img/cafe.jpg">
+            <!-- <img src="{{(profile | async)?.imgProfile}}" class="avatar"/>   -->
+        </ion-avatar>    
+      <ion-col  text-center>
+        <h5>21</h5>
+        <p no-padding no-margin>포스트</p>
+      </ion-col>
+      <ion-col  text-center>
+        <h5>114</h5>
+        <p no-paddin no-margin>컬렉션</p>
+      </ion-col>
+      <ion-col  text-center>
+        <h5>119</h5>
+        <p no-paddin no-margin>팔로잉</p>
+      </ion-col>
+    </ion-row>
+    </ion-item>
+
+      <!-- <ion-row no-padding no-margin>
+        <ion-col no-padding no-margin col-4></ion-col>
+        <ion-col no-padding no-margin text-center col-8>
+          <button ion-button class="follow-button" *ngIf="!following"  block  (click)="follow()">Follow</button>
+          <button ion-button class="follow-button-active" icon-left *ngIf="following"  block  (click)="follow()">
+            <ion-icon name="checkmark"></ion-icon>
+            Following
+          </button>
+        </ion-col>
+        <ion-col col-3></ion-col>
+      </ion-row> -->
+    
+    
+      <div padding style="padding-top: 0;">
+        <p no-margin no-padding><b>test</b></p>
+        <p no-padding no-margin class="info">testsetsete</p>
+        <!--<p no-padding no-margin color="blue2"><a href="#">{{(profile | async)?.facebook}}</a></p>-->
+      </div>
+
+    </div>
+    
+   
+
+    <div class="main-content">
+      <!--***********  Segement tab ***********-->
+      <ion-segment mode="md" [(ngModel)]="segmentView" color="blue2">
+        <ion-segment-button value="one">
+          피드
+        </ion-segment-button>
+        <ion-segment-button value="two">
+          컬렉션
+        </ion-segment-button>
+        <ion-segment-button value="three">
+          즐겨찾기
+        </ion-segment-button>
+      </ion-segment>
+    
+      <!--***********  Segement one ***********-->
+      <ion-grid no-padding *ngIf="segmentView==='one'">
+        <ion-row wrap color="gray">
+          <ion-col col-4 *ngFor="let image of photos  ,let i = index  ">
+              <!-- <div class="square-image" [ngStyle]="{'background-image': 'url(' + image + ')'}" (click)="openFullImage(i)" ></div>-->
+              <div class="square-image" [ngStyle]="{'background-color': '#dedede'}" (click)="openFullImage(i)" ></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    
+      <!--***********    Segement two  ***********-->
+      <div *ngIf="segmentView==='two'">
+        <ion-list no-lines padding>
+          <ion-list-header>
+            <h2>Friend</h2>
+          </ion-list-header>
+          <ion-item *ngFor="let friend of friends | async" padding-bottom>
+            <ion-avatar item-left>
+              <img [src]="friend.profileImg">
+            </ion-avatar>
+            <h2>{{friend.name}}</h2>
+          </ion-item>
+        </ion-list>
+      </div>
+    
+      <!--***********  Segment three  ***********-->
+      <div *ngIf="segmentView==='three'">
+        <ion-list no-lines padding>
+          <ion-list-header>
+            <h2>Contact</h2>
+          </ion-list-header>
+          <ion-item>
+            <ion-icon name="ios-mail" item-left></ion-icon>
+            <h2>ceo@cemo.com</h2>
+            <p>work email</p>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="ios-call" item-left></ion-icon>
+            <h2>009923124322</h2>
+            <p>mobile phone</p>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="logo-linkedin" item-left></ion-icon>
+            <h2>linkedin.com/cemo</h2>
+            <p>linked in </p>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="logo-facebook" item-left></ion-icon>
+            <h2>facebook.com/cemo</h2>
+            <p>facebook</p>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="logo-skype" item-left></ion-icon>
+            <h2>cemo@outlook.com</h2>
+            <p>skype</p>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+</ion-content>

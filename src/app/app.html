@@ -1,9 +1,9 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" >
 
-  <ion-header>      
+  <ion-header *ngIf="auth.getUserData()" menuClose (click)="nav.push('ProfilePage')">      
     <div class="menu-header"> 
     <img class="user-avatar round" src = "https://pbs.twimg.com/profile_images/834457277830541312/bYMCvtHD.jpg"/>
-    <p class="name">Locaf_7</p>
+    <p class="name">{{ auth.getUserData().username }}</p>
     <p class="email">description</p>
   </div>
   

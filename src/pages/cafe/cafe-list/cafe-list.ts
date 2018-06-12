@@ -13,11 +13,12 @@ import {
   MyLocation,
   Geocoder,
   GeocoderResult,
-  ILatLng
+  ILatLng,
+  Spherical
 } from '@ionic-native/google-maps';
 // import { ImageLoaderConfig } from 'ionic-image-loader';
 
-
+declare var google: any;
 
 @IonicPage()
 @Component({
@@ -29,6 +30,7 @@ export class CafeListPage {
   @ViewChild("fab") fabHandler: FabContainer;
 
   // private cafes: Cafe[];
+  private halfHeight = this.platform.height() / 2;
   private cafes: any[];
   private myCoords;
   public currentLocation = "";
@@ -62,7 +64,7 @@ export class CafeListPage {
     public app: App,
     public firestore: FirestoreProvider,
     public geolocation: Geolocation,
-    public platform: Platform,
+    public platform: Platform
     // private imageLoaderConfig: ImageLoaderConfig
     ) {
     
@@ -76,8 +78,7 @@ export class CafeListPage {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
-
-    
+    console.log(this.halfHeight);
     // let subscription =  this.firestore.getCafes().valueChanges().take(1).subscribe((cafes :any[]) => {    // => cafes: Cafe[]
     //   this.cafes = cafes;
     //   this.cafes.forEach(cafe => {
@@ -129,6 +130,12 @@ export class CafeListPage {
     });
   }
 
+  openNoticePage(){
+    this.app.getRootNavs()[0].push('NoticePage', {
+      from: 'cafe'
+    });
+  }
+
   getCurrentLocation(){
     
     if(this.platform.is('cordova')){
@@ -137,9 +144,19 @@ export class CafeListPage {
           lat: resp.coords.latitude,
           lng: resp.coords.longitude
         }
-        this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: any[]) => {
+        this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: Cafe[]) => {
           
           this.cafes = cafes;
+          this.cafes.forEach(cafe => {
+            let destination = {
+              lat: cafe.coords.latitude,
+              lng: cafe.coords.longitude
+            }
+            console.log(this.myCoords);
+            console.log(destination);
+            cafe.distance = Spherical.computeDistanceBetween(this.myCoords, destination);
+            console.log(cafe.distance)
+          });
         })
         
         Geocoder.geocode({
@@ -166,10 +183,9 @@ export class CafeListPage {
         }
   
         this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: any[]) => {
-     
+          
           this.cafes = cafes;
-        })
-    
+        });
       })
     }
     
@@ -208,5 +224,22 @@ export class CafeListPage {
     }
     // fab.setAttribute('background-color', 'rgba(255, 255, 255, 0.5)' )
   }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: Cafe[])=>{
+        console.log(cafes);
+        cafes.forEach(cafe => {
+          this.cafes.push(cafe);
+        })
+      })
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
+
  
 }

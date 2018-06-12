@@ -13,8 +13,8 @@ import { FirestoreProvider } from '../../../providers';
 export class CafeDetailPage {
   cafe: Cafe;
   rate: any  ;
-  favorite: boolean = false;
-    
+  expanded: boolean = false;
+  itemExpandHeight: number = 200;
   //*********** Variables for fading header **************//
   showToolbar:boolean = false;
   transition:boolean = false;
@@ -31,19 +31,19 @@ export class CafeDetailPage {
               public toastCtrl: ToastController
               ) {
     this.cafe = this.navParams.get('cafe');
-
+  
   }
 
   ionViewDidLoad() {
     
     console.log(this.cafe);
-    
+   
   }
 
  //*********** Fading header  **************/
   onScroll($event: any){
     let scrollTop = $event.scrollTop;
-    this.showToolbar = scrollTop >= 100;
+    this.showToolbar = scrollTop >= 150;
     if(scrollTop < 0){
         this.transition = false;
         //this.headerImgSize = `${ Math.abs(scrollTop)/2 + 100}%`;
@@ -54,8 +54,8 @@ export class CafeDetailPage {
     this.ref.detectChanges();
 }
 
-addToFav() {
-  this.favorite = !this.favorite;
+addToFav(cafe) {
+  cafe.favorite = !cafe.favorite;
   this.presentToast('bottom','Add to Favorite');
 }
 
@@ -74,7 +74,11 @@ private dismissHandler() {
   console.info('Toast onDidDismiss()');
 }
 
+expandItem(){
+  console.log(this.expanded)
+  this.expanded = !this.expanded;
 
+}
 
 
 }

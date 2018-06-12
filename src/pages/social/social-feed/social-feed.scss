@@ -1,0 +1,54 @@
+page-social-feed {
+
+    
+    .searchBar{
+        vertical-align: middle;
+        background-color:  color($colors, lc-gray);
+        box-shadow: none;
+        height: 2.0rem;
+        width: 55%;
+
+        .icon{
+            color: black;
+            margin-left: -1rem;
+           
+        }
+
+        ion-slides{
+            color: black;
+            .slide-zoom{
+                font-size: 1.5rem;
+            }
+          
+
+        }
+    }
+
+    .photo-list{
+        ion-col{
+            padding: 1px !important;
+          }
+
+          .square-image{
+ 
+            padding:1px;
+            float:left;
+            position: relative;
+            width: 100%;
+            padding-bottom : 100%; /* = width for a 1:1 aspect ratio */
+            background-position:center center;
+            background-repeat:no-repeat;
+            background-size:cover; 
+        }
+    
+        
+    }
+
+    ion-fab{
+        .fab-close-active{
+            background-color: color($colors, lc-green);
+        }
+    }
+
+
+}

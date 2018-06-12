@@ -1,24 +1,25 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, FabContainer, App, Slides, NavOptions } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, FabContainer, App, Slides, NavOptions, Platform } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
-import { Item } from '../../models/item';
-import { Items, StorageProvider } from '../../providers';
+import { StorageProvider } from '../../../providers';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 @IonicPage()
 @Component({
-  selector: 'page-social',
-  templateUrl: 'social.html'
+  selector: 'page-social-feed',
+  templateUrl: 'social-feed.html'
 })
-export class SocialPage {
+export class SocialFeedPage {
 
   @ViewChild(Content) content: Content;
   @ViewChild('searchSlides') searchSlides: Slides
   @ViewChild("fab") fabHandler: FabContainer;
 
+  private halfHeight = this.platform.height() / 2;
   public cameraOptions: CameraOptions;
   public view = 'list';
+  photos = [];
 
   currentItems: any = [];
 
@@ -34,9 +35,9 @@ export class SocialPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public app: App,
-    public items: Items,
     public imagePicker: ImagePicker,
     public storage: StorageProvider,
+    public platform: Platform,
     public camera: Camera) {
 
       this.cameraOptions = {
@@ -56,27 +57,18 @@ export class SocialPage {
   ionViewDidLoad(){
     this.searchSlides.onlyExternal= true;
     this.searchSlides.autoplayDisableOnInteraction = false;
-  }
 
-  /**
-   * Perform a service for the proper items.
-   */
-  getItems(ev) {
-    let val = ev.target.value;
-    if (!val || !val.trim()) {
-      this.currentItems = [];
-      return;
+    for(let i = 0; i< 30 ; i++){
+      this.photos.push('assets/img/cafe.jpg')
     }
-    this.currentItems = this.items.query({
-      name: val
-    });
   }
 
+ 
   /**
    * Navigate to the detail page for this item.
    */
   
-  openSocialSearchPage(item: Item) {
+  openSocialSearchPage(item) {
     let options : NavOptions = {
       keyboardClose: false
     }
@@ -107,7 +99,6 @@ export class SocialPage {
       })
     }
     
-
     // this.app.getRootNavs()[0].push('SocialCreatePage', {
     //   item: item
      
@@ -115,8 +106,24 @@ export class SocialPage {
     
   }
 
-  // Convert fileURI to Blob.
- 
+  openNoticePage(){
+    this.app.getRootNavs()[0].push('NoticePage', {
+      from: 'social'
+    });
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      
+      for(let i = 0; i< 30 ; i++){
+        this.photos.push('assets/img/cafe.jpg')
+      }
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
 
 
 }
