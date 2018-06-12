@@ -1,0 +1,110 @@
+page-profile {
+
+    .follow-button {
+        background: #fff; 
+        border: 1px solid color($colors, lc-green); 
+        color:  color($colors, lc-green);
+        font-size: 13px; 
+        border-radius: 3px;
+        padding: 5px;
+        font-weight: bold;
+        width: 90%;
+        margin-right: 30px;
+      }
+        .follow-button-active {
+        background:color($colors, lc-green); 
+        border: 1px solid color($colors, lc-green); 
+        color:  color($colors, white);
+        font-size: 13px; 
+        border-radius: 3px;
+        padding: 5px;
+        font-weight: bold;
+        width: 90%;
+        margin-right: 30px;
+      }
+    
+
+      .header-image{
+
+        vertical-align: middle;
+
+        .item-inner{
+            padding-right: 0 !important;
+            
+            .label{
+                margin-right: 0;
+            }
+        }
+        
+        ion-avatar {      
+            color:#fff;
+        }
+        ion-avatar img {
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            object-fit: cover;
+            // border: 1px solid #ccc;
+        }   
+
+        ion-row{
+            align-items: center;
+        }
+
+        h5{
+            color: black;
+            font-size: 1.8rem;
+            margin-bottom: 0px;
+            font-family: HelveticaNeue-BlackItalic !important;
+        }
+
+        p{
+            color: black;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+
+      }
+
+
+    .main-content{
+        width: 100%;
+
+        .segment-md{
+            background-color: white;
+
+            .segment-button{
+                
+                font-style: italic;
+                
+            }
+    
+            .segment-activated{
+                font-weight: bold;
+            }
+        }
+
+        ion-col{
+            padding: 1px !important;
+          }
+
+          .square-image{
+ 
+            padding:1px;
+            float:left;
+            position: relative;
+            width: 100%;
+            padding-bottom : 100%; /* = width for a 1:1 aspect ratio */
+            background-position:center center;
+            background-repeat:no-repeat;
+            background-size:cover; 
+        }
+    
+        
+    }
+   
+    
+     
+        
+}

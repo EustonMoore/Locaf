@@ -1,6 +1,6 @@
 page-cafe-detail {
   .content{
-    background-color: #eee;
+    background-color: #fff;
   }
   .scroll-content{
     margin-top: 0 !important;
@@ -8,9 +8,16 @@ page-cafe-detail {
   }
 
   ion-navbar{
+   
     height: 44px;
   }
+
+  ion-title{
+    font-family: HelveticaNeue-BlackItalic;
+  }
+  
   ion-toolbar{
+    
     height:44px;
   }
   scroll-content {
@@ -19,11 +26,12 @@ page-cafe-detail {
   }
 
   .toolbar-title {
-      color:#FFFFFF;
+      color:#FFFFFF !important;
   }
 
   ion-navbar{
     transition: all .5s;
+    
     .back-button,.bar-button{
       //text-shadow: 0 0 5px #000000;
       color: #fff;
@@ -33,60 +41,80 @@ page-cafe-detail {
     background-image: none;
   }
 
-
-
+ 
   ion-card{
-        margin: 12px 0px 15px 0px !important;
+      margin: 0px 0px 0px 0px !important;
+      box-shadow: none !important;
       width: 100% !important;
+      position: relative;
+      border-radius: 0px !important;
   }
-  .detail-header:before {
+  .card-list .card-list-like {
+    font-size: 5vw;
+    background-color: transparent !important;
+    color: rgba(255,255,255,0.5) !important;
+    box-shadow: none !important;
+    
+  }
+
+  .card-list-bg:before {
       content: ' ';
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
-      background: -moz-linear-gradient(top,  rgba(0,0,0,0) 68%, rgba(0,0,0,0.65) 100%); /* FF3.6-15 */
-      background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 68%,rgba(0,0,0,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
-      background: linear-gradient(to bottom,  rgba(0,0,0,0) 68%,rgba(0,0,0,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
-
+      background-size: cover;
+      background-position: center;
+      background-color: rgba(0, 0, 0, 0.4);
   }
-  .detail-header {
+
+  .card-list-bg {
       position: relative;
-      height: 300px;
+      width: 100%;
+      padding-bottom:100%;
       // background: url(img/1.jpg) no-repeat;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
+      background-position: center;
       background-size: cover;
   }
 
-  .detail-header .detail-name {
-      font-size: 20px;
-      font-weight: normal;
+  .card-list-bg .card-list-title {
+      
+      font-family: HelveticaNeue-BlackItalic !important;
+      font-size: 2rem;
+      font-style: italic;
       color: #FFFFFF;
       position: absolute;
-      left: 20px;
-      bottom: 35px;
-      text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      top: 40vw;
+      width: 100vw;
+      text-align: center;
   }
-  .detail-header .detail-price {
-      color: #FFFFFF;
-      font-size: 16px;
-      font-weight: bold;
-      /*color: #86d44d;*/
+  .card-list-bg .card-list-subtitle {
+      font-family:-윤고딕310 !important;
+      text-transform:none !important;
+      font-size: 4vw;
+      font-style: italic;
       position: absolute;
-      left: 20px;
-      bottom: 20px;
-      text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      top: 50vw;
+      width: 100vw;
+      color: #FFFFFF;
+      text-align: center;
   }
-
-  .info{
-
-      padding: 10px 20px 20px 10px;
+  .card-list-bg .card-list-distance {
+      font-family:-윤고딕310 !important;
+      text-transform:none !important;
+      font-size: 4vw;
+      font-style: italic;
+      position: absolute;
+      top: 60vw;
+      width: 100vw;
+      color: #FFFFFF;
+      text-align: center;
   }
-
+  
   .indent p{
     text-indent: 20px;
   }
@@ -119,11 +147,42 @@ page-cafe-detail {
   }
 
  ion-col{
-   padding: 1.5px !important;
+   padding: 1px !important;
  }
-  
 
+ .item-block .item-inner{
+   border-bottom: 1px solid #dedede !important;
+}
+
+
+
+ion-list{
+  background-color: #fff;
+}
+
+ion-item{
  
+  .button{
+    font-family: HelveticaNeue-BlackItalic;
+    color: color($colors, lc-gray);
+  }
+
+  ion-label{
+    font-family: HelveticaNeue-lightItalic;
+    
+
+  }
+}
+
+.list-header{
+  ion-label{
+    font-family: HelveticaNeue-BlackItalic;
+    color: black;
+  }
+  padding-right: 0.5rem;
+  margin-bottom: 0px;
+  
+}
 
   .square-image{
  
@@ -136,4 +195,6 @@ page-cafe-detail {
     background-repeat:no-repeat;
     background-size:cover; 
   }
+
+  
 }

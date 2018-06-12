@@ -32,7 +32,7 @@ export class LoaderPage {
         this.auth.getUser().then((user: firebase.User) => {
           if (!user) {
             // User is not authenticated, proceed to LoginPage.
-            this.navCtrl.setRoot('LoginPage');
+            this.navCtrl.setRoot('TabsPage');
             this.splashScreen.hide();
           } else {
             // Data exists, proceed to TabsPage.

@@ -2,6 +2,10 @@
 
   <ion-navbar  transparent  [class.show-background]="showToolbar" >
     <ion-title color="light" [hidden]="!showToolbar">{{ cafe.cafeName }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button [navPush]="'CafeMenuPage'" [navParams]="cafe">MENU</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -10,22 +14,27 @@
 <ion-content  no-padding  class="content" (ionScroll)="onScroll($event)" [class.transition]="transition" >
 
   <!--*********** Image header  ***********-->
-  <div class="detail-header" [ngStyle]="{'background-image': 'url(' + cafe.images.imgBig + ')'}">
-    <h2 class="detail-name "> {{cafe.cafeName}}</h2>
-    <div class="detail-price ">{{cafe.phone}}</div>
-    <ion-fab  bottom right edge class="hello pop-in">
-    <button ion-fab *ngIf="!favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart-outline"></ion-icon></button>
-    <button ion-fab *ngIf="favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart"></ion-icon></button>
+  <ion-card tappable no-padding no-margin class="card-list ">
+    
+    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + cafe.images.background+ ')'}">
+      <h2 class="card-list-title" > {{cafe.cafeName}}</h2>
+      <h2 class="card-list-subtitle">{{ cafe.address }}</h2>
+      <h2 class="card-list-distance">{{ cafe.distance }}</h2>
+      
+      <!-- <h2 class="card-list-like"></ion-icon></h2> -->
+    </div>
+    <ion-fab right middle>
+        <button ion-fab class="card-list-like" *ngIf="!cafe.favorite" (click)="addToFav(cafe);  $event.stopPropagation()"> <ion-icon name="lc-heart-outline"></ion-icon></button>
+        <button ion-fab class="card-list-like pop-in" *ngIf="cafe.favorite" (click)="addToFav(cafe);  $event.stopPropagation()"> <ion-icon name="lc-heart"></ion-icon></button>
     </ion-fab>
-  </div>
-
+  </ion-card>
   <!--***********  Description ***********-->
-  <ion-card>
+  <!-- <ion-card>
       <ion-card-header no-margin>
         Description
       </ion-card-header>
       <ion-card-content>
-        <!-- <ion-row>
+        <ion-row>
           <ion-col col-2 no-padding text-left>
               <h4>Rating:</h4>
           </ion-col>
@@ -40,68 +49,64 @@
                     (ngModelChange)="onModelChange($event)"> 
               </rating>  
           </ion-col>
-        </ion-row> -->
+        </ion-row>
         
         <div [innerHTML]="cafe.description" ></div>
 
       </ion-card-content>
-    </ion-card>
-    
-    <!--*********** Static map  ***********-->
-    <ion-card class="wave">
-      <ion-card-header>
-        Map
-      </ion-card-header>
-      <img src="https://maps.googleapis.com/maps/api/staticmap?center={{cafe.coords.latitude}},{{cafe.coords.longitude}}&zoom=15&scale=2&size=300x150&maptype=roadmap&format=png&visual_refresh=true&markers=color:0xff0000%7Clabel:%7C{{cafe.coords.latitude}},{{cafe.coords.longitude}}"/>
-      <ion-row>
-        <ion-col center text-center>
-          <input #dummy style="display: none" type="text" >
-          <!-- value="{{(item | async)?.categoryId}}" -->
-          <button ion-button icon-left clear  (click)="showMap(dummy.value)">
-            <div>Explore </div>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-      <!--*********** Contact  ***********-->
-      <ion-card>
-          <div class="info">
-            <ion-list no-lines>
-              <ion-item >
-                <ion-icon name="ios-pin-outline" item-left  color="darkGray" ></ion-icon>
-                  {{cafe.address}}         
-              </ion-item>
-                <ion-item>
-                  <ion-icon name="ios-call-outline" item-left  color="darkGray" ></ion-icon>
-                    {{cafe.phone}} 
-              </ion-item>
-                <ion-item >
-                <ion-icon name="ios-globe-outline" item-left  color="darkGray" ></ion-icon>
-                  {{cafe.web}} 
-              </ion-item>
-              <ion-item >
-                <ion-icon name="ios-map-outline" item-left  color="darkGray" ></ion-icon>
-                  Gps: {{cafe.coords.latitude}},{{cafe.coords.longitude}} 
-              </ion-item>
-              <!-- <ion-item >
-                <ion-icon name="ios-navigate-outline" item-left  color="darkGray" ></ion-icon>
-                  {{(item | async)?.location}} 
-              </ion-item> -->
-              <ion-item >
-                <ion-icon name="ios-pricetag-outline" item-left  color="darkGray" ></ion-icon>
-                  {{cafe.type}}  
-              </ion-item>
-            </ion-list>
-          </div>
-      </ion-card>
-    <!--     -->
-      
+    </ion-card> -->
 
+
+
+    <!--*********** Contact  ***********-->
+    <ion-card >      
+      
+        <ion-item>
+          <ion-label stacked color="lc-gray">Address</ion-label>
+          <ion-input readonly value= "{{cafe.address}}"> </ion-input>
+          <button ion-button item-end clear (click)="expandItem()">Map</button>  
+        </ion-item>
+        <expandable-list [expandHeight]="itemExpandHeight" [expanded]="expanded" [mode] ="'map'">
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{cafe.coords.latitude}},{{cafe.coords.longitude}}&zoom=15&scale=2&size=300x160&maptype=roadmap&format=png&visual_refresh=true&markers=|{{cafe.coords.latitude}},{{cafe.coords.longitude}}"/>
+        </expandable-list>  
+        <ion-item >
+          <ion-label stacked color="lc-gray">Near Station</ion-label>
+          <ion-input readonly value = "{{cafe.station.name}} &lt;{{cafe.station.line}}호선&gt;"></ion-input>
+          </ion-item>
+        <ion-item>
+          <ion-label stacked color="lc-gray">Call</ion-label>
+          <ion-input readonly value = "{{cafe.phone}}"> </ion-input> 
+        </ion-item>
+        <ion-item >
+          <ion-label stacked color="lc-gray">Open Hours</ion-label>
+          <ion-input readonly > <div item-content >Value</div>
+          </ion-input> 
+         
+        
+        </ion-item>
+        <!-- <ion-item >
+          <ion-icon name="ios-map-outline" item-left  color="darkGray" ></ion-icon>
+          Gps: {{cafe.coords.latitude}},{{cafe.coords.longitude}} 
+        </ion-item> -->
+        <!-- <ion-item >
+          <ion-icon name="ios-navigate-outline" item-left  color="darkGray" ></ion-icon>
+            {{(item | async)?.location}} 
+        </ion-item> -->
+        
+      
+    
+  </ion-card>
+<!--     -->
+   
+      
         <!--***********  Thumbnail images ***********-->
-      <ion-card *ngIf="cafe.images.imgGallery?.length > 0 ">
-          <ion-card-header>
-            Photos
-          </ion-card-header>
+      <ion-list *ngIf="cafe.images.imgGallery?.length > 0 ">
+          <ion-list-header class="photo">
+            PHOTOS
+            <button ion-button icon-only item-end clear>
+                <ion-icon  name="lc-add"></ion-icon>
+            </button>  
+          </ion-list-header>
           <ion-grid no-padding >
                 <ion-row  wrap color="gray">
                   <ion-col  tappable col-4 *ngFor="let image of cafe.images.imgGallery  ,let i = index" >
@@ -111,7 +116,7 @@
                   </ion-col>
                 </ion-row>
           </ion-grid>
-      </ion-card>
+      </ion-list>
 
 
 </ion-content>

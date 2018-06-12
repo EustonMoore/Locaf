@@ -1,0 +1,67 @@
+<ion-header >
+
+  <ion-navbar mode="md">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="lc-menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    
+
+    <ion-title >
+        <button class="searchBar" ion-button round (click)="openSocialSearchPage()"><ion-icon color="black" name="search"></ion-icon>&nbsp;&nbsp;
+          <ion-slides #searchSlides autoplay="4000" direction="vertical" loop>
+            <ion-slide>
+              #상수동카페
+            </ion-slide>
+            <ion-slide>
+              #아메리카노
+            </ion-slide>
+            <ion-slide>
+              #로컬카페
+            </ion-slide>
+          </ion-slides>
+        </button>
+      </ion-title>
+    
+
+
+    <ion-buttons end >
+      
+      <button ion-button icon-only (click)="openNoticePage()">
+        <ion-icon name="lc-notifications"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content fullscreen=""  >
+    
+  
+
+  <ion-grid no-padding class="photo-list">
+        <ion-row  wrap color="gray">
+          <ion-col  tappable col-4 *ngFor="let image of photos  ,let i = index" >
+              <!-- <div class="square-image" [ngStyle]="{'background-image': 'url(' + image + ')'}" (click)="openFullImage(i)" ></div> -->
+              <div class="square-image" [ngStyle]="{'background-color': '#dedede'}" (click)="openFullImage(i)" ></div>
+          </ion-col>
+        </ion-row>
+  </ion-grid>
+
+  <!-- <ion-fab bottom right #fab style="bottom: 10%;" [hideFabOnscroll]='content' > -->
+  <ion-fab bottom right  style="bottom: 10%;">
+    <button ion-fab color="lc-fab"> <ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+        <button ion-fab (click)="openSocialCreatePage('gallery')"> <ion-icon name="images"></ion-icon> </button>
+        <button ion-fab (click)="openSocialCreatePage('camera')"> <ion-icon name="camera"></ion-icon> </button>
+      </ion-fab-list>
+  </ion-fab>
+
+  <ion-infinite-scroll threshold = "{{halfHeight}}" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

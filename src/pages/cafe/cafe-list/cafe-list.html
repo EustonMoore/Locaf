@@ -9,8 +9,8 @@
       </ion-buttons>
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()"><ion-icon name="md-locate"></ion-icon></button>
-      <button ion-button icon-only (click)="addItem()"><ion-icon name="lc-notifications"></ion-icon></button>
+     
+      <button ion-button icon-only (click)="openNoticePage()"><ion-icon name="lc-notifications"></ion-icon></button>
      
     </ion-buttons>
   </ion-navbar>
@@ -29,11 +29,13 @@
     </ion-refresher-content>
   </ion-refresher>
 
+  
   <ion-card tappable no-padding no-margin class="card-list " *ngFor="let cafe of cafes" (click)="openCafeDetailPage(cafe)">
     
     <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + cafe.images.background+ ')'}">
       <h2 class="card-list-title" > {{cafe.cafeName}}</h2>
-      <h2 class="card-list-subtitle">{{ cafe.subtitle }}</h2>
+      <h2 class="card-list-subtitle">{{ cafe.address }}</h2>
+      <h2 class="card-list-distance">{{ cafe.distance }}</h2>
       
       <!-- <h2 class="card-list-like"></ion-icon></h2> -->
     </div>
@@ -59,4 +61,12 @@
         <button ion-fab *ngFor="let filter of filters" (click)="checkFilter(filter)" [ngStyle]="{'background-color': filter.color}"><ion-icon name="{{filter.name}}" color="white"></ion-icon></button>
       </ion-fab-list>
   </ion-fab>
+
+
+  <ion-infinite-scroll threshold = "{{halfHeight}}" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

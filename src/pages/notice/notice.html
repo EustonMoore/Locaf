@@ -1,0 +1,29 @@
+<!--
+  Generated template for the NoticePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+  <ion-navbar >
+    <ion-title>NOTICE</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-padding mode="md">
+    <ion-segment [(ngModel)]="page" color="secondary" mode="md">
+      <ion-segment-button value="cafe">
+        LOCAF소식
+      </ion-segment-button>
+      <ion-segment-button value="social">
+        내소식
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content (pan)='swipeEvent($event)'>
+
+</ion-content>

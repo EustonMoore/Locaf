@@ -6,7 +6,6 @@ import { Config, Nav, Platform, MenuController } from 'ionic-angular';
 import { Settings, TranslateProvider, AlertProvider, AuthProvider } from '../providers';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { HeaderColor } from '@ionic-native/header-color';
-import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +27,6 @@ export class MyApp {
     private splashScreen: SplashScreen,
     private menuCtrl: MenuController,
     private headerColor: HeaderColor,
-    private keyboard: Keyboard,
     private alert: AlertProvider,
     private auth: AuthProvider,
 
@@ -36,10 +34,10 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.keyboard.disableScroll(true);
-      this.statusBar.backgroundColorByHexString('#365a55');
+
+      this.statusBar.backgroundColorByHexString('#3c4240');
       this.splashScreen.hide();
-      this.headerColor.tint('#365a55');
+      this.headerColor.tint('#3c4240');
       this.menuCtrl.enable(false);
     });
     this.initTranslate();
@@ -55,7 +53,7 @@ export class MyApp {
     { title: 'Login', component: 'LoginPage' },
     { title: 'Signup', component: 'SignupPage' },
     { title: 'Master Detail', component: 'CafeListPage' },
-    { title: 'Menu', component: 'MenuPage' },
+    { title: 'Profile', component: 'ProfilePage' },
     { title: 'Settings', component: 'SettingsPage' },
     { title: 'Logout', component: 'LoginPage' }
   ]
@@ -78,15 +76,14 @@ export class MyApp {
     //   this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
     // });
   }
-  test(){
-    console.log('sdtsdt')
-  }
-
+  
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if(page.title == 'Logout') this.logout();
-
+    else{
+      this.nav.push(page.component);
+    }
     // this.nav.setRoot(page);
 
   }
