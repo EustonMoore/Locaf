@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 // import { ShrinkFabModule } from '../../../components/shrink-fab/shrink-fab.module';
-import { SocialFeedPage } from './social-feed';
+import { SocialGridPage } from './social-grid';
 
 @NgModule({
   declarations: [
-    SocialFeedPage,
+    SocialGridPage,
   ],
   imports: [
-    IonicPageModule.forChild(SocialFeedPage),
+    IonicPageModule.forChild(SocialGridPage),
     TranslateModule.forChild(),
     // ShrinkFabModule
   ],
   exports: [
-    SocialFeedPage
+    SocialGridPage
   ]
 })
-export class SocialFeedPageModule { }
+export class SocialGridPageModule { }

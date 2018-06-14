@@ -13,7 +13,7 @@ export class TabsPage {
 
 
   tab1Root: any = 'CafeListPage';
-  tab2Root: any = 'SocialFeedPage';
+  tab2Root: any = 'SocialGridPage';
   tab3Root: any = 'SettingsPage';
   
   

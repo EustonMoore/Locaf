@@ -4,6 +4,26 @@ page-notice {
     ion-segment{
         left: 0 !important;
         width: 100% !important;
+        font-style: italic;
         
+    }
+
+    ion-avatar {
+       margin: 0.5rem 1.5rem 0.5rem 0rem !important;
+
+       img{
+           width: 5rem !important;
+           height: 5rem !important;
+       }
+    }
+
+    .writer{
+        font-family: HelveticaNeue-BlackItalic;
+    }
+
+    .date{
+        font-size: 1.2rem;
+        font-family: HelveticaNeue-LightItalic;
+        color: color($colors, lc-gray);
     }
 }

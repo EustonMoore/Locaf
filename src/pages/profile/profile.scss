@@ -58,11 +58,25 @@ page-profile {
             font-family: HelveticaNeue-BlackItalic !important;
         }
 
-        p{
-            color: black;
-            font-size: 1rem;
-            font-style: italic;
+        .profile-header{
+           
+            p{
+                color: black;
+                font-size: 1.2rem;
+                font-style: italic;
+            }
+           
         }
+
+        .profile-middle{
+            padding-top: 0;
+            padding-bottom: 0;
+            p{
+                font-family: HelveticaNeue-LightItalic;
+                font-style: italic;
+            }
+        }
+        
 
 
       }
