@@ -30,7 +30,7 @@ export class CafeListPage {
   @ViewChild("fab") fabHandler: FabContainer;
 
   // private cafes: Cafe[];
-  private halfHeight = this.platform.height() / 2;
+  halfHeight = this.platform.height() / 2;
   private cafes: any[];
   private myCoords;
   public currentLocation = "";
@@ -78,7 +78,7 @@ export class CafeListPage {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
-    console.log(this.halfHeight);
+    
     // let subscription =  this.firestore.getCafes().valueChanges().take(1).subscribe((cafes :any[]) => {    // => cafes: Cafe[]
     //   this.cafes = cafes;
     //   this.cafes.forEach(cafe => {

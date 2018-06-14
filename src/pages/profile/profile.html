@@ -19,7 +19,7 @@
 <ion-content parallax-header>
 
   <div class="header-image">
-    <ion-item no-lines>
+    <ion-item no-lines class="profile-header">
     <ion-row>
       
         <ion-avatar >
@@ -54,8 +54,8 @@
       </ion-row> -->
     
     
-      <div padding style="padding-top: 0;">
-        <p no-margin no-padding><b>test</b></p>
+      <div padding class="profile-middle">
+        <h5 no-margin no-padding><b>test</b></h5>
         <p no-padding no-margin class="info">testsetsete</p>
         <!--<p no-padding no-margin color="blue2"><a href="#">{{(profile | async)?.facebook}}</a></p>-->
       </div>
@@ -67,19 +67,19 @@
     <div class="main-content">
       <!--***********  Segement tab ***********-->
       <ion-segment mode="md" [(ngModel)]="segmentView" color="blue2">
-        <ion-segment-button value="one">
+        <ion-segment-button value="feed">
           피드
         </ion-segment-button>
-        <ion-segment-button value="two">
+        <ion-segment-button value="collection">
           컬렉션
         </ion-segment-button>
-        <ion-segment-button value="three">
+        <ion-segment-button value="favorite">
           즐겨찾기
         </ion-segment-button>
       </ion-segment>
     
       <!--***********  Segement one ***********-->
-      <ion-grid no-padding *ngIf="segmentView==='one'">
+      <ion-grid no-padding *ngIf="segmentView==='feed'">
         <ion-row wrap color="gray">
           <ion-col col-4 *ngFor="let image of photos  ,let i = index  ">
               <!-- <div class="square-image" [ngStyle]="{'background-image': 'url(' + image + ')'}" (click)="openFullImage(i)" ></div>-->
@@ -89,52 +89,24 @@
       </ion-grid>
     
       <!--***********    Segement two  ***********-->
-      <div *ngIf="segmentView==='two'">
-        <ion-list no-lines padding>
-          <ion-list-header>
-            <h2>Friend</h2>
-          </ion-list-header>
-          <ion-item *ngFor="let friend of friends | async" padding-bottom>
-            <ion-avatar item-left>
-              <img [src]="friend.profileImg">
-            </ion-avatar>
-            <h2>{{friend.name}}</h2>
-          </ion-item>
-        </ion-list>
-      </div>
+      <ion-grid no-padding *ngIf="segmentView==='collection'">
+          <ion-row wrap color="gray">
+            <ion-col col-4 *ngFor="let image of photos  ,let i = index  ">
+                <!-- <div class="square-image" [ngStyle]="{'background-image': 'url(' + image + ')'}" (click)="openFullImage(i)" ></div>-->
+                <div class="square-image" [ngStyle]="{'background-color': '#dedede'}" (click)="openFullImage(i)" ></div>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+      
     
       <!--***********  Segment three  ***********-->
-      <div *ngIf="segmentView==='three'">
-        <ion-list no-lines padding>
-          <ion-list-header>
-            <h2>Contact</h2>
-          </ion-list-header>
-          <ion-item>
-            <ion-icon name="ios-mail" item-left></ion-icon>
-            <h2>ceo@cemo.com</h2>
-            <p>work email</p>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="ios-call" item-left></ion-icon>
-            <h2>009923124322</h2>
-            <p>mobile phone</p>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="logo-linkedin" item-left></ion-icon>
-            <h2>linkedin.com/cemo</h2>
-            <p>linked in </p>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="logo-facebook" item-left></ion-icon>
-            <h2>facebook.com/cemo</h2>
-            <p>facebook</p>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="logo-skype" item-left></ion-icon>
-            <h2>cemo@outlook.com</h2>
-            <p>skype</p>
-          </ion-item>
-        </ion-list>
-      </div>
+      <ion-grid no-padding *ngIf="segmentView==='favorite'">
+          <ion-row wrap color="gray">
+            <ion-col col-4 *ngFor="let image of photos  ,let i = index  ">
+                <!-- <div class="square-image" [ngStyle]="{'background-image': 'url(' + image + ')'}" (click)="openFullImage(i)" ></div>-->
+                <div class="square-image" [ngStyle]="{'background-color': '#dedede'}" (click)="openFullImage(i)" ></div>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
     </div>
 </ion-content>

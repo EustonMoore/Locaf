@@ -7,16 +7,16 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
-  selector: 'page-social-feed',
-  templateUrl: 'social-feed.html'
+  selector: 'page-social-grid',
+  templateUrl: 'social-grid.html'
 })
-export class SocialFeedPage {
+export class SocialGridPage {
 
   @ViewChild(Content) content: Content;
   @ViewChild('searchSlides') searchSlides: Slides
   @ViewChild("fab") fabHandler: FabContainer;
 
-  private halfHeight = this.platform.height() / 2;
+  halfHeight = this.platform.height() / 2;
   public cameraOptions: CameraOptions;
   public view = 'list';
   photos = [];
@@ -68,15 +68,22 @@ export class SocialFeedPage {
    * Navigate to the detail page for this item.
    */
   
-  openSocialSearchPage(item) {
+  openSocialSearchPage(keyword) {
     let options : NavOptions = {
       keyboardClose: false
     }
 
-    this.app.getRootNavs()[0].push('SocialSearchPage', {
-      item: item
-     
-    }, options);
+    if(keyword){
+      this.app.getRootNavs()[0].push('SocialSearchPage', {
+        keyword: keyword
+       
+      }, options);
+    }
+
+    else{
+      this.app.getRootNavs()[0].push('SocialSearchPage', {}, options);
+    }
+    
     
   }
 
@@ -104,6 +111,10 @@ export class SocialFeedPage {
      
     // });
     
+  }
+
+  openSocialListPage(){
+    this.app.getRootNavs()[0].push('SocialListPage');
   }
 
   openNoticePage(){

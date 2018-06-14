@@ -28,16 +28,28 @@ page-tabs {
         
     }
     .segment-ios{
+        
         .segment-button{
-           
-            height: 3.0rem !important;
+            
             color: color($colors, white) !important;
             border-color: color($colors, white) !important;
             background-color: rgba(0,0,0,0.5) !important;
-            padding-top:0.3rem;
+           
             ion-icon{
-                font-size:2.2rem;
+               font-size: 2.5rem;
+               margin-top: 0.3rem;
             }
+
+            
+        }
+        :first-of-type{
+            border-top-left-radius: 1.2rem !important;
+            border-bottom-left-radius: 1.2rem !important;
+        }
+
+        :last-of-type{
+            border-top-right-radius: 1.2rem !important;
+            border-bottom-right-radius: 1.2rem !important;
         }
 
         .segment-activated{

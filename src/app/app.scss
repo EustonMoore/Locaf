@@ -28,10 +28,17 @@
 
 
 ion-navbar{
+   
     .bar-buttons{
         font-family: HelveticaNeue-LightItalic;
     }
+
+  
+        padding-right: 1rem !important;
+    
 }
+
+
 
 ion-title {
     font-family: HelveticaNeue-LightItalic;
@@ -98,6 +105,7 @@ ion-title {
 .round {
     border-radius: 50%;
 }
+
 
 
 h3, .label,

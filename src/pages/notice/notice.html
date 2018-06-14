@@ -6,17 +6,17 @@
 -->
 <ion-header no-border>
 
-  <ion-navbar >
+  <ion-navbar color="lc-green">
     <ion-title>NOTICE</ion-title>
   </ion-navbar>
 
   <ion-toolbar no-padding mode="md">
     <ion-segment [(ngModel)]="page" color="secondary" mode="md">
       <ion-segment-button value="cafe">
-        LOCAF소식
+        새 소식
       </ion-segment-button>
       <ion-segment-button value="social">
-        내소식
+        내 소식
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -25,5 +25,33 @@
 
 
 <ion-content (pan)='swipeEvent($event)'>
+
+    <ion-list no-lines>
+        <ion-item text-wrap>
+          <ion-avatar item-start>
+            <img src="assets/img/cafe.jpg">
+          </ion-avatar>
+          <div>
+            <span class="writer">sesssss</span>님이
+            <span> 콜렉션에 담았습니다. </span>
+            <span class="date"> 18.07.05</span>
+          </div>
+         
+        </ion-item>
+        <ion-item>
+            <ion-avatar item-start>
+              <img src="assets/img/cafe.jpg">
+            </ion-avatar>
+            <h2>Cher</h2>
+            
+          </ion-item>
+          <ion-item>
+              <ion-avatar item-start>
+                <img src="assets/img/cafe.jpg">
+              </ion-avatar>
+              <h2>Cher</h2>
+              
+            </ion-item>
+      </ion-list>
 
 </ion-content>

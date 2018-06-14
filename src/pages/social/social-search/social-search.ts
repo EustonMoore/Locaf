@@ -16,12 +16,18 @@ import { IonicPage, NavController, NavParams, Searchbar } from 'ionic-angular';
 export class SocialSearchPage {
   @ViewChild('searchBar') searchbar: Searchbar;
 
+  public keyword = 'search';
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams) {
+  
+               
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SocialSearchPage');
+    let param = this.navParams.get('keyword');
+    if(param) this.keyword = param;
     
   }
 

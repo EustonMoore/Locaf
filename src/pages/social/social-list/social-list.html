@@ -1,0 +1,82 @@
+<!--
+  Generated template for the SocialListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="lc-green">
+    <ion-title>PHOTO</ion-title>
+
+
+    
+    <ion-buttons end >
+      
+      <button ion-button icon-only (click)="test()">
+        <ion-icon name="lc-refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-card  *ngFor="let feed of feeds">
+
+      
+        <ion-item class="feed-header">
+          <ion-avatar item-left>
+            <img [src]="feed.imgProfile">
+          </ion-avatar>
+          <h2 >{{feed.name}}</h2>
+          <p >cafe Dee</p>
+          <div class="timestamp" item-end>33분전</div>
+          <button ion-button clear item-end>팔로우</button>
+          <ion-icon item-end name="md-more" ></ion-icon>
+        </ion-item>
+        
+            <ion-slides  pager>
+              <!-- <ion-slide *ngFor="let images of  feed.images " [ngStyle]="{'background' : 'url(' + images.url + ')'}"> -->
+              <ion-slide class="square-image" *ngFor="let images of  feed.images " [ngStyle]="{'background-color': '#dedede'}">
+              </ion-slide>
+            </ion-slides>
+          
+        <ion-card-content>
+          <div class="collectors">
+            <span >521</span>명이 컬렉션에 담았습니다.
+          </div>
+          <ion-card-title no-padding>
+            {{feed.title}}
+          </ion-card-title>
+          
+          <div class="description" text-wrap >
+            <span class="writer">asdasdasd</span> 
+            <span (click)="showMore($event)">
+              졸라 맛잇네요 추천합니다. asdfjladfjladfafadfjakl sdfaksdfjlskajfl sdflk sdfjkl sdfj ksldfj 
+            </span>
+          </div>
+          <p style="color: #d9d9d9">
+              댓글 17개 모두보기
+          </p>
+        </ion-card-content>
+      
+        
+        <ion-row class="feed-button">
+          <ion-col no-padding col-6>
+            <button ion-button icon-only clear color="gray">
+              <ion-icon name="lc-collection"></ion-icon>
+              
+            </button>
+            <button ion-button icon-only clear color="gray">
+                <ion-icon name="lc-reply"></ion-icon>
+                <div>{{feed.comment}}</div>
+              </button>
+          </ion-col>
+        </ion-row>
+    
+      </ion-card>
+
+</ion-content>
