@@ -27,21 +27,32 @@
 
 
 
+
+.menu.menu-left{
+	width: calc(100%) !important;
+}
+
+ion-content{
+    //font-weight: 300 !important;
+}
 ion-navbar{
    
-    .bar-buttons{
-        font-family: HelveticaNeue-LightItalic;
+    .button-inner{
+        font-weight: 300;
+        font-style: italic;
     }
 
-  
-        padding-right: 1rem !important;
+    padding-right: 1rem !important;
     
 }
 
 
 
 ion-title {
-    font-family: HelveticaNeue-LightItalic;
+    .toolbar-title{
+        font-weight: 300;
+        font-style: italic;
+    }
     position: absolute;
     top: 0;
     left: 0;

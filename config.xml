@@ -20,13 +20,12 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
-    <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']">
-        <activity android:name="MainActivity" android:windowSoftInputMode="adjustPan" />
-    </edit-config>
+    <preference name="KeyboardResize" value="false" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <activity android:windowSoftInputMode="adjustPan|adjustResize">
-        </activity>
+        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
+            <activity android:windowSoftInputMode="adjustResize" />
+        </edit-config>
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -110,8 +109,8 @@
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.2" />
-    <engine name="android" spec="~6.4.0" />
     <plugin name="cordova-plugin-kakao-sdk" spec="^2.0.3">
         <variable name="KAKAO_APP_KEY" value="42497f7d93884a5502abac07ab55f2d0" />
     </plugin>
+    <engine name="android" spec="6.4.0" />
 </widget>

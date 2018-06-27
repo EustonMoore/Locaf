@@ -43,7 +43,6 @@ export class AuthProvider {
             // Update userData variable from Firestore.
             this.fsSubscription = ref.valueChanges().subscribe((user: User) => {
               this.user = user;
-              console.log(user);
             });
           }).catch(() => {
             reject();

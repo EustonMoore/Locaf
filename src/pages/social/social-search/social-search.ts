@@ -28,12 +28,13 @@ export class SocialSearchPage {
     console.log('ionViewDidLoad SocialSearchPage');
     let param = this.navParams.get('keyword');
     if(param) this.keyword = param;
+    else this.searchbar.setFocus();
     
   }
 
   ionViewDidEnter() {
   
-      this.searchbar.setFocus();
+      
    
   }
 

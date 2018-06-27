@@ -25,7 +25,6 @@ export class ParallaxHeader {
         let mainContent = content.getElementsByClassName('main-content')[0];
  
         this.headerHeight = this.header.clientHeight;
-        console.log(this.headerHeight + 'sdfsdf')
  
         this.renderer.setElementStyle(this.header, 'webkitTransformOrigin', 'center bottom');
         this.renderer.setElementStyle(this.header, 'background-size', 'cover');

@@ -1,0 +1,31 @@
+page-profile-update {
+
+    .profile-photo{
+         
+       
+        
+        p{
+            margin-top: 0.5rem;
+            font-weight: 300;
+            color: black;
+            
+        }
+        ion-avatar img {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            object-fit: cover;
+            // border: 1px solid #ccc;
+        }   
+    }
+
+    ion-list-header{
+        
+        .label{
+            font-weight: bold;
+        }
+       
+      
+    }
+   
+}

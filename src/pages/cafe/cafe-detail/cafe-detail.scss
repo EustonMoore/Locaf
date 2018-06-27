@@ -13,7 +13,11 @@ page-cafe-detail {
   }
 
   ion-title{
-    font-family: HelveticaNeue-BlackItalic;
+    .toolbar-title{
+      font-weight: 900;
+
+    }
+    
   }
   
   ion-toolbar{
@@ -83,7 +87,7 @@ page-cafe-detail {
 
   .card-list-bg .card-list-title {
       
-      font-family: HelveticaNeue-BlackItalic !important;
+      font-weight: 900;
       font-size: 2rem;
       font-style: italic;
       color: #FFFFFF;
@@ -93,7 +97,8 @@ page-cafe-detail {
       text-align: center;
   }
   .card-list-bg .card-list-subtitle {
-      font-family:-윤고딕310 !important;
+      
+      font-weight: 100;
       text-transform:none !important;
       font-size: 4vw;
       font-style: italic;
@@ -104,7 +109,8 @@ page-cafe-detail {
       text-align: center;
   }
   .card-list-bg .card-list-distance {
-      font-family:-윤고딕310 !important;
+      
+      font-weight: 100;
       text-transform:none !important;
       font-size: 4vw;
       font-style: italic;
@@ -163,20 +169,21 @@ ion-list{
 ion-item{
  
   .button{
-    font-family: HelveticaNeue-BlackItalic;
+    font-style: italic;
+    font-weight: 900;
     color: color($colors, lc-gray);
   }
 
   ion-label{
-    font-family: HelveticaNeue-lightItalic;
-    
-
+    font-style: italic;
+    font-weight: 300 !important;
   }
+
 }
 
 .list-header{
   ion-label{
-    font-family: HelveticaNeue-BlackItalic;
+    font-style: italic !important;
     color: black;
   }
   padding-right: 0.5rem;

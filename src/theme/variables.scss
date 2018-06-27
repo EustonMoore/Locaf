@@ -124,6 +124,7 @@ $label-md-text-color-focused: false;
 
 @import "roboto";
 @import "noto-sans";
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 
 $toolbar-background: white;
@@ -139,6 +140,6 @@ $text-input-wp-show-focus-highlight:      false;
 $text-input-wp-show-valid-highlight:      false;
 $text-input-wp-show-invalid-highlight:    false;
 
-$font-family-md-base:  "-윤고딕310";
-$font-family-ios-base: "-윤고딕310";
+$font-family-md-base: 'Noto Sans KR';
+$font-family-ios-base: 'Noto Sans KR';
 // $background-color: transparent;

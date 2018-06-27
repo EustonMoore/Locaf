@@ -112,7 +112,6 @@ export class CafeListPage {
   }
 
   openCafeDetailPage(cafe: Cafe) {
-    console.log(cafe);
     this.app.getRootNavs()[0].push('CafeDetailPage', {
       cafe: cafe
     });
@@ -152,8 +151,7 @@ export class CafeListPage {
               lat: cafe.coords.latitude,
               lng: cafe.coords.longitude
             }
-            console.log(this.myCoords);
-            console.log(destination);
+            
             cafe.distance = Spherical.computeDistanceBetween(this.myCoords, destination);
             console.log(cafe.distance)
           });

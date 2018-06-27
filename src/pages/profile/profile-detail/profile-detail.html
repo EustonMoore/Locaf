@@ -10,7 +10,7 @@
     <ion-title>PROFILE</ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only ><ion-icon name="md-more"></ion-icon></button>
+      <button ion-button icon-only (click)="myProfile ? navCtrl.push('ProfileSettingsPage') : console.log('tt')" ><ion-icon name="md-more"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -20,39 +20,43 @@
 
   <div class="header-image">
     <ion-item no-lines class="profile-header">
-    <ion-row>
-      
+      <ion-row>
         <ion-avatar >
           <img src="assets/img/cafe.jpg"  alt="assets/img/cafe.jpg">
             <!-- <img src="{{(profile | async)?.imgProfile}}" class="avatar"/>   -->
-        </ion-avatar>    
-      <ion-col  text-center>
-        <h5>21</h5>
-        <p no-padding no-margin>포스트</p>
-      </ion-col>
-      <ion-col  text-center>
-        <h5>114</h5>
-        <p no-paddin no-margin>컬렉션</p>
-      </ion-col>
-      <ion-col  text-center>
-        <h5>119</h5>
-        <p no-paddin no-margin>팔로잉</p>
-      </ion-col>
-    </ion-row>
-    </ion-item>
-
-      <!-- <ion-row no-padding no-margin>
-        <ion-col no-padding no-margin col-4></ion-col>
-        <ion-col no-padding no-margin text-center col-8>
-          <button ion-button class="follow-button" *ngIf="!following"  block  (click)="follow()">Follow</button>
-          <button ion-button class="follow-button-active" icon-left *ngIf="following"  block  (click)="follow()">
-            <ion-icon name="checkmark"></ion-icon>
-            Following
-          </button>
+        </ion-avatar> 
+        <ion-col no-padding>
+        
+          <ion-row >
+            <ion-col col-4 text-center>
+              <h5>21</h5>
+              <p no-padding no-margin>포스트</p>
+            </ion-col>
+            <ion-col col-4 text-center>
+              <h5>114</h5>
+              <p no-paddin no-margin>컬렉션</p>
+            </ion-col>
+            <ion-col col-4 text-center>
+              <h5>119</h5>
+              <p no-paddin no-margin>팔로잉</p>
+            </ion-col>
+            <ion-col text-center>
+              <div *ngIf="!myProfile" >
+              <button mode="ios" ion-button class="follow-button" *ngIf="!following"    (click)="follow()">Follow</button>
+              <button mode="ios" ion-button class="follow-button-active" icon-left *ngIf="following"    (click)="follow()">
+                <ion-icon name="checkmark"></ion-icon>
+                Following
+              </button>
+              </div>
+              <div *ngIf="myProfile" mode="ios">
+                <button mode="ios" ion-button class="edit-button" [navPush]="'ProfileUpdatePage'" [navParams]="user" >프로필 수정</button>
+                <button mode="ios" ion-button  [navPush]="'ProfileUpdatePage'" [navParams]="user" icon-only color="white"><ion-icon name="lc-grid-edit"></ion-icon></button>
+              </div>
+            </ion-col>
+          </ion-row>   
         </ion-col>
-        <ion-col col-3></ion-col>
-      </ion-row> -->
-    
+      </ion-row>
+    </ion-item>
     
       <div padding class="profile-middle">
         <h5 no-margin no-padding><b>test</b></h5>
