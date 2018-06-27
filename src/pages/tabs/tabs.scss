@@ -30,14 +30,14 @@ page-tabs {
     .segment-ios{
         
         .segment-button{
-            
+            height: 4rem;
             color: color($colors, white) !important;
             border-color: color($colors, white) !important;
             background-color: rgba(0,0,0,0.5) !important;
            
             ion-icon{
                font-size: 2.5rem;
-               margin-top: 0.3rem;
+               margin-top: 0.8rem;
             }
 
             

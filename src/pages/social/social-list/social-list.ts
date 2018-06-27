@@ -36,13 +36,17 @@ export class SocialListPage {
 
   }
 
-  showMore(e){
+  showMore(e, feed){
     
     if(e.path[1].offsetHeight < e.path[1].scrollHeight) e.path[1].style.display = 'block';
     else{
-      console.log('open');
+      this.openSocialCommentPage(feed);
     }
   
+  }
+
+  openSocialCommentPage(feed){
+    this.navCtrl.push('SocialCommentPage', {feed: feed});
   }
 
 }

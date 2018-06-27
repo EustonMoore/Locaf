@@ -11,7 +11,7 @@ page-cafe-menu {
         border: none;
         margin-bottom: 0px;
         .label{
-            font-family: HelveticaNeue-LightItalic !important;
+            font-style: italic;
             padding-left: 4%;
             text-align: center;
             color: #fff;
@@ -67,7 +67,7 @@ page-cafe-menu {
 
         .card-list-bg .card-list-title {
             text-transform:uppercase;
-            font-family: HelveticaNeue-BlackItalic;
+            font-weight: bold;
             font-size: 4rem;
             font-style: italic;
             color: #FFFFFF;
@@ -91,7 +91,7 @@ page-cafe-menu {
             text-align: right;
         }
         .card-list-bg .card-list-distance {
-            font-family: HelveticaNeue-LightItalic;
+            font-style: italic;
             text-transform:none !important;
             font-size: 1.2rem;
             position: absolute;

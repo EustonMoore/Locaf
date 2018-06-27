@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthProvider } from '../../../providers';
 
 /**
  * Generated class for the ProfilePage page.
@@ -10,19 +11,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+  selector: 'page-detail-profile',
+  templateUrl: 'profile-detail.html',
 })
 export class ProfilePage {
 
+  user;
+  myProfile = false;
   photos = [];
   segmentView = 'feed';
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider) {
+    this.user = navParams.get('user');
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
-
+    if(!this.user){
+      this.myProfile = true;
+      this.user = this.auth.getUserData();
+    }
     for(let i = 0; i< 30 ; i++){
       this.photos.push('assets/img/cafe.jpg')
     }

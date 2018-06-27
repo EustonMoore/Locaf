@@ -67,7 +67,7 @@
           <button ion-button item-end clear (click)="expandItem()">Map</button>  
         </ion-item>
         <expandable-list [expandHeight]="itemExpandHeight" [expanded]="expanded" [mode] ="'map'">
-          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{cafe.coords.latitude}},{{cafe.coords.longitude}}&zoom=15&scale=2&size=300x160&maptype=roadmap&format=png&visual_refresh=true&markers=|{{cafe.coords.latitude}},{{cafe.coords.longitude}}"/>
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{cafe.coords.latitude}},{{cafe.coords.longitude}}&zoom=15&scale=2&size=200x160&maptype=roadmap&format=png&visual_refresh=true&markers=color:0xff0000%7Clabel:%7C{{cafe.coords.latitude}},{{cafe.coords.longitude}}"/>
         </expandable-list>  
         <ion-item >
           <ion-label stacked color="lc-gray">Near Station</ion-label>

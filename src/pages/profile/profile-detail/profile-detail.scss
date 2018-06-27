@@ -1,4 +1,4 @@
-page-profile {
+page-detail-profile {
 
     .follow-button {
         background: #fff; 
@@ -8,8 +8,8 @@ page-profile {
         border-radius: 3px;
         padding: 5px;
         font-weight: bold;
-        width: 90%;
-        margin-right: 30px;
+        width: 85%;
+        
       }
         .follow-button-active {
         background:color($colors, lc-green); 
@@ -19,13 +19,24 @@ page-profile {
         border-radius: 3px;
         padding: 5px;
         font-weight: bold;
-        width: 90%;
-        margin-right: 30px;
+        width: 85%;
+        
+      }
+
+      .edit-button {
+        background: #fff; 
+        border: 1px solid color($colors, lc-green); 
+        color:  color($colors, lc-green);
+        font-size: 13px; 
+        border-radius: 3px;
+        padding: 5px;
+        font-weight: bold;
+        width: 70%;
+        
       }
     
 
-      .header-image{
-
+    .header-image{
         vertical-align: middle;
 
         .item-inner{
@@ -40,8 +51,8 @@ page-profile {
             color:#fff;
         }
         ion-avatar img {
-            width: 6rem;
-            height: 6rem;
+            width: 8rem;
+            height: 8rem;
             border-radius: 50%;
             object-fit: cover;
             // border: 1px solid #ccc;
@@ -55,14 +66,28 @@ page-profile {
             color: black;
             font-size: 1.8rem;
             margin-bottom: 0px;
-            font-family: HelveticaNeue-BlackItalic !important;
+            font-weight: 300;
+            font-style: italic;
         }
 
         .profile-header{
            
+            ion-label{
+                margin-top: 0;
+            }
+
+            ion-icon{
+                font-size: 2.3rem;
+            }
             p{
+                font-weight: 300;
                 color: black;
                 font-size: 1.2rem;
+                font-style: italic;
+            }
+
+            .button-inner{
+                font-weight: 300;
                 font-style: italic;
             }
            
@@ -72,14 +97,14 @@ page-profile {
             padding-top: 0;
             padding-bottom: 0;
             p{
-                font-family: HelveticaNeue-LightItalic;
+                //font-family: HelveticaNeue-LightItalic;
                 font-style: italic;
             }
         }
         
 
 
-      }
+    }
 
 
     .main-content{

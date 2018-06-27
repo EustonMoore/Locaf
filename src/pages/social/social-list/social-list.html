@@ -32,9 +32,9 @@
             <img [src]="feed.imgProfile">
           </ion-avatar>
           <h2 >{{feed.name}}</h2>
-          <p >cafe Dee</p>
+          <p >카페이름</p>
+          <button ion-button clear item-end color="lc-green">팔로우</button>
           <div class="timestamp" item-end>33분전</div>
-          <button ion-button clear item-end>팔로우</button>
           <ion-icon item-end name="md-more" ></ion-icon>
         </ion-item>
         
@@ -54,28 +54,23 @@
           
           <div class="description" text-wrap >
             <span class="writer">asdasdasd</span> 
-            <span (click)="showMore($event)">
+            <span (click)="showMore($event, feed)">
               졸라 맛잇네요 추천합니다. asdfjladfjladfafadfjakl sdfaksdfjlskajfl sdflk sdfjkl sdfj ksldfj 
             </span>
           </div>
-          <p style="color: #d9d9d9">
+          <p style="color: #d9d9d9"(click)="openSocialCommentPage(feed)">
               댓글 17개 모두보기
           </p>
+          <button ion-button icon-only clear color="gray">
+            <ion-icon name="lc-collection"></ion-icon>
+          </button>
+          <button ion-button icon-only clear color="gray">
+              <ion-icon name="lc-reply"></ion-icon>
+          </button>
+            
         </ion-card-content>
       
-        
-        <ion-row class="feed-button">
-          <ion-col no-padding col-6>
-            <button ion-button icon-only clear color="gray">
-              <ion-icon name="lc-collection"></ion-icon>
-              
-            </button>
-            <button ion-button icon-only clear color="gray">
-                <ion-icon name="lc-reply"></ion-icon>
-                <div>{{feed.comment}}</div>
-              </button>
-          </ion-col>
-        </ion-row>
+       
     
       </ion-card>
 
