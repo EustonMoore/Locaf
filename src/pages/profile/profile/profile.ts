@@ -11,8 +11,8 @@ import { AuthProvider } from '../../../providers';
 
 @IonicPage()
 @Component({
-  selector: 'page-detail-profile',
-  templateUrl: 'profile-detail.html',
+  selector: 'page-profile',
+  templateUrl: 'profile.html',
 })
 export class ProfilePage {
 

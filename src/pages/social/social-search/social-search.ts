@@ -17,7 +17,7 @@ export class SocialSearchPage {
   @ViewChild('searchBar') searchbar: Searchbar;
 
   public keyword = 'search';
-
+  public page = 'tag';
   constructor(public navCtrl: NavController, 
               public navParams: NavParams) {
   

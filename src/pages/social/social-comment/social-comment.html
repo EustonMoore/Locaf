@@ -7,18 +7,84 @@
 <ion-header>
 
   <ion-navbar color="lc-green">
-    <ion-title>social-comment</ion-title>
+    <ion-title>COMMENT</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content #content>
+<ion-content>
  
+  <ion-card class="comment-writer" >
+    <div *ngIf="feed.writer">
+      <ion-item >
+        <ion-avatar item-left >
+          <img [src]="feed.writer.photo">
+        </ion-avatar>
+        <h2 >{{ feed.writer.username }}</h2>
+        <!-- <p (click)="openCafeDetailPage(feed.cafeId)">{{ feed.cafeName }}</p> -->
+      
+        
+        <ion-icon style="padding-right:1rem; padding-left:1rem;" item-end name="md-more" (click)="presentActionSheet(feed)"></ion-icon>
+      </ion-item>
+      
+      <ion-card-content>
+        <ion-card-title no-padding>
+          {{feed.title}}
+        </ion-card-title>
+
+        <div class="description" text-wrap *ngIf="feed.writer">
+          <span class="writer" >{{ feed.writer.username }}</span> 
+          <span (click)="showMore($event, feed)">
+            {{ feed.description }}
+          </span>
+          
+        </div>
+
+        <div class="comment-bottom">
+          <span>33분전</span>
+        </div>
+
+      </ion-card-content>
+    </div>
+  </ion-card>
+
+  <ion-card class="comment-content">
+    <div *ngIf="feed.writer">
+      <ion-item class="comment-header">
+        <ion-avatar item-left >
+          <img [src]="feed.writer.photo">
+        </ion-avatar>
+        <h2 >{{ feed.writer.username }}</h2>
+        <!-- <p (click)="openCafeDetailPage(feed.cafeId)">{{ feed.cafeName }}</p> -->
+      
+        
+        <ion-icon style="padding-right:1rem; padding-left:1rem;" item-end name="md-more" (click)="presentActionSheet(feed)"></ion-icon>
+      </ion-item>
+      
+      <ion-card-content>
+        <div class="description" text-wrap *ngIf="feed.writer">
+          <span class="writer" >{{ feed.writer.username }}</span> 
+          <span (click)="showMore($event, feed)">
+            {{ feed.description }}
+          </span>
+         
+        </div>
+        <div class="comment-bottom">
+          <span>33분전</span> <span>답글남기기</span> <span>Thx</span>
+        </div>
+
+      </ion-card-content>
+    </div>
+  </ion-card>
+
+
+
+
 </ion-content>
 
 
-<ion-footer class="commentInput"  [keyboardAttach]="content">
+<ion-footer class="commentInput" >
   <ion-toolbar no-padding>
     <ion-row no-padding align-items-end>
       <ion-col col-10 no-padding>

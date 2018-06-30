@@ -43,19 +43,13 @@ export class MyApp {
     this.initTranslate();
     
   this.pages = [
-    { title: 'Tutorial', component: function(){
-      console.log('sdfd');
-    }},
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
-    { title: 'Content', component: 'ContentPage' },
-    { title: 'Login', component: 'LoginPage' },
-    { title: 'Signup', component: 'SignupPage' },
-    { title: 'Master Detail', component: 'CafeListPage' },
-    { title: 'Profile', component: 'ProfilePage' },
-    { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Logout', component: 'LoginPage' }
+    
+    { title: '방문기록', component: 'WelcomePage' },
+    { title: '제보하기', component: 'TabsPage' },
+    { title: 'FAQ', component: 'CardsPage' },
+    { title: '설정', component: 'SettingsPage' },
+    { title: '도움말', component: 'LoginPage' },
+    { title: '로그아웃', component: 'LoginPage' }
   ]
    
   }

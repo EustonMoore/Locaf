@@ -18,8 +18,10 @@ export class SocialCommentPage {
 
 
   private comment = ''
+  public feed: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.feed = navParams.get('feed');
   }
 
   ionViewDidLoad() {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ProfileUpdatePage } from './profile-update';
+import { ElasticModule } from '../../../components/elastic-textarea/elastic-textarea.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ProfileUpdatePage } from './profile-update';
   ],
   imports: [
     IonicPageModule.forChild(ProfileUpdatePage),
+    ElasticModule
   ],
 })
 export class ProfileUpdatePageModule {}

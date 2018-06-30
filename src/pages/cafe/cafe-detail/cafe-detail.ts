@@ -14,7 +14,7 @@ export class CafeDetailPage {
   cafe: Cafe;
   rate: any  ;
   expanded: boolean = false;
-  itemExpandHeight: number = 200;
+  itemExpandHeight: number = 250;
   //*********** Variables for fading header **************//
   showToolbar:boolean = false;
   transition:boolean = false;
@@ -25,12 +25,14 @@ export class CafeDetailPage {
 
 
   constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
+              public navParams: NavParams,
               public ref: ChangeDetectorRef,
               public firestore: FirestoreProvider,
               public toastCtrl: ToastController
               ) {
-    this.cafe = this.navParams.get('cafe');
+    this.cafe = navParams.get('cafe');
+    
+    
   
   }
 

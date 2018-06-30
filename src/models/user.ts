@@ -1,4 +1,3 @@
-import { AngularFirestoreCollection } from 'angularfire2/firestore';
 
 export class User {
   public object: {};
