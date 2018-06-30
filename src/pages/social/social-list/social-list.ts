@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { FirestoreProvider } from '../../../providers';
+import { Cafe, Feed, User } from '../../../models';
 
 
 /**
@@ -16,23 +18,41 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SocialListPage {
 
-  feeds = []
+  feeds: any[]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public actionSheetCtrl: ActionSheetController,
+              public firestore: FirestoreProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SocialListPage');
-    for(let i = 0; i < 30; i++){
-      this.feeds.push({
-        imgProfile: "assets/img/cafe.jpg",
-        name: 'test',
-        title: 'title',
-        images: [1,2,3],
-        description: 'testestest'
 
+    this.firestore.getFeeds().valueChanges().take(1).subscribe(feeds => {
+      this.feeds = feeds;
+      this.feeds.forEach((feed: Feed) => {
+        this.firestore.get('users/' + feed.writerId).then(ref => {
+          ref.valueChanges().take(1).subscribe((user: User) => {
+            feed.writer = user;
+            console.log(feed.writer)
+          })
+        })
       })
-    }
+      
+
+    })
+
+    // for(let i = 0; i < 30; i++){
+    //   this.feeds.push({
+    //     imgProfile: "assets/img/cafe.jpg",
+    //     name: 'test',
+    //     title: 'title',
+    //     images: [1,2,3],
+    //     description: 'testestest'
+
+    //   })
+    // }
 
   }
 
@@ -47,6 +67,40 @@ export class SocialListPage {
 
   openSocialCommentPage(feed){
     this.navCtrl.push('SocialCommentPage', {feed: feed});
+  }
+
+  openCafeDetailPage(cafeId){
+    this.firestore.getCafe(cafeId).valueChanges().take(1).subscribe((cafe: Cafe) => {
+      this.navCtrl.push('CafeDetailPage', {cafe: cafe})
+    })
+  }
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: '신고',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+          }
+        },
+        {
+          text: '팔로우 취소',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },
+        {
+          text: '숨기기',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        }
+      ]
+    });
+ 
+    actionSheet.present();
   }
 
 }

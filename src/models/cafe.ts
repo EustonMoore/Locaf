@@ -1,4 +1,3 @@
-import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { firestore } from 'firebase';
 
 export class Cafe {

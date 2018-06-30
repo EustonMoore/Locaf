@@ -2,3 +2,4 @@
 export { User } from './user';
 export { Item } from './item';
 export { Cafe } from './cafe';
+export { Feed } from './feed';

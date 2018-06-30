@@ -267,7 +267,7 @@ export class CafeMapPage {
       filter.value = !filter.value;
     }
     else{
-      filter.color = 'rgba(54, 90, 85, 1)';
+      filter.color = '#3c4240';
       filter.value = !filter.value;
     }
     // fab.setAttribute('background-color', 'rgba(255, 255, 255, 0.5)' )
