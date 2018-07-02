@@ -9,77 +9,98 @@ page-social-comment {
     }
 
 
-ion-card{
+    ion-card{
 
-    margin: 0px 0px 0px 0px !important;
-    padding-bottom: 1rem;
-    width: 100% !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    ion-card-content{
-        padding-bottom: 0 !important;
-        
-        .button{
-            margin-left: 0;
-        }
-        ion-icon{
-            margin-right: 0.5rem !important;
-        }
-    }
-
-    ion-card-title{
-        font-weight: 900;
-    }
-
-    ion-avatar{
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-    }
-    ion-label{
-        margin: 0;
-    }
-
-    ion-icon{
-        color: #d9d9d9;
-    }
-
-    .button{
-        font-style: italic;
-        padding-left: 0 !important;
-        padding-right: 1rem;
-    }
-
-    h2{
-        color: color($colors, lc-black);
-        font-weight: bold !important;
-        font-style: italic;
-        // font-size: 1.4rem !important;
-        margin-bottom: 0;
-    }
-
-    p{
-        color: color($colors, lc-black);
-        font-weight: 300;
-        font-style: italic;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-   
-
+        margin: 0px 0px 0px 0px !important;
+        padding-bottom: 1rem;
+        width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
     
-}
+        ion-card-content{
+            padding-bottom: 0 !important;
+            
+            .button{
+                margin-left: 0;
+            }
+            ion-icon{
+                margin-right: 0.5rem !important;
+            }
+        }
 
+        ion-card-title{
+            font-weight: 900;
+        }
 
-    .description{
+        ion-avatar{
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        ion-label{
+            margin: 0;
+        }
+
+        ion-icon{
+            color: #d9d9d9;
+        }
+
+        .button{
+            font-style: italic;
+            padding-left: 0 !important;
+            padding-right: 1rem;
+        }
+
+        h2{
+            color: color($colors, lc-black);
+            font-weight: bold !important;
+            font-style: italic;
+            // font-size: 1.4rem !important;
+        }
+
+        p{
+            color: color($colors, lc-black);
+            font-weight: 300;
+            font-style: italic;
         
+        }
+    
+        .description{
+            
+
+            .writer{
+                font-weight: bold;
+                font-style: italic;
+                padding-right: 0.5rem;
+            }
+
+        }
+    }
+
+    ion-list{
 
         .writer{
-            font-weight: bold;
+        
+            font-weight: bold !important;
             font-style: italic;
+            padding-right: 0.5rem;
+        }
+
+        span{
+            color: color($colors, lc-black);
+        }
+
+        ion-label{
+            margin-bottom: 0 !important;
+        }
+
+        .child{
+            padding-left: 2rem;
         }
 
     }
 
+
+    
 
     .comment-bottom{
         

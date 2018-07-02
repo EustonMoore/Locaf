@@ -1,3 +1,9 @@
+Node version: v8.9.4
+
+Cordova version: 8.0.0
+
+Config.xml file: 
+
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.eustonmoore.locaf" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>LOCAF</name>
@@ -110,3 +116,16 @@
     </plugin>
     <engine name="android" spec="6.4.0" />
 </widget>
+
+
+Plugins: 
+
+com.synconset.imagepicker,cordova-plugin-camera,cordova-plugin-camera-preview,cordova-plugin-device,cordova-plugin-file,cordova-plugin-file-transfer,cordova-plugin-geolocation,cordova-plugin-googlemaps,cordova-plugin-headercolor,cordova-plugin-ionic-keyboard,cordova-plugin-ionic-webview,cordova-plugin-kakao-sdk,cordova-plugin-splashscreen,cordova-plugin-statusbar,cordova-plugin-whitelist
+
+Error retrieving Android platform information: 
+Android SDK is not set up properly. Make sure that the Android SDK 'tools' and 'platform-tools' directories are in the PATH variable. 
+
+Error: cmd: Command failed with exit code 1 Error output:
+'android'��(��) ���� �Ǵ� �ܺ� ���, ������ �� �ִ� ���α׷�, �Ǵ�
+��ġ ������ �ƴմϴ�.
+

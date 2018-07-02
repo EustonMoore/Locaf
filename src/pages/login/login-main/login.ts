@@ -126,7 +126,7 @@ export class LoginPage {
           this.firestore.get('users/' + this.userId).then(ref => {
           // Formatting the first and last names to capitalized.
           
-          let newUser = new User(this.userId, user.email.toLowerCase(),this.photo, username, null, null, null, null, '', true);
+          let newUser = new User(this.userId, user.email.toLowerCase(),this.photo, username, null, null, null, null, '', true, null);
         
           ref.set(newUser.object).then(() => {
             //this.notification.init();

@@ -1,4 +1,5 @@
 import { User } from "./user";
+import { AngularFirestoreCollection } from "angularfire2/firestore";
 
 export class Feed {
     public object: {};
@@ -12,8 +13,8 @@ export class Feed {
       public cafeId: string,
       public cafeName: string,
       public collectedNum: number,
-      public comments: string[], 
       public photos: string[],
+      public comments: AngularFirestoreCollection<{}>
      
     ) {
       this.object = {

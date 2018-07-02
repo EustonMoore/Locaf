@@ -1,3 +1,4 @@
+import { AngularFirestoreCollection } from "angularfire2/firestore";
 
 export class User {
   public object: {};
@@ -11,7 +12,8 @@ export class User {
     public requestsSent: string[], //userIds whom you sent a contact request
     public requestsReceived: string[], //userIds who sent you a contact request
     public pushToken: string,
-    public notifications: boolean
+    public notifications: boolean,
+    public comments: AngularFirestoreCollection<{}>
   ) {
     this.object = {
       userId: userId,
@@ -22,7 +24,8 @@ export class User {
       requestsSent: this.requestsSent,
       requestsReceived: this.requestsReceived,
       pushToken: this.pushToken,
-      notifications: this.notifications
+      notifications: this.notifications,
+      comments: this.comments
     };
   }
 }

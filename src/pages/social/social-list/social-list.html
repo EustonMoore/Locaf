@@ -58,9 +58,11 @@
               {{ feed.description }}
             </span>
           </div>
+          
           <p style="color: #d9d9d9"(click)="openSocialCommentPage(feed)">
-              댓글 17개 모두보기
+              댓글 {{ feed.commentNum }}개 모두보기
           </p>
+
           <button ion-button icon-only clear color="gray">
             <ion-icon name="lc-collection"></ion-icon>
           </button>

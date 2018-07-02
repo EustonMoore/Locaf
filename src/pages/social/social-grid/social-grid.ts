@@ -91,11 +91,11 @@ export class SocialGridPage {
     
     if(select == 'camera'){
 
-      this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA;
-      this.camera.getPicture(this.cameraOptions).then(imageUri => {
-        this.app.getRootNavs()[0].push('SocialCreatePage', {imageUri: imageUri});
-      })
-
+      // this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA;
+      // this.camera.getPicture(this.cameraOptions).then(imageUri => {
+      //   this.app.getRootNavs()[0].push('SocialCreatePage', {imageUri: imageUri});
+      // })
+      this.app.getRootNavs()[0].push('SocialCreatePage');
     }
 
 

@@ -17,14 +17,14 @@
 <!-- 
   <div id="takedPicture" style="width: 100%;" [ngStyle]="{'background-image': 'url(' + 'data:image/jpeg;base64,' + takedPicture + ')'}"> </div>
    -->
+<!-- 
+   <img [src] = "takedPicture" alt="tt" style="width:100%;" /> -->
 
-   <img [src] = "takedPicture" alt="tt" style="width:100%;" />
-
-
-  <div text-center>
+   <p><div id="originalPicture" style="width: 100%"></div></p>
+  
     <button class ="button" ion-button (click)="takePicture()">take picture</button>
   
-  </div>
+  
 
  
   

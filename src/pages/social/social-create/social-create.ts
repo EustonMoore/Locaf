@@ -62,7 +62,7 @@ export class SocialCreatePage {
     private camera: Camera,
     ) {
 
-    this.takedPicture = "data:image/jpeg;base64," + navParams.get('imageUri');
+    // this.takedPicture = "data:image/jpeg;base64," + navParams.get('imageUri');
     
         
      
@@ -77,37 +77,37 @@ export class SocialCreatePage {
     let imgBlob = this.imgURItoBlob(this.takedPicture)
     console.log(imgBlob);
 
-    // this.cameraPreview.startCamera(cameraPreviewOpts).then(
-    //   (res) => {
+    this.cameraPreview.startCamera(cameraPreviewOpts).then(
+      (res) => {
         
-    //     console.log(res)
+        console.log(res)
 
-    //     // let pinchArea = <HTMLAnchorElement> document.querySelector('#pinchArea');
-    //     // pinchArea.style.width = window.screen.width + 'px';
-    //     // pinchArea.style.height = window.screen.width + 'px';
+        // let pinchArea = <HTMLAnchorElement> document.querySelector('#pinchArea');
+        // pinchArea.style.width = window.screen.width + 'px';
+        // pinchArea.style.height = window.screen.width + 'px';
 
 
-    //     // this.gesture = new Gesture(this.element.nativeElement);
-    //     // this.gesture.listen();
-    //     // this.gesture.on('pinchstart', (e) => {
-    //     //   console.log('pinchstart event');
-    //     // });
+        // this.gesture = new Gesture(this.element.nativeElement);
+        // this.gesture.listen();
+        // this.gesture.on('pinchstart', (e) => {
+        //   console.log('pinchstart event');
+        // });
     
-    //     // // ... for the pinch event
-    //     // this.gesture.on('pinch', (e) => {
-    //     //   console.log(e.scale);
-    //     // });
+        // // ... for the pinch event
+        // this.gesture.on('pinch', (e) => {
+        //   console.log(e.scale);
+        // });
     
-    //     // // ... for the pinchend event
-    //     // this.gesture.on('pinchend', (e) => {
-    //     //   console.log('pinchend event')
-    //     // });
+        // // ... for the pinchend event
+        // this.gesture.on('pinchend', (e) => {
+        //   console.log('pinchend event')
+        // });
         
-    //   },
-    //   (err) => {
-    //     console.log(err)
-    //   });
-    //   this.cameraPreview.show();
+      },
+      (err) => {
+        console.log(err)
+      });
+      this.cameraPreview.show();
     
     
   }
