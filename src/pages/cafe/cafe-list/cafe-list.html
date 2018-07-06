@@ -38,11 +38,13 @@
       <h2 class="card-list-distance">{{ cafe.distance }}</h2>
       
       <!-- <h2 class="card-list-like"></ion-icon></h2> -->
+
+      <ion-fab right middle >
+          <button ion-fab class="card-list-like" *ngIf="!cafe.favorite" (click)="addToFav(cafe);  $event.stopPropagation()"> <ion-icon name="lc-heart-outline"></ion-icon></button>
+          <button ion-fab class="card-list-like pop-in" *ngIf="cafe.favorite" (click)="addToFav(cafe);  $event.stopPropagation()"> <ion-icon name="lc-heart"></ion-icon></button>
+      </ion-fab>
     </div>
-    <ion-fab right middle>
-        <button ion-fab class="card-list-like" *ngIf="!cafe.favorite" (click)="addToFav(cafe);  $event.stopPropagation()"> <ion-icon name="lc-heart-outline"></ion-icon></button>
-        <button ion-fab class="card-list-like pop-in" *ngIf="cafe.favorite" (click)="addToFav(cafe);  $event.stopPropagation()"> <ion-icon name="lc-heart"></ion-icon></button>
-    </ion-fab>
+    
   </ion-card>
 
 

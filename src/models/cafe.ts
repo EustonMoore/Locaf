@@ -4,7 +4,7 @@ export class Cafe {
   public object: {};
   constructor(
     public cafeId: string,
-    public images: Object,
+    public images: {background: String, imgBig: String, imgGallery: String[]},
     public cafeName: string,
     public address: string,
     public phone: string,
@@ -13,8 +13,8 @@ export class Cafe {
     public web: string,
     public rate: number,
     public location: string,
-    public coords: firestore.GeoPoint
-    
+    public coords: firestore.GeoPoint,
+    public station: {line: String, name: String}
   ) {
     
     this.object = {
@@ -30,7 +30,8 @@ export class Cafe {
       coords: this.coords,
       location: this.location,
       rate: this.rate,
-      web: this.web
+      web: this.web,
+      station: this.station
       
     };
   }

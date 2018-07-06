@@ -1,12 +1,16 @@
-<ion-header > 
-    <ion-navbar>
-        <ion-title >
-            <ion-buttons>
-                <button ion-button><ion-icon name="arrow-dropdown"></ion-icon></button>
-            </ion-buttons>
-        </ion-title>
-    </ion-navbar>
+<ion-header no-border> 
+    <ion-toolbar mode="md">
+        <ion-segment [(ngModel)]="icons" color="secondary" mode="md">
+            <ion-segment-button value="camera" (click)="!show ? showContent() : null">
+                <ion-icon name="cafe"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button value="bookmark" (click)="!show ? showContent() : null">
+                <ion-icon name="bookmark"></ion-icon>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
+
 <ion-content>
      
     <ng-content ></ng-content>

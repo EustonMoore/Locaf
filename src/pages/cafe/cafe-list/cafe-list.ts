@@ -4,21 +4,11 @@ import { IonicPage, ModalController, NavController, App, FabContainer, Content, 
 import { Item, Cafe } from '../../../models';
 import { Items, FirestoreProvider } from '../../../providers';
 import { Geolocation } from '@ionic-native/geolocation';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  MyLocation,
-  Geocoder,
-  GeocoderResult,
-  ILatLng,
-  Spherical
-} from '@ionic-native/google-maps';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+
 // import { ImageLoaderConfig } from 'ionic-image-loader';
 
-declare var google: any;
+declare var naver: any;
 
 @IonicPage()
 @Component({
@@ -33,7 +23,7 @@ export class CafeListPage {
   halfHeight = this.platform.height() / 2;
   private cafes: any[];
   private myCoords;
-  public currentLocation = "";
+  public currentLocation: string = '';
   private filters = [{
     name: 'no-smoking',
     value: false,
@@ -54,8 +44,8 @@ export class CafeListPage {
     value: false,
     color:  'rgba(255, 255, 255, 0.3)'
     }];
-  mapReady: boolean = false;
-  map: GoogleMap;
+
+  
 
   constructor(
     public navCtrl: NavController, 
@@ -64,6 +54,7 @@ export class CafeListPage {
     public app: App,
     public firestore: FirestoreProvider,
     public geolocation: Geolocation,
+    public geocoder: NativeGeocoder,
     public platform: Platform
     // private imageLoaderConfig: ImageLoaderConfig
     ) {
@@ -152,25 +143,23 @@ export class CafeListPage {
               lng: cafe.coords.longitude
             }
             
-            cafe.distance = Spherical.computeDistanceBetween(this.myCoords, destination);
-            console.log(cafe.distance)
+            // cafe.distance;
           });
         })
-        
-        Geocoder.geocode({
-          "position": this.myCoords
-        }).then((results: GeocoderResult[]) => {
-         
-          if (results.length == 0) {
-            // Not found
-            return null;
-          }
-          this.currentLocation = "";
-          let split= results[0].extra.lines[0].split(" ");
-          for(let i = 1 ; i < 4; i ++){
-            this.currentLocation += split[i] + ' ';
-          }
-        });
+
+        let options: NativeGeocoderOptions = {
+          useLocale: true,
+          maxResults: 1
+        };
+
+        this.geocoder.reverseGeocode(this.myCoords.lat, this.myCoords.lng, options).then((result: NativeGeocoderReverseResult[]) => {
+          
+          this.currentLocation = result[0].administrativeArea;
+          if(result[0].administrativeArea != result[0].locality && result[0].locality) this.currentLocation += ' ' + result[0].locality;
+          if(result[0].locality != result[0].subLocality && result[0].subLocality) this.currentLocation += ' ' + result[0].subLocality;
+          if(result[0].subLocality != result[0].thoroughfare && result[0].thoroughfare) this.currentLocation += ' ' + result[0].thoroughfare;
+        }).catch((error: any) => console.log(error));
+
       })
     }
     else{
@@ -179,7 +168,8 @@ export class CafeListPage {
           lat: resp.coords.latitude,
           lng: resp.coords.longitude
         }
-  
+
+
         this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: any[]) => {
           
           this.cafes = cafes;
@@ -187,6 +177,11 @@ export class CafeListPage {
       })
     }
     
+  }
+
+  setCurrentLocation(address){
+    console.log(address)
+    this.currentLocation = address;
   }
 
   addToFav(cafe) {

@@ -54,6 +54,51 @@ export class StorageProvider {
     });
   }
 
+
+  // Function to convert dataURI to Blob needed by Firebase
+  imgURItoBlob(dataURI) {
+    var binary = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    var array = [];
+    for (var i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i));
+    }
+    return new Blob([new Uint8Array(array)], {
+      type: mimeString
+    });
+  }
+
+  generateFilename() {
+    var length = 8;
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text + ".jpg";
+  }
+
+
+  public uploadPhoto(userId: string, imageData: string, feedId: string): Promise<string>{
+    return new Promise((resolve, reject)=>{
+      this.loading.show();
+      let imgBlob = this.imgURItoBlob("data:image/jpeg;base64," + imageData);
+      let metadata = {
+        'contentType': imgBlob.type
+      };
+
+      firebase.storage().ref().child('images/feeds/' + feedId + '/' + this.generateFilename()).put(imgBlob, metadata).then((snapshot) => {
+        let url = snapshot.metadata.downloadURLs[0];
+        this.loading.hide();
+        resolve(url);
+      }).catch(err => {
+        console.log("ERROR STORAGE: " + JSON.stringify(err));
+        this.loading.hide();
+        reject();
+      });
+    })
+  }
+
   // Upload an image file provided the userId, cameraOptions, and sourceType.
   public upload(userId: string, options: CameraOptions, sourceType: number): Promise<string> {
     options.sourceType = sourceType;

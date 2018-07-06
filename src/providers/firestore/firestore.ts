@@ -89,18 +89,15 @@ export class FirestoreProvider {
     
     let minPoint = new firestore.GeoPoint(myCoords.lat - (lat * distance), myCoords.lng - (lng * distance))
     let maxPoint = new firestore.GeoPoint(myCoords.lat + (lat * distance), myCoords.lng + (lng * distance))
-
-    console.log(minPoint);
-  
-    return this.afs.collection('/cafes', ref => ref.where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30) )
+    return this.afs.collection('/cafes', ref => ref.where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30))
   }
 
   public getFeeds(): AngularFirestoreCollection<{}>{
-    return this.afs.collection('feeds')
+    return this.afs.collection('feeds');
   }
 
   public getFeed(feedId: string): AngularFirestoreDocument<{}>{
-    return this.afs.doc('feeds/' + feedId)
+    return this.afs.doc('feeds/' + feedId);
   }
 
   // Get userData of a user given the username. Return the userData promise.

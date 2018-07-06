@@ -1,11 +1,47 @@
 page-social-create {
-    html, body, ion-app, ion-content {
-        background-color: transparent !important;
-      }
 
-     .button{
+   
+    ion-avatar{
+       
+        img{
+            margin-top: 33%;
+            object-fit: cover;
+        }
+    }
+    ion-thumbnail {
+        img {
+            object-fit: cover;
+           
+        }
+    }
+
+    ion-textarea{
+        .text-input{
+            margin-left: 0;
+        }
         
-         top: 35em;
-     }
+    }
+
+    ion-list{
+        ion-input{
+            padding-left: 1rem;
+        }
+    }
+
+    .cafe-search{
+        ion-icon{
+            padding-left: 2rem;
+            margin-right: 0 !important;
+        }
+    }
+    .search-list{
+        ion-label{
+            margin: 0;
+        }
+
+    }
+
+    
+   
     
 }

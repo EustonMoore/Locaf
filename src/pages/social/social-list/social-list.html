@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="lc-green">
+  <ion-navbar >
     <ion-title>PHOTO</ion-title>
 
 
@@ -26,7 +26,7 @@
 
     <ion-card  *ngFor="let feed of feeds">
 
-      <div *ngIf="feed.writer">
+      <div *ngIf="feed.writer && feed.images">
         <ion-item class="feed-header">
           <ion-avatar item-left >
             <img [src]="feed.writer.photo">
@@ -38,12 +38,18 @@
           <ion-icon style="padding-right:1rem; padding-left:1rem;" item-end name="md-more" (click)="presentActionSheet(feed)"></ion-icon>
         </ion-item>
         
-            <ion-slides  pager>
-              <!-- <ion-slide *ngFor="let images of  feed.images " [ngStyle]="{'background' : 'url(' + images.url + ')'}"> -->
-              <ion-slide class="square-image" *ngFor="let images of  feed.images " [ngStyle]="{'background-color': '#dedede'}">
-              </ion-slide>
-            </ion-slides>
-          
+        
+        <div>
+            <img [src]="feed.images[0]">
+        </div>
+
+        <!-- <ion-slides pager *ngIf="feed.images.length > 1">
+          <ion-slide *ngFor="let image of  feed.images " [ngStyle]="{'background' : 'url(' + images.url + ')'}">
+          <ion-slide class="square-image" *ngFor="let image of feed.images " [ngStyle]="{'background-image': 'url(' + image + ')'}">
+          </ion-slide>
+        </ion-slides> -->
+
+        
         <ion-card-content>
           <div class="collectors">
             <span >{{ feed.collectedNum }}</span>명이 컬렉션에 담았습니다.
@@ -75,55 +81,4 @@
        
       </div>
   </ion-card>
-
-  <ion-card  *ngFor="let feed of feeds">
-
-    <div *ngIf="feed.writer">
-      <ion-item class="feed-header">
-        <ion-avatar item-left >
-          <img [src]="feed.writer.photo">
-        </ion-avatar>
-        <h2 >{{ feed.writer.username }}</h2>
-        <p (click)="openCafeDetailPage(feed.cafeId)">{{ feed.cafeName }}</p>
-        <button ion-button clear item-end color="lc-green">팔로우</button>
-        <div class="timestamp" item-end>33분전</div>
-        <ion-icon style="padding-right:1rem; padding-left:1rem;" item-end name="md-more" (click)="presentActionSheet(feed)"></ion-icon>
-      </ion-item>
-      
-          <ion-slides  pager>
-            <!-- <ion-slide *ngFor="let images of  feed.images " [ngStyle]="{'background' : 'url(' + images.url + ')'}"> -->
-            <ion-slide class="square-image" *ngFor="let images of  feed.images " [ngStyle]="{'background-color': '#dedede'}">
-            </ion-slide>
-          </ion-slides>
-        
-      <ion-card-content>
-        <div class="collectors">
-          <span >{{ feed.collectedNum }}</span>명이 컬렉션에 담았습니다.
-        </div>
-        <ion-card-title no-padding>
-          {{feed.title}}
-        </ion-card-title>
-        
-        <div class="description" text-wrap *ngIf="feed.writer">
-          <span class="writer" >{{ feed.writer.username }}</span> 
-          <span (click)="showMore($event, feed)">
-            {{ feed.description }}
-          </span>
-        </div>
-        <p style="color: #d9d9d9"(click)="openSocialCommentPage(feed)">
-            댓글 17개 모두보기
-        </p>
-        <button ion-button icon-only clear color="gray">
-          <ion-icon name="lc-collection"></ion-icon>
-        </button>
-        <button ion-button icon-only clear color="gray">
-            <ion-icon name="lc-reply"></ion-icon>
-        </button>
-          
-      </ion-card-content>
-    
-     
-    </div>
-</ion-card>
-
 </ion-content>
