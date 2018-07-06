@@ -9,20 +9,26 @@ export class ContentDrawer {
  
   @Input('options') options: any;
  
-  handleHeight: number = 50;
+  handleHeight: number;
   bounceBack: boolean = true;
   thresholdTop: number = 200;
   thresholdBottom: number = 200;
+  open: boolean = false;
  
-  constructor(public element: ElementRef, public renderer: Renderer, public domCtrl: DomController, public platform: Platform) {
+  constructor(
+    public element: ElementRef, 
+    public renderer: Renderer, 
+    public domCtrl: DomController, 
+    public platform: Platform) {
  
   }
  
   ngAfterViewInit() {
- 
-    if(this.options.handleHeight){
-      this.handleHeight = this.options.handleHeight;
-    }
+    
+    this.platform.is('ios') ? this.handleHeight = document.getElementsByClassName('toolbar')[2].clientHeight : this.handleHeight = document.getElementsByClassName('toolbar')[0].clientHeight;
+    // if(this.options.handleHeight){
+    //   this.handleHeight = this.options.handleHeight;
+    // }
  
     if(this.options.bounceBack){
       this.bounceBack = this.options.bounceBack;
@@ -36,8 +42,9 @@ export class ContentDrawer {
       this.thresholdTop = this.options.thresholdFromTop;
     }
  
-    this.renderer.setElementStyle(this.element.nativeElement, 'top', 100 + '%');
-   
+    this.renderer.setElementStyle(this.element.nativeElement, 'top', this.platform.height() - this.handleHeight + 'px');
+    this.renderer.setElementStyle(this.element.nativeElement, 'padding-top', this.handleHeight + 'px');
+ 
  
     let hammer = new window['Hammer'](this.element.nativeElement.children[0]);
     hammer.get('pan').set({ direction: window['Hammer'].DIRECTION_VERTICAL });
@@ -48,7 +55,6 @@ export class ContentDrawer {
  
   }
 
- 
   handlePan(ev){
  
     let newTop = ev.center.y;
@@ -65,53 +71,60 @@ export class ContentDrawer {
  
     }
  
-    // if((newTop < this.thresholdTop && ev.additionalEvent === "panup") || bounceToTop){
- 
-    //   this.domCtrl.write(() => {
-    //     this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'top 0.5s');
-    //     this.renderer.setElementStyle(this.element.nativeElement, 'top', 50 + '%');
-    //   });
- 
-    // } 
-    if(((this.platform.height() - newTop) < this.thresholdBottom && ev.additionalEvent === "pandown") || bounceToBottom){
+    if((newTop < this.thresholdTop && ev.additionalEvent === "panup") || bounceToTop){
  
       this.domCtrl.write(() => {
-        this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'top 0.5s');
-        this.renderer.setElementStyle(this.element.nativeElement, 'top', 100 + '%');
+        this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'top 0.3s');
+        this.renderer.setElementStyle(this.element.nativeElement, 'top', 60 + '%');
+       
       });
+      this.open = true;
+      console.log(this.open)
  
-    } 
-    // else {
+    } else if(((this.platform.height() - newTop) < this.thresholdBottom && ev.additionalEvent === "pandown") || bounceToBottom){
  
-    //   this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'none');
+      this.domCtrl.write(() => {
+        this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'top 0.3s');
+        this.renderer.setElementStyle(this.element.nativeElement, 'top', this.platform.height() - this.handleHeight + 'px');
+        
+      });
+      this.open = false;
+      console.log(this.open)
  
-    //   if(newTop > 0 && newTop < (this.platform.height() - this.handleHeight)) {
+    } else {
+      
+      this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'none');
  
-    //     if(ev.additionalEvent === "panup" || ev.additionalEvent === "pandown"){
+      if(newTop > 0 && newTop < (this.platform.height() - this.handleHeight)) {
  
-    //       this.domCtrl.write(() => {
-    //         this.renderer.setElementStyle(this.element.nativeElement, 'top', newTop + 'px');
-    //       });
+        if(ev.additionalEvent === "panup" || ev.additionalEvent === "pandown"){
  
-    //     }
+          this.domCtrl.write(() => {
+            this.renderer.setElementStyle(this.element.nativeElement, 'top', newTop + 'px');
+          });
  
-    //   }
+        }
  
-    // }
+      }
+ 
+    }
  
   }
  
+
+ 
   showContent(){
     this.domCtrl.write(() => {
-      this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'top 0.5s');
+      this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'top 0.3s');
       this.renderer.setElementStyle(this.element.nativeElement, 'top', 60 + '%');
     });
   }
 
   hideContent(){
     this.domCtrl.write(() => {
-      this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'top 0.5s');
+      this.renderer.setElementStyle(this.element.nativeElement, 'transition', 'top 0.3s');
       this.renderer.setElementStyle(this.element.nativeElement, 'top', this.platform.height() - this.handleHeight + 'px');
+      
     });
   }
 }

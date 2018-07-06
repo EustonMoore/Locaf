@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 
 import { Cafe } from '../../../models';
 import { FirestoreProvider } from '../../../providers';
+import { Platform } from 'ionic-angular/platform/platform';
 
 @IonicPage()
 @Component({
@@ -14,10 +15,11 @@ export class CafeDetailPage {
   cafe: Cafe;
   rate: any  ;
   expanded: boolean = false;
-  itemExpandHeight: number = 250;
+  itemExpandHeight: number = this.platform.height() / 3;
   //*********** Variables for fading header **************//
   showToolbar:boolean = false;
   transition:boolean = false;
+  iconPath: string;
   // headerImgSize:string = '100%';
   // headerImgUrl:string = '';
   //****************************//
@@ -28,10 +30,11 @@ export class CafeDetailPage {
               public navParams: NavParams,
               public ref: ChangeDetectorRef,
               public firestore: FirestoreProvider,
-              public toastCtrl: ToastController
+              public toastCtrl: ToastController,
+              public platform: Platform
               ) {
     this.cafe = navParams.get('cafe');
-    
+    this.iconPath = "assets/icon/metro-Line-" + this.cafe.station.line + ".svg";
     
   
   }

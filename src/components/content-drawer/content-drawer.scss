@@ -6,13 +6,10 @@ content-drawer {
     z-index: 10 !important;
     box-shadow: none !important;
 
-    ion-header {
-
-        height: 2.0rem;//by default 56px
-        ion-navbar.toolbar , .title {
-            height: 2.0rem;
-            min-height: 2.0rem;
-        }
+    .scroll-content{
+        margin-top:0 !important;
     }
+   
+    
   
 }

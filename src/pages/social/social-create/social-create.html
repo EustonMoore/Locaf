@@ -7,26 +7,64 @@
 <ion-header class="header_camera">
 
   <ion-navbar>
-    <ion-title>social-create</ion-title>
+    <ion-title>피드작성</ion-title>
+
+    <ion-buttons end >
+      
+      <button ion-button (click)="writeFeed()">완료</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content >
-<!-- 
-  <div id="takedPicture" style="width: 100%;" [ngStyle]="{'background-image': 'url(' + 'data:image/jpeg;base64,' + takedPicture + ')'}"> </div>
-   -->
+    
+  <ion-list *ngIf="user">
+      <ion-item no-padding>
+          <ion-input placeholder="제목"  [(ngModel)]="title"></ion-input>
+      </ion-item>
 
-   <img [src] = "takedPicture" alt="tt" style="width:100%;" />
+      <ion-item mode="ios">
+    
+          <ion-avatar item-start >
+              <!-- <img [src]="user.photo"> -->
+            <img [src]="user.photo">
+          </ion-avatar>
+          
+          <ion-textarea  autosize placeholder="내용" [(ngModel)]="description">
+             
+          </ion-textarea>
+      
+          <ion-thumbnail item-end >
+            <img [src]="'data:image/jpeg;base64,' + takedPhoto">
+          </ion-thumbnail>
+        
+        </ion-item>
+      
+        <ion-item no-padding class="cafe-search">
+            <ion-label *ngIf="selectedCafe" no-margin><ion-icon name="pin" item-left></ion-icon></ion-label>
+            <ion-input *ngIf="selectedCafe" readonly (ionChange)="clearInput()" [(ngModel)]="selectedCafe.cafeName" clearInput> </ion-input>
+            <ion-input *ngIf="!selectedCafe" type="text" placeholder="카페이름" (input)="updateSearchResults()" [(ngModel)]="autocomplete.input" clearInput></ion-input>
+        </ion-item>
+        <ion-list [hidden]="autocompleteItems.length == 0 || autocomplete.input == ''" >
+            <ion-item class="search-list" *ngFor="let cafe of autocompleteItems" tappable (click)="selectSearchResult(cafe)">
+              {{ cafe.cafeName }} <p><small>{{ cafe.address }}</small></p>
+            </ion-item>
+        </ion-list> 
 
+        <ion-item no-padding >
+            <ion-input type="text" placeholder="addtional Field_1"  clearInput></ion-input>
+        </ion-item>
+        <ion-item no-padding >
+            <ion-input type="text" placeholder="addtional Field_2"  clearInput></ion-input>
+        </ion-item>
+        <ion-item no-padding >
+            <ion-input type="text" placeholder="addtional Field_3"  clearInput></ion-input>
+        </ion-item>
+  </ion-list>
 
-  <div text-center>
-    <button class ="button" ion-button (click)="takePicture()">take picture</button>
-  
-  </div>
 
  
-  
 
 </ion-content>

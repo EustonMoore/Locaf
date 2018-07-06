@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, FabContainer, App, Slides, NavOptions, Platform } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
-import { StorageProvider } from '../../../providers';
+import { FirestoreProvider } from '../../../providers';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -19,7 +19,8 @@ export class SocialGridPage {
   halfHeight = this.platform.height() / 2;
   public cameraOptions: CameraOptions;
   public view = 'list';
-  photos = [];
+  public lastFeed;
+  feeds = [];
 
   currentItems: any = [];
 
@@ -36,14 +37,14 @@ export class SocialGridPage {
     public navParams: NavParams,
     public app: App,
     public imagePicker: ImagePicker,
-    public storage: StorageProvider,
+    public firestore: FirestoreProvider,
     public platform: Platform,
     public camera: Camera) {
 
       this.cameraOptions = {
         quality: 100,
-        targetWidth: 900,
-        targetHeight: 900,
+        targetWidth: 640,
+        targetHeight: 640,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         saveToPhotoAlbum : true,
@@ -58,12 +59,17 @@ export class SocialGridPage {
     this.searchSlides.onlyExternal= true;
     this.searchSlides.autoplayDisableOnInteraction = false;
 
-    for(let i = 0; i< 30 ; i++){
-      this.photos.push('assets/img/cafe.jpg')
-    }
+    
+    this.firestore.getFeeds().ref.orderBy('date', 'desc').limit(30).get().then(feeds => {
+      this.lastFeed = feeds.docs[feeds.docs.length - 1];
+      feeds.docs.forEach(doc => {
+        this.feeds.push(doc.data());
+      });
+    });
+    
   }
 
- 
+
   /**
    * Navigate to the detail page for this item.
    */
@@ -90,27 +96,26 @@ export class SocialGridPage {
   openSocialCreatePage(select) {
     
     if(select == 'camera'){
-
-      this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA;
-      this.camera.getPicture(this.cameraOptions).then(imageUri => {
-        this.app.getRootNavs()[0].push('SocialCreatePage', {imageUri: imageUri});
-      })
-
+      // this.cameraOptions.sourceType = this.camera.PictureSourceType.CAMERA;
+      // this.camera.getPicture(this.cameraOptions).then(imageUri => {
+      //   this.app.getRootNavs()[0].push('SocialCreatePage', {imageUri: imageUri});
+      // })
+      let options: NavOptions
+      options = {
+        animate: false
+      }
+      this.app.getRootNavs()[0].push('CameraPreviewPage', {}, options);
     }
-
 
     else if(select == 'gallery'){
       this.cameraOptions.sourceType = this.camera.PictureSourceType.SAVEDPHOTOALBUM;
-      this.camera.getPicture(this.cameraOptions).then(imageUri => {
-        this.app.getRootNavs()[0].push('SocialCreatePage', {imageUri: imageUri});
+      this.camera.getPicture(this.cameraOptions).then(imageData => {
+        console.log(imageData);
+        this.app.getRootNavs()[0].push('CameraPreviewPage', {
+          imageData: imageData
+        });
       })
     }
-    
-    // this.app.getRootNavs()[0].push('SocialCreatePage', {
-    //   item: item
-     
-    // });
-    
   }
 
   openSocialListPage(){
@@ -127,10 +132,12 @@ export class SocialGridPage {
     console.log('Begin async operation');
 
     setTimeout(() => {
-      
-      for(let i = 0; i< 30 ; i++){
-        this.photos.push('assets/img/cafe.jpg')
-      }
+      this.firestore.getFeeds().ref.orderBy('date', 'desc').limit(30).startAfter(this.lastFeed).get().then(feeds => {
+        this.lastFeed = feeds.docs[feeds.docs.length - 1];
+        feeds.docs.forEach(doc => {
+          this.feeds.push(doc.data());
+          });
+       });
       console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 500);

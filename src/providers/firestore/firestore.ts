@@ -6,6 +6,7 @@ import { User, Cafe, Feed } from '../../models';
 
 @Injectable()
 export class FirestoreProvider {
+
   constructor(private afs: AngularFirestore) { 
     
     afs.firestore.settings({timestampsInSnapshots: true});
@@ -16,6 +17,12 @@ export class FirestoreProvider {
   public get(path: string): Promise<AngularFirestoreDocument<{}>> {
     return new Promise(resolve => {
       resolve(this.afs.doc(path));
+    });
+  }
+
+  public getCollection(path: string): Promise<AngularFirestoreCollection<{}>> {
+    return new Promise(resolve => {
+      resolve(this.afs.collection(path));
     });
   }
 
@@ -82,18 +89,15 @@ export class FirestoreProvider {
     
     let minPoint = new firestore.GeoPoint(myCoords.lat - (lat * distance), myCoords.lng - (lng * distance))
     let maxPoint = new firestore.GeoPoint(myCoords.lat + (lat * distance), myCoords.lng + (lng * distance))
-
-    console.log(minPoint);
-  
-    return this.afs.collection('/cafes', ref => ref.where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30) )
+    return this.afs.collection('/cafes', ref => ref.where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30))
   }
 
   public getFeeds(): AngularFirestoreCollection<{}>{
-    return this.afs.collection('feeds')
+    return this.afs.collection('feeds');
   }
 
   public getFeed(feedId: string): AngularFirestoreDocument<{}>{
-    return this.afs.doc('feeds/' + feedId)
+    return this.afs.doc('feeds/' + feedId);
   }
 
   // Get userData of a user given the username. Return the userData promise.

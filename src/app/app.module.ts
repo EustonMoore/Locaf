@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { GoogleMaps, LocationService } from '@ionic-native/google-maps'
+import { NativeGeocoder } from "@ionic-native/native-geocoder"
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HeaderColor } from '@ionic-native/header-color'
@@ -22,9 +23,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { Items } from '../mocks/providers/items';
 import { Settings, Api, FirestoreProvider, AuthProvider, TranslateProvider, StorageProvider, LoadingProvider, ToastProvider, AlertProvider } from '../providers';
 import { MyApp } from './app.component';
-
 import { Facebook } from '@ionic-native/facebook';
 import { KakaoCordovaSDK } from 'kakao-sdk';
+import 'web-photo-filter';
 import { Environment } from '../environment';
 
 // The translate loader needs to know where to load i18n files
@@ -101,6 +102,7 @@ export function provideSettings(storage: Storage) {
     File,
     Facebook,
     KakaoCordovaSDK,
+    NativeGeocoder,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

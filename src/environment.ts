@@ -14,12 +14,12 @@ export namespace Environment {
     export const gcmKey = 'AAAAko64RCw:APA91bFvJT5kz7B4-IK4JqluQuHXXhET7rp7n6g6ojpYmG8oaaCz-yt_qRF84Sf5ooJmpohJiqHFc5wDylkwAMd1uXZOhur-GMghY02YmDAtT90pHItMu42zz-YXw-a1aWTk8rSN4sqR';
     // Set to your Firebase app, you can find your credentials on Firebase app console -> Add Web App.
     export const firebase = {
-        apiKey: "AIzaSyAxWR93jzgKRV3Tc4pbLdnPoOCeHaNbMtY",
-        authDomain: "locaf-5f731.firebaseapp.com",
-        databaseURL: "https://locaf-5f731.firebaseio.com",
-        projectId: "locaf-5f731",
-        storageBucket: "",
-        messagingSenderId: "785993744461"
+      apiKey: "AIzaSyAxWR93jzgKRV3Tc4pbLdnPoOCeHaNbMtY",
+      authDomain: "locaf-5f731.firebaseapp.com",
+      databaseURL: "https://locaf-5f731.firebaseio.com",
+      projectId: "locaf-5f731",
+      storageBucket: "locaf-5f731.appspot.com",
+      messagingSenderId: "785993744461"
     };
     // You can find your googleWebClientId on your Firebase app console -> Authentication -> Sign-in Method -> Google -> Web client ID
     export const googleWebClientId: string = '579230665805-qbcjf6jips1e8v4siv7bgfd5dqbde2v7.apps.googleusercontent.com';

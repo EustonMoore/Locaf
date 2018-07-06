@@ -29,16 +29,14 @@ page-cafe-detail {
       padding-bottom: $toolbar-ios-height; // Padding for the Tabbbar (only needed if tabbar is used)
   }
 
-  .toolbar-title {
-      color:#FFFFFF !important;
-  }
+
 
   ion-navbar{
     transition: all .5s;
     
     .back-button,.bar-button{
-      //text-shadow: 0 0 5px #000000;
-      color: #fff;
+      // text-shadow: 0 0 5px #000000;
+      
     }
   }
   .header-md::after{
@@ -56,7 +54,7 @@ page-cafe-detail {
   .card-list .card-list-like {
     font-size: 5vw;
     background-color: transparent !important;
-    color: rgba(255,255,255,0.5) !important;
+    color: white;
     box-shadow: none !important;
     
   }
@@ -146,62 +144,81 @@ page-cafe-detail {
   //************ Fading header  **********//
   .show-background{
     border-style: none;
-    background : color($colors, lc-green)
+    background : white;
   }
   .transition{
     transition: background-size .1s ease-in;
   }
 
- ion-col{
-   padding: 1px !important;
- }
 
- .item-block .item-inner{
-   border-bottom: 1px solid #dedede !important;
-}
+  .station{
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+    
 
+  ion-list{
+    background-color: #fff;
+  }
 
-
-ion-list{
-  background-color: #fff;
-}
-
-ion-item{
- 
-  .button{
+  ion-item{
     font-style: italic;
+
+  .item-inner{
+    align-items: flex-end;
+    border-bottom: 1px solid #dedede !important;
+  }
+
+  .button{
+
+    font-size: 1.5rem !important;
     font-weight: 900;
     color: color($colors, lc-gray);
   }
 
   ion-label{
-    font-style: italic;
     font-weight: 300 !important;
   }
 
 }
 
-.list-header{
-  ion-label{
-    font-style: italic !important;
-    color: black;
-  }
-  padding-right: 0.5rem;
-  margin-bottom: 0px;
-  
-}
 
-  .square-image{
- 
-    padding:1px;
-    float:left;
-    position: relative;
-    width: 100%;
-    padding-bottom : 100%; /* = width for a 1:1 aspect ratio */
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:cover; 
+  .photo{
+
+    ion-col{
+      padding: 0.5px !important;
+    }
+    
+    .list-header{
+      ion-label{
+        font-weight: 700;
+        font-style: italic !important;
+        color: black;
+      }
+      padding-right: 0.5rem;
+      margin-bottom: 0px;
+      
+    }
+
+    
+
+    .square-image{
+  
+      padding:1px;
+      float:left;
+      position: relative;
+      width: 100%;
+      padding-bottom : 100%; /* = width for a 1:1 aspect ratio */
+      background-position:center center;
+      background-repeat:no-repeat;
+      background-size:cover; 
+    }
+
   }
+
+
+
+
 
   
 }

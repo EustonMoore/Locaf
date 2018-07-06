@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar  transparent  [class.show-background]="showToolbar" >
-    <ion-title color="light" [hidden]="!showToolbar">{{ cafe.cafeName }}</ion-title>
+    <ion-title [hidden]="!showToolbar">{{ cafe.cafeName }}</ion-title>
 
     <ion-buttons end>
       <button ion-button [navPush]="'CafeMenuPage'" [navParams]="cafe">MENU</button>
@@ -67,23 +67,37 @@
           <button ion-button item-end clear (click)="expandItem()">Map</button>  
         </ion-item>
         <expandable-list [expandHeight]="itemExpandHeight" [expanded]="expanded" [mode] ="'map'">
-          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{cafe.coords.latitude}},{{cafe.coords.longitude}}&zoom=15&scale=2&size=300x150&maptype=roadmap&format=png&visual_refresh=true&markers=color:0xff0000%7Clabel:%7C{{cafe.coords.latitude}},{{cafe.coords.longitude}}"/>
+          <img src="https://openapi.naver.com/v1/map/staticmap.bin?clientId=EkxtTIPAsbnSdv7HhO8N&url=file:///&crs=EPSG:4326&center={{ cafe.coords.longitude }}, {{ cafe.coords.latitude }}&level=14&w={{ platform.width() }}&h={{ platform.height() / 3 }}&baselayer=default&markers={{ cafe.coords.longitude }}, {{ cafe.coords.latitude }}" />
         </expandable-list>  
         <ion-item >
           <ion-label stacked color="lc-gray">Near Station</ion-label>
-          <ion-input readonly value = "{{cafe.station.name}} &lt;{{cafe.station.line}}호선&gt;"></ion-input>
-          </ion-item>
+          <ion-input readonly value = "{{cafe.station.name}}"></ion-input>
+          <!-- <ion-icon item-end name="{{ cafe.station.line }}"></ion-icon> -->
+          <img class="station" item-end [src]="iconPath">
+        </ion-item>
         <ion-item>
           <ion-label stacked color="lc-gray">Call</ion-label>
           <ion-input readonly value = "{{cafe.phone}}"> </ion-input> 
+          <ion-icon item-end name="call"></ion-icon>
         </ion-item>
-        <ion-item >
-          <ion-label stacked color="lc-gray">Open Hours</ion-label>
-          <ion-input readonly > <div item-content >Value</div>
-          </ion-input> 
-         
-        
-        </ion-item>
+
+        <ion-row >
+            <ion-col no-padding col-6>
+              <ion-item no-lines>
+                <ion-label stacked color="lc-gray">Open Hours</ion-label>
+                <ion-input readonly value="{{ cafe.time.open }} ~ {{cafe.time.close}}" > </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col no-padding col-6>
+              <ion-item no-lines>
+                  <ion-label stacked color="lc-gray">Break</ion-label>
+                  <ion-input readonly value="{{ cafe.time.break }}" > </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+
+       
         <!-- <ion-item >
           <ion-icon name="ios-map-outline" item-left  color="darkGray" ></ion-icon>
           Gps: {{cafe.coords.latitude}},{{cafe.coords.longitude}} 
@@ -100,8 +114,8 @@
    
       
         <!--***********  Thumbnail images ***********-->
-      <ion-list *ngIf="cafe.images.imgGallery?.length > 0 ">
-          <ion-list-header class="photo">
+      <ion-list *ngIf="cafe.images.imgGallery?.length > 0 " class="photo">
+          <ion-list-header >
             PHOTOS
             <button ion-button icon-only item-end clear>
                 <ion-icon  name="lc-add"></ion-icon>

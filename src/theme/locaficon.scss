@@ -7,6 +7,8 @@ ion-icon {
       width: 1em;
       height: 1em;
     }
+
+  
     
     
     &[class*="lc-feed"] {mask-image: url(../assets/fonts/flaticon/feed.svg);}
@@ -26,6 +28,29 @@ ion-icon {
     &[class*="lc-collection"] {mask-image: url(../assets/fonts/flaticon/collection.svg);}
     &[class*="lc-refresh"] {mask-image: url(../assets/fonts/flaticon/refresh.svg);}
     &[class*="lc-grid-edit"] {mask-image: url(../assets/fonts/flaticon/grid-edit.svg);}
+
+
+
+
+
+    // &[class*="color-"] {
+    //   background-size: contain;
+    //   background-position: 50% 50%;
+    //   background-repeat: no-repeat;
+      
+    //   width: 1em;
+    //   height: 1em;
+    // }
+
+    // &[class*="color-line-1"] {background-image: url(../assets/fonts/flaticon/metro-Line-1.svg);}
+    // &[class*="color-line-2"] {background-image: url(../assets/fonts/flaticon/metro-Line-2.svg);}
+    // &[class*="color-line-3"] {background-image: url(../assets/fonts/flaticon/metro-Line-3.svg);}
+    // &[class*="color-line-4"] {background-image: url(../assets/fonts/flaticon/metro-Line-4.svg);}
+    // &[class*="color-line-5"] {background-image: url(../assets/fonts/flaticon/metro-Line-5.svg);}
+    // &[class*="color-line-6"] {background-image: url(../assets/fonts/flaticon/metro-Line-6.svg);}
+    // &[class*="color-line-7"] {background-image: url(../assets/fonts/flaticon/metro-Line-7.svg);}
+    // &[class*="color-line-8"] {background-image: url(../assets/fonts/flaticon/metro-Line-8.svg);}
+    // &[class*="color-line-9"] {background-image: url(../assets/fonts/flaticon/metro-Line-9.svg);}
     
     
 }

@@ -1,0 +1,101 @@
+page-camera-preview {
+    // html, body, ion-app, ion-content {
+    //     background-color: transparent !important;
+    //   }
+
+      
+    
+      .takedPicture{
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    
+
+     .camera-preview{
+        web-photo-filter {
+
+            img{
+                width: 100%;
+                position: absolute;
+                display: block; 
+            }
+
+            canvas{
+                width: 100%;
+                position: absolute;
+                display: block; 
+                z-index: 10;
+            }
+  
+           
+        }
+     }
+    
+    .camera-buttons{
+        height: 100%;
+        position: relative;
+        text-align: center;
+    
+    
+        button{
+            margin-top: 20%;
+            border-radius: 50%;
+            font-size: 3rem;
+            width: 8rem;
+            height: 8rem;
+            
+        }
+        
+        ion-item{
+            position: absolute;
+            bottom:0;
+            .item-inner{
+                padding-right: 0 !important;
+            }
+        
+        }
+
+    }
+
+     
+    .filter-list{
+        height: 100%;
+
+        p{
+            margin-bottom: 0;
+        }
+        img{
+            
+            width: 100%;
+            object-fit: cover;
+        }
+       
+        web-photo-filter {
+            float: center;
+             img, canvas {
+                
+                z-index: 10;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+
+        ion-item{
+            z-index: 10;
+            position: absolute;
+            bottom:0;
+            .item-inner{
+                padding-right: 0 !important;
+            }
+        
+        }
+    
+        ion-scroll {
+          height: 100%;
+        }
+    }
+
+    
+}

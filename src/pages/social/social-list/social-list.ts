@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
-import { FirestoreProvider } from '../../../providers';
+import { FirestoreProvider, AuthProvider } from '../../../providers';
 import { Cafe, Feed, User } from '../../../models';
 
 
@@ -18,26 +18,41 @@ import { Cafe, Feed, User } from '../../../models';
 })
 export class SocialListPage {
 
-  feeds: any[]
+  feeds: any[];
+  user: User;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController,
+              public auth: AuthProvider,
               public firestore: FirestoreProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SocialListPage');
+    this.user = this.auth.getUserData();
 
-    this.firestore.getFeeds().valueChanges().take(1).subscribe(feeds => {
-      this.feeds = feeds;
-      this.feeds.forEach((feed: Feed) => {
+
+    this.feeds = [];
+    this.firestore.getFeeds().snapshotChanges().take(1).subscribe(feeds => {
+      
+      feeds.forEach(snapshot => {
+        let feed = snapshot.payload.doc.data();
+        feed.feedId = snapshot.payload.doc.id;
         this.firestore.get('users/' + feed.writerId).then(ref => {
           ref.valueChanges().take(1).subscribe((user: User) => {
             feed.writer = user;
-            console.log(feed.writer)
+            
           })
+        });
+
+        feed.commentRef = snapshot.payload.doc.ref.collection('comments');
+        snapshot.payload.doc.ref.collection('comments').get().then(comments => {
+          feed.commentNum = comments.size
         })
+        
+        console.log(feed);
+        this.feeds.push(feed);
       })
       
 

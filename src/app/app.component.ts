@@ -34,10 +34,14 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
-      this.statusBar.backgroundColorByHexString('#3c4240');
+      if (platform.is('android')) {
+        this.statusBar.styleDefault();
+        this.statusBar.backgroundColorByHexString('#ffffff');
+      }
+      
+      // this.headerColor.tint('#ffffff');
       this.splashScreen.hide();
-      this.headerColor.tint('#3c4240');
+      
       this.menuCtrl.enable(false);
     });
     this.initTranslate();

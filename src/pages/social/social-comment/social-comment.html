@@ -6,17 +6,16 @@
 -->
 <ion-header>
 
-  <ion-navbar color="lc-green">
+  <ion-navbar >
     <ion-title>COMMENT</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
+<ion-content *ngIf="feed">
  
   <ion-card class="comment-writer" >
-    <div *ngIf="feed.writer">
       <ion-item >
         <ion-avatar item-left >
           <img [src]="feed.writer.photo">
@@ -33,8 +32,8 @@
           {{feed.title}}
         </ion-card-title>
 
-        <div class="description" text-wrap *ngIf="feed.writer">
-          <span class="writer" >{{ feed.writer.username }}</span> 
+        <div class="description" text-wrap >
+          <!-- <span class="writer" >{{ feed.writer.username }}</span>  -->
           <span (click)="showMore($event, feed)">
             {{ feed.description }}
           </span>
@@ -42,21 +41,58 @@
         </div>
 
         <div class="comment-bottom">
-          <span>33분전</span>
+          <span style="padding-top: 0.5rem;">{{ feed.date.seconds*1000 | fromNow }}</span>
         </div>
-
       </ion-card-content>
-    </div>
   </ion-card>
 
-  <ion-card class="comment-content">
+<ion-list>
+  <ion-item text-wrap no-lines *ngFor="let comment of feed.comments">
+    <ion-row *ngIf="comment.writer">
+      <ion-col no-padding col-2  >
+        <ion-avatar item-start>
+          <img [src]="comment.writer.photo">
+        </ion-avatar>
+      </ion-col >
+        <ion-col  no-padding col-10 align-self-center>
+        <span class="writer">{{ comment.writer.username }}</span>
+        <span> {{ comment.description }} </span>
+        
+        <div class="comment-bottom">
+          <span>{{ comment.date.seconds*1000 | fromNow }}</span> <span>답글남기기</span> <span>Thx</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-list no-margin class="child" *ngIf="childComments.get(comment.commentId)">
+      <ion-item text-wrap no-lines *ngFor="let childComment of childComments.get(comment.commentId)">
+        <ion-row *ngIf="childComment.writer">
+          <ion-col no-padding col-2 >
+            <ion-avatar item-start >
+              <img [src]="childComment.writer.photo">
+            </ion-avatar>
+          </ion-col>
+            <ion-col  no-padding col-10 align-self-center>
+            <span class="writer" >{{ childComment.writer.username }}</span>
+            <span> {{ childComment.description }} </span>
+            
+            <div class="comment-bottom">
+              <span>{{ childComment.date.seconds*1000 | fromNow }}</span> <span>답글남기기</span> <span>Thx</span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </ion-item>
+</ion-list>
+  <!-- <ion-card >
     <div *ngIf="feed.writer">
       <ion-item class="comment-header">
         <ion-avatar item-left >
           <img [src]="feed.writer.photo">
         </ion-avatar>
         <h2 >{{ feed.writer.username }}</h2>
-        <!-- <p (click)="openCafeDetailPage(feed.cafeId)">{{ feed.cafeName }}</p> -->
+        <p (click)="openCafeDetailPage(feed.cafeId)">{{ feed.cafeName }}</p>
       
         
         <ion-icon style="padding-right:1rem; padding-left:1rem;" item-end name="md-more" (click)="presentActionSheet(feed)"></ion-icon>
@@ -70,13 +106,11 @@
           </span>
          
         </div>
-        <div class="comment-bottom">
-          <span>33분전</span> <span>답글남기기</span> <span>Thx</span>
-        </div>
+       
 
       </ion-card-content>
     </div>
-  </ion-card>
+  </ion-card> -->
 
 
 
@@ -88,12 +122,12 @@
   <ion-toolbar no-padding>
     <ion-row no-padding align-items-end>
       <ion-col col-10 no-padding>
-        <ion-textarea autosize placeholder="Enter a description" [(ngModel)]="comment">
+        <ion-textarea no-margin no-padding autosize placeholder="Enter a description" [(ngModel)]="comment">
        
           </ion-textarea>
         </ion-col>   
         <ion-col col-2 no-padding>
-            <button ion-button clear [disabled]="comment.trim().length == 0" (click)="writeComment()"> 작성 </button>
+            <button ion-button clear [disabled]="comment.trim().length == 0" (click)="writeComment(null)"> 작성 </button>
           
 
         </ion-col>
