@@ -151,10 +151,10 @@ export class CafeListPage {
           snapshot.forEach(snapshot => {
             let cafe = snapshot.data();
             cafe.cafeId = snapshot.id;
+            cafe.distance = this.getDistance(this.myCoords, cafe.coords, 'km');
             this.cafes.push(cafe);
           })
         })
-        console.log(this.cafes);
 
         // this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: Cafe[]) => {
           
@@ -205,44 +205,41 @@ export class CafeListPage {
             let cafe = snapshot.data();
             cafe.cafeId = snapshot.id;
             cafe.distance = this.getDistance(this.myCoords, cafe.coords, 'km');
-            console.log(cafe.distance);
             this.cafes.push(cafe);
-          })
-        })
-       
-        
-      })
+          });
+        });
+      });
     }
     
   }
 
 
     
-    getDistance(start, end, units): string{
-  
-      let earthRadius = {
-          miles: 3958.8,
-          km: 6371
-      };
+  getDistance(start, end, units): string{
 
-      let R = earthRadius[units || 'miles'];
-      let lat1 = start.lat;
-      let lon1 = start.lng;
-      let lat2 = end.latitude;
-      let lon2 = end.longitude;
+    let earthRadius = {
+        miles: 3958.8,
+        km: 6371
+    };
 
-      let dLat = this.toRad((lat2 - lat1));
-      let dLon = this.toRad((lon2 - lon1));
-      let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-      let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-      let d = R * c;
+    let R = earthRadius[units || 'miles'];
+    let lat1 = start.lat;
+    let lon1 = start.lng;
+    let lat2 = end.latitude;
+    let lon2 = end.longitude;
 
-      let result = d >= 1 ? d.toFixed(1) + 'Km' : d * 1000 + 'm';
+    let dLat = this.toRad((lat2 - lat1));
+    let dLon = this.toRad((lon2 - lon1));
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
+    Math.sin(dLon / 2) *
+    Math.sin(dLon / 2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    let d = R * c;
 
-      return result;
+    let result = d >= 1 ? d.toFixed(1) + 'Km' : d * 1000 + 'm';
+
+    return result;
 
   }
 
@@ -252,7 +249,6 @@ export class CafeListPage {
 
 
   setCurrentLocation(address){
-    console.log(address)
     this.currentLocation = address;
   }
 
@@ -306,7 +302,6 @@ export class CafeListPage {
       this.firestore.getCafes().ref.orderBy('coords', 'asc').where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30).startAfter(this.lastCafe).get().then(snapshot => {
         this.lastCafe = snapshot.docs[snapshot.docs.length - 1];
         this.loadMoreCheck = snapshot.docs.length == 30 ? true : false;
-        console.log(this.loadMoreCheck)
         snapshot.forEach(snapshot => {
           let cafe = snapshot.data();
           cafe.cafeId = snapshot.id;
