@@ -156,19 +156,6 @@ export class CafeListPage {
           })
         })
 
-        // this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: Cafe[]) => {
-          
-        //   this.cafes = cafes;
-        //   this.cafes.forEach(cafe => {
-        //     let destination = {
-        //       lat: cafe.coords.latitude,
-        //       lng: cafe.coords.longitude
-        //     }
-            
-        //     // cafe.distance;
-        //   });
-        // })
-
         let options: NativeGeocoderOptions = {
           useLocale: true,
           maxResults: 1
@@ -237,7 +224,8 @@ export class CafeListPage {
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     let d = R * c;
 
-    let result = d >= 1 ? d.toFixed(1) + 'Km' : d * 1000 + 'm';
+    console.log(Math.round(d * 1000));
+    let result = d >= 1 ? d.toFixed(1) + 'Km' : Math.round(d * 1000) + 'm';
 
     return result;
 
