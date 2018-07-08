@@ -5,11 +5,15 @@ import { FirestoreProvider } from '../../../providers';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import * as firebase from 'firebase';
 
+
+
 @IonicPage()
 @Component({
   selector: 'page-social-grid',
   templateUrl: 'social-grid.html'
 })
+
+
 export class SocialGridPage {
 
   @ViewChild(Content) content: Content;
@@ -17,9 +21,9 @@ export class SocialGridPage {
   @ViewChild("fab") fabHandler: FabContainer;
 
   halfHeight = this.platform.height() / 2;
-  public cameraOptions: CameraOptions;
   public view = 'list';
   public lastFeed;
+  public loadMoreCheck: boolean = true;
   feeds = [];
 
   currentItems: any = [];
@@ -41,16 +45,7 @@ export class SocialGridPage {
     public platform: Platform,
     public camera: Camera) {
 
-      this.cameraOptions = {
-        quality: 100,
-        targetWidth: 640,
-        targetHeight: 640,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        saveToPhotoAlbum : true,
-        correctOrientation: true,
-        allowEdit: true
-      };
+    
 
       
    }
@@ -60,9 +55,11 @@ export class SocialGridPage {
     this.searchSlides.autoplayDisableOnInteraction = false;
 
     
-    this.firestore.getFeeds().ref.orderBy('date', 'desc').limit(30).get().then(feeds => {
-      this.lastFeed = feeds.docs[feeds.docs.length - 1];
-      feeds.docs.forEach(doc => {
+    this.firestore.getFeeds().ref.orderBy('date', 'desc').limit(30).get().then(snapshot => {
+      this.feeds = [];
+      this.lastFeed = snapshot.docs[snapshot.docs.length - 1];
+      this.loadMoreCheck = snapshot.docs.length == 30 ? true : false;
+      snapshot.docs.forEach(doc => {
         this.feeds.push(doc.data());
       });
     });
@@ -108,8 +105,20 @@ export class SocialGridPage {
     }
 
     else if(select == 'gallery'){
-      this.cameraOptions.sourceType = this.camera.PictureSourceType.SAVEDPHOTOALBUM;
-      this.camera.getPicture(this.cameraOptions).then(imageData => {
+
+      const cameraOptions: CameraOptions = {
+        quality: 100,
+        targetWidth: 640,
+        targetHeight: 640,
+        sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        saveToPhotoAlbum : true,
+        correctOrientation: true,
+        allowEdit: true
+      };
+      
+      this.camera.getPicture(cameraOptions).then(imageData => {
         console.log(imageData);
         this.app.getRootNavs()[0].push('CameraPreviewPage', {
           imageData: imageData
@@ -132,9 +141,10 @@ export class SocialGridPage {
     console.log('Begin async operation');
 
     setTimeout(() => {
-      this.firestore.getFeeds().ref.orderBy('date', 'desc').limit(30).startAfter(this.lastFeed).get().then(feeds => {
-        this.lastFeed = feeds.docs[feeds.docs.length - 1];
-        feeds.docs.forEach(doc => {
+      this.firestore.getFeeds().ref.orderBy('date', 'desc').limit(30).startAfter(this.lastFeed).get().then(snapshot => {
+        this.lastFeed = snapshot.docs[snapshot.docs.length - 1];
+        this.loadMoreCheck = snapshot.docs.length == 30 ? true : false;
+        snapshot.docs.forEach(doc => {
           this.feeds.push(doc.data());
           });
        });

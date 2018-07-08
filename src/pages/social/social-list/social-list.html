@@ -34,7 +34,7 @@
           <h2 >{{ feed.writer.username }}</h2>
           <p (click)="openCafeDetailPage(feed.cafeId)">{{ feed.cafeName }}</p>
           <button ion-button clear item-end color="lc-green">팔로우</button>
-          <div class="timestamp" item-end>33분전</div>
+          <div class="timestamp" item-end>{{ feed.date.seconds*1000 | fromNow }}</div>
           <ion-icon style="padding-right:1rem; padding-left:1rem;" item-end name="md-more" (click)="presentActionSheet(feed)"></ion-icon>
         </ion-item>
         
@@ -65,14 +65,14 @@
             </span>
           </div>
           
-          <p style="color: #d9d9d9"(click)="openSocialCommentPage(feed)">
+          <p style="color: #d9d9d9"(click)="openSocialCommentPage(feed)" *ngIf="feed.commentNum > 0">
               댓글 {{ feed.commentNum }}개 모두보기
           </p>
 
           <button ion-button icon-only clear color="gray">
             <ion-icon name="lc-collection"></ion-icon>
           </button>
-          <button ion-button icon-only clear color="gray">
+          <button ion-button icon-only clear color="gray" (click)="openSocialCommentPage(feed)" >
               <ion-icon name="lc-reply"></ion-icon>
           </button>
             
@@ -81,4 +81,10 @@
        
       </div>
   </ion-card>
+
+  <ion-infinite-scroll threshold = "{{halfHeight}}" [enabled]="loadMoreCheck" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

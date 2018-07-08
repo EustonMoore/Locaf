@@ -25,7 +25,8 @@ export class SocialCreatePage {
 
   private user: User;
   private selectedCafe: Cafe
-  public takedPhoto: string;
+  public imageData: string;
+  public thumbnail: string;
   public title: string;
   public description: string;
   public cafeName: string;
@@ -54,7 +55,9 @@ export class SocialCreatePage {
     ) {
 
       
-    this.takedPhoto = navParams.get('imageData');
+    this.imageData = navParams.get('imageData');
+    this.thumbnail = navParams.get('thumbnail');
+    this.selectedCafe = navParams.get('cafe');
       
   }
 
@@ -82,14 +85,23 @@ export class SocialCreatePage {
         title: this.title,
         writerId: this.user.userId,
       }).then(success => {
-        this.storage.uploadPhoto(this.user.userId, this.takedPhoto, success.id).then((url) => {
+        this.storage.uploadPhoto(this.user.userId, this.imageData, this.thumbnail, success.id).then((url) => {
           let photoUrl = [];
-          photoUrl.push(url);
+          photoUrl.push(url[0]);
+
+          let thumbnailUrl = url[1];
+          
           ref.doc(success.id).ref.update({
             feedId: success.id,
-            images: photoUrl
+            images: photoUrl,
+            thumbnail: thumbnailUrl
           }).then(success => {
-            this.navCtrl.popAll();
+            if(this.navCtrl.getByIndex(1).name == 'CafeDetailPage') this.navCtrl.popTo(this.navCtrl.getByIndex(1)).then(() => {
+              this.navCtrl.getByIndex(1)._didLoad();
+            });
+            else this.navCtrl.popToRoot().then(() => {
+              this.navCtrl.getActiveChildNavs()[0]._tabs[1]._views[0]._didLoad();
+            });
           });
         })
       })

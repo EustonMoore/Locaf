@@ -33,8 +33,9 @@
   <ion-card tappable no-padding no-margin class="card-list " *ngFor="let cafe of cafes" (click)="openCafeDetailPage(cafe)">
     
     <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + cafe.images.background+ ')'}">
+      
       <h2 class="card-list-title" > {{cafe.cafeName}}</h2>
-      <h2 class="card-list-subtitle">{{ cafe.address }}</h2>
+      <h2 class="card-list-address">{{ cafe.address }}</h2>
       <h2 class="card-list-distance">{{ cafe.distance }}</h2>
       
       <!-- <h2 class="card-list-like"></ion-icon></h2> -->
@@ -65,7 +66,7 @@
   </ion-fab>
 
 
-  <ion-infinite-scroll threshold = "{{halfHeight}}" (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll threshold = "{{halfHeight}}" [enabled] = "loadMoreCheck" (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">

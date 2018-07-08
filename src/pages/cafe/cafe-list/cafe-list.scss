@@ -48,7 +48,8 @@ page-cafe-list {
         }
 
         .card-list-bg .card-list-title {
-            text-transform:uppercase;
+            
+            // text-transform:uppercase;
             font-weight: bold;
             font-size: 6vw;
             font-style: italic;
@@ -58,13 +59,13 @@ page-cafe-list {
             width: 100%;
             text-align: center;
         }
-        .card-list-bg .card-list-subtitle {
+        .card-list-bg .card-list-address {
             font-weight: 200;
             text-transform:none !important;
             font-size: 4vw;
             font-style: italic;
             position: absolute;
-            top: 50%;
+            top: 48%;
             width: 100%;
             color: #FFFFFF;
             text-align: center;
@@ -75,7 +76,7 @@ page-cafe-list {
             font-size: 4vw;
             font-style: italic;
             position: absolute;
-            top: 60%;
+            top: 54%;
             width: 100%;
             color: #FFFFFF;
             text-align: center;

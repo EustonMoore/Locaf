@@ -5,7 +5,7 @@ import { Item, Cafe } from '../../../models';
 import { Items, FirestoreProvider } from '../../../providers';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
-
+import { firestore } from 'firebase';
 // import { ImageLoaderConfig } from 'ionic-image-loader';
 
 declare var naver: any;
@@ -20,11 +20,13 @@ export class CafeListPage {
   @ViewChild("fab") fabHandler: FabContainer;
 
   // private cafes: Cafe[];
-  halfHeight = this.platform.height() / 2;
-  private cafes: any[];
-  private myCoords;
+  public halfHeight = this.platform.height() / 2;
+  public cafes = [];
+  public lastCafe;
+  public myCoords;
   public currentLocation: string = '';
-  private filters = [{
+  public loadMoreCheck: boolean = true;
+  public filters = [{
     name: 'no-smoking',
     value: false,
     color:  'rgba(255, 255, 255, 0.3)'
@@ -134,18 +136,38 @@ export class CafeListPage {
           lat: resp.coords.latitude,
           lng: resp.coords.longitude
         }
-        this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: Cafe[]) => {
-          
-          this.cafes = cafes;
-          this.cafes.forEach(cafe => {
-            let destination = {
-              lat: cafe.coords.latitude,
-              lng: cafe.coords.longitude
-            }
-            
-            // cafe.distance;
-          });
+
+        let lat = 0.008983;
+        let lng = 0.015060;
+        let distance = 10;
+      
+        
+        let minPoint = new firestore.GeoPoint(this.myCoords.lat - (lat * distance), this.myCoords.lng - (lng * distance));
+        let maxPoint = new firestore.GeoPoint(this.myCoords.lat + (lat * distance), this.myCoords.lng + (lng * distance));
+
+        this.firestore.getCafes().ref.orderBy('coords', 'asc').where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30).get().then(snapshot => {
+          this.lastCafe = snapshot.docs[snapshot.docs.length - 1];
+          this.loadMoreCheck = snapshot.docs.length == 30 ? true : false;
+          snapshot.forEach(snapshot => {
+            let cafe = snapshot.data();
+            cafe.cafeId = snapshot.id;
+            this.cafes.push(cafe);
+          })
         })
+        console.log(this.cafes);
+
+        // this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: Cafe[]) => {
+          
+        //   this.cafes = cafes;
+        //   this.cafes.forEach(cafe => {
+        //     let destination = {
+        //       lat: cafe.coords.latitude,
+        //       lng: cafe.coords.longitude
+        //     }
+            
+        //     // cafe.distance;
+        //   });
+        // })
 
         let options: NativeGeocoderOptions = {
           useLocale: true,
@@ -169,15 +191,65 @@ export class CafeListPage {
           lng: resp.coords.longitude
         }
 
-
-        this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: any[]) => {
-          
-          this.cafes = cafes;
-        });
+        let lat = 0.008983;
+        let lng = 0.015060;
+        let distance = 10;
+      
+        
+        let minPoint = new firestore.GeoPoint(this.myCoords.lat - (lat * distance), this.myCoords.lng - (lng * distance));
+        let maxPoint = new firestore.GeoPoint(this.myCoords.lat + (lat * distance), this.myCoords.lng + (lng * distance));
+        this.firestore.getCafes().ref.orderBy('coords', 'desc').where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30).get().then(snapshot => {
+          this.lastCafe = snapshot.docs[snapshot.docs.length - 1];
+          this.loadMoreCheck = snapshot.docs.length == 30 ? true : false;
+          snapshot.forEach(snapshot => {
+            let cafe = snapshot.data();
+            cafe.cafeId = snapshot.id;
+            cafe.distance = this.getDistance(this.myCoords, cafe.coords, 'km');
+            console.log(cafe.distance);
+            this.cafes.push(cafe);
+          })
+        })
+       
+        
       })
     }
     
   }
+
+
+    
+    getDistance(start, end, units): string{
+  
+      let earthRadius = {
+          miles: 3958.8,
+          km: 6371
+      };
+
+      let R = earthRadius[units || 'miles'];
+      let lat1 = start.lat;
+      let lon1 = start.lng;
+      let lat2 = end.latitude;
+      let lon2 = end.longitude;
+
+      let dLat = this.toRad((lat2 - lat1));
+      let dLon = this.toRad((lon2 - lon1));
+      let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.toRad(lat1)) * Math.cos(this.toRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+      let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      let d = R * c;
+
+      let result = d >= 1 ? d.toFixed(1) + 'Km' : d * 1000 + 'm';
+
+      return result;
+
+  }
+
+  toRad(x){
+    return x * Math.PI / 180;
+  }
+
 
   setCurrentLocation(address){
     console.log(address)
@@ -222,13 +294,25 @@ export class CafeListPage {
     console.log('Begin async operation');
 
     setTimeout(() => {
-      this.firestore.getCafesNearBy(this.myCoords, 10).valueChanges().take(1).subscribe((cafes: Cafe[])=>{
-        console.log(cafes);
-        cafes.forEach(cafe => {
+
+      let lat = 0.008983;
+      let lng = 0.015060;
+      let distance = 10;
+    
+      
+      let minPoint = new firestore.GeoPoint(this.myCoords.lat - (lat * distance), this.myCoords.lng - (lng * distance));
+      let maxPoint = new firestore.GeoPoint(this.myCoords.lat + (lat * distance), this.myCoords.lng + (lng * distance));
+
+      this.firestore.getCafes().ref.orderBy('coords', 'asc').where('coords', '>=', minPoint ).where('coords', '<=', maxPoint).limit(30).startAfter(this.lastCafe).get().then(snapshot => {
+        this.lastCafe = snapshot.docs[snapshot.docs.length - 1];
+        this.loadMoreCheck = snapshot.docs.length == 30 ? true : false;
+        console.log(this.loadMoreCheck)
+        snapshot.forEach(snapshot => {
+          let cafe = snapshot.data();
+          cafe.cafeId = snapshot.id;
           this.cafes.push(cafe);
         })
       })
-
       console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 500);

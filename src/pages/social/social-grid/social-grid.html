@@ -44,7 +44,7 @@
         <ion-row  wrap color="gray">
           <ion-col  tappable col-4 *ngFor="let feed of feeds  ,let i = index" >
               <!-- <div class="square-image" [ngStyle]="{'background-image': 'url(' + image + ')'}" (click)="openFullImage(i)" ></div> -->
-              <div class="square-image" [ngStyle]="{'background-image': 'url(' + feed.images[0] + ')'}" (click)="openSocialListPage()" ></div>
+              <div class="square-image" [ngStyle]="{'background-image': 'url(' + feed.thumbnail + ')'}" (click)="openSocialListPage()" ></div>
           </ion-col>
         </ion-row>
   </ion-grid>
@@ -55,11 +55,10 @@
     <ion-fab-list side="top">
         <button ion-fab (click)="openSocialCreatePage('gallery')" color="lc-green"> <ion-icon name="images"></ion-icon> </button>
         <button ion-fab (click)="openSocialCreatePage('camera')" color="lc-green"> <ion-icon name="camera"></ion-icon> </button>
-        <button ion-fab (click)="app.getRootNavs()[0].push('SocialCreatePage')" color="lc-green"> <ion-icon name="camera"></ion-icon> </button>
       </ion-fab-list>
   </ion-fab>
 
-  <ion-infinite-scroll threshold = "{{halfHeight}}" (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll threshold = "{{halfHeight}}" [enabled]="loadMoreCheck" (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles">
     </ion-infinite-scroll-content>

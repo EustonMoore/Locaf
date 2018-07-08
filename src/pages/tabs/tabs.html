@@ -1,7 +1,6 @@
 <ion-tabs #tabs>
   <ion-tab [root]="tab1Root" [tab-hidden] = "true" [tabTitle]="tab1Title" tabIcon="home"></ion-tab>
   <ion-tab [root]="tab2Root" [tab-hidden] = "true" [tabTitle]="tab2Title" tabIcon="search"></ion-tab>
-  <ion-tab [root]="tab3Root" [tab-hidden] = "true" [tabTitle]="tab3Title" tabIcon="cog"></ion-tab>
 
 
   <ion-segment [(ngModel)]="selected" mode="ios"  (swipe)="swipeEvent($event)" (ionChange)="segmentChanged($event)">

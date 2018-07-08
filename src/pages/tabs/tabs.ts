@@ -14,24 +14,20 @@ export class TabsPage {
 
   tab1Root: any = 'CafeListPage';
   tab2Root: any = 'SocialGridPage';
-  tab3Root: any = 'SettingsPage';
   
   
   public selected = "0";
-  public selectedTab = 2;
   public show = true;
   tab1Title = " ";
   tab2Title = " ";
-  tab3Title = " ";
 
   constructor(public navCtrl: NavController, 
               public translateService: TranslateService,
               public menuCtrl: MenuController
               ) {
-    translateService.get(['TAB1_TITLE', 'TAB2_TITLE', 'TAB3_TITLE']).subscribe(values => {
+    translateService.get(['TAB1_TITLE', 'TAB2_TITLE']).subscribe(values => {
       this.tab1Title = values['TAB1_TITLE'];
       this.tab2Title = values['TAB2_TITLE'];
-      this.tab3Title = values['TAB3_TITLE'];
     });
 
     this.menuCtrl.enable(true);

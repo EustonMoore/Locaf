@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, Platform } from 'ionic-angular';
 import { FirestoreProvider, AuthProvider } from '../../../providers';
 import { Cafe, Feed, User } from '../../../models';
 
@@ -18,13 +18,17 @@ import { Cafe, Feed, User } from '../../../models';
 })
 export class SocialListPage {
 
+  halfHeight = this.platform.height() / 2;
   feeds: any[];
   user: User;
+  public lastFeed: any;
+  public loadMoreCheck: boolean = true;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController,
               public auth: AuthProvider,
+              public platform: Platform,
               public firestore: FirestoreProvider) {
   }
 
@@ -33,41 +37,52 @@ export class SocialListPage {
     this.user = this.auth.getUserData();
 
 
-    this.feeds = [];
-    this.firestore.getFeeds().snapshotChanges().take(1).subscribe(feeds => {
-      
-      feeds.forEach(snapshot => {
-        let feed = snapshot.payload.doc.data();
-        feed.feedId = snapshot.payload.doc.id;
-        this.firestore.get('users/' + feed.writerId).then(ref => {
-          ref.valueChanges().take(1).subscribe((user: User) => {
+    
+    this.firestore.getFeeds().ref.orderBy('date', 'desc').limit(15).get().then(snapshot => {
+      this.feeds = [];
+      this.lastFeed = snapshot.docs[snapshot.docs.length - 1];
+      this.loadMoreCheck = snapshot.docs.length == 15 ? true : false;
+      snapshot.docs.forEach(doc => {
+        let feed = doc.data();
+
+        this.firestore.get('users/' + doc.data().writerId).then(ref => {
+          ref.valueChanges().take(1).subscribe((user: User)=> {
             feed.writer = user;
-            
-          })
+          });
         });
 
-        feed.commentRef = snapshot.payload.doc.ref.collection('comments');
-        snapshot.payload.doc.ref.collection('comments').get().then(comments => {
+        feed.commentRef = doc.ref.collection('comments');
+        doc.ref.collection('comments').get().then(comments => {
           feed.commentNum = comments.size
         })
-        
-        console.log(feed);
+
         this.feeds.push(feed);
-      })
+
+      });
+    });
+    // this.firestore.getFeeds().snapshotChanges().take(1).subscribe(feeds => {
+      
+    //   feeds.forEach(snapshot => {
+    //     let feed = snapshot.payload.doc.data();
+    //     feed.feedId = snapshot.payload.doc.id;
+    //     this.firestore.get('users/' + feed.writerId).then(ref => {
+    //       ref.valueChanges().take(1).subscribe((user: User) => {
+    //         feed.writer = user;
+            
+    //       })
+    //     });
+       
+    //     feed.commentRef = snapshot.payload.doc.ref.collection('comments');
+    //     snapshot.payload.doc.ref.collection('comments').get().then(comments => {
+    //       feed.commentNum = comments.size
+    //     })
+        
+    //     console.log(feed);
+    //     this.feeds.push(feed);
+    //   })
       
 
-    })
-
-    // for(let i = 0; i < 30; i++){
-    //   this.feeds.push({
-    //     imgProfile: "assets/img/cafe.jpg",
-    //     name: 'test',
-    //     title: 'title',
-    //     images: [1,2,3],
-    //     description: 'testestest'
-
-    //   })
-    // }
+    // })
 
   }
 
@@ -118,4 +133,37 @@ export class SocialListPage {
     actionSheet.present();
   }
 
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      this.firestore.getFeeds().ref.orderBy('date', 'desc').limit(15).startAfter(this.lastFeed).get().then(snapshot => {
+        this.lastFeed = snapshot.docs[snapshot.docs.length - 1];
+        this.loadMoreCheck = snapshot.docs.length == 15 ? true : false;
+        snapshot.docs.forEach(doc => {
+          let feed = doc.data();
+  
+          this.firestore.get('users/' + doc.data().writerId).then(ref => {
+            ref.valueChanges().take(1).subscribe((user: User)=> {
+              feed.writer = user;
+            });
+          });
+  
+          feed.commentRef = doc.ref.collection('comments');
+          doc.ref.collection('comments').get().then(comments => {
+            feed.commentNum = comments.size
+          })
+  
+          this.feeds.push(feed);
+  
+        });
+      });
+
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
+  }
+
+  
 }

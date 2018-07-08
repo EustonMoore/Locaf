@@ -1,8 +1,9 @@
 import { Component, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Thumbnail } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { CameraPreviewOptions, CameraPreview, CameraPreviewPictureOptions } from '@ionic-native/camera-preview';
 import { Platform } from 'ionic-angular/platform/platform';
 import { take } from 'rxjs/operator/take';
+import { Cafe } from '../../models';
 
 /**
  * Generated class for the CameraPreviewPage page.
@@ -27,6 +28,7 @@ export class CameraPreviewPage {
   public footerHeight: number;
   public filterLevel: number;
   public editMode: boolean = false;
+  public cafe: Cafe;
 
 
   public filter = [{name: 'Original', filter: null, src: null, range: null, imageData: null},
@@ -48,51 +50,52 @@ export class CameraPreviewPage {
 
   public selectedFilter = {
     imageData: null,
+    thumbnail: null,
     filter: this.filter[0].filter
   }
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private cameraPreview: CameraPreview,
+              public menuCtrl: MenuController,
               private platform: Platform) {
 
-            
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CameraPreviewPage');
-
-    this.footerHeight = this.platform.width() + document.getElementsByClassName('camera-header')[0].clientHeight;
+    this.menuCtrl.enable(false);
     
+    this.footerHeight = this.platform.width() + document.getElementsByClassName('camera-header')[0].clientHeight;
+    this.cafe = this.navParams.get('cafe');
     this.selectedFilter.imageData = this.navParams.get('imageData');
+    console.log(this.cafe);
+
     if(this.selectedFilter.imageData){
       let takedPicture = document.getElementById('originalPicture') as HTMLImageElement;
       takedPicture.src = 'data:image/jpeg;base64,' + this.selectedFilter.imageData;
       
-      this.resizeImage(this.selectedFilter.imageData, null, 320).then(resizedBase64 => {
+      this.resizeImage(this.selectedFilter.imageData, null, 180).then(resizedBase64 => {
         this.filter.forEach((filter) => {
           filter.src = resizedBase64[0];
         })
+        this.selectedFilter.thumbnail = resizedBase64[0].split(',')[1];
+       
         this.editMode = true;
       })
-      
+      console.log(this.selectedFilter);
      
     }
   
     else this.initCamera();
     
-
-  
-   
-
-   
-    
-    
-
-    
     // this.cameraPreview.show();      
   }
   
+  ionViewWillLeave(){
+    this.cameraPreview.stopCamera();
+    this.menuCtrl.enable(true);
+  }
 
   initCamera(){
 
@@ -145,25 +148,25 @@ export class CameraPreviewPage {
       });
   }
   
-  ionViewWillLeave(){
-    this.cameraPreview.stopCamera();
-  }
+  
 
 
   takePicture(){
     this.cameraPreview.takePicture(this.cameraOpts).then(imageData => {
       let takedPicture = document.getElementById('originalPicture') as HTMLImageElement;
            
-      this.resizeImage(imageData, 1024, 320).then(resizedBase64 => {
+      this.resizeImage(imageData, 1024, 180).then(resizedBase64 => {
         takedPicture.src = resizedBase64[0];
         this.filter.forEach((filter, index) => {
           filter.src = resizedBase64[1];
         })
-        // this.navCtrl.push('SocialCreatePage', {imageData: resizedData});
+      
         this.cameraPreview.hide();
-        this.selectedFilter.imageData = takedPicture.src.split(',')[1];
+        this.selectedFilter.imageData = resizedBase64[0].split(',')[1];
+        this.selectedFilter.thumbnail = resizedBase64[1].split(',')[1];
         this.editMode = true;
       });
+      console.log(this.selectedFilter);
     })
   }
 
@@ -197,18 +200,22 @@ export class CameraPreviewPage {
     let takedPicture = document.getElementById('originalPicture') as HTMLImageElement;
     
     this.selectedFilter.filter = item.filter;
+    this.selectedFilter.thumbnail = item.imageData == null ? item.src.split(',')[1] : item.imageData.split(',')[1];
     if(item.filter == null && takedPicture.firstElementChild.tagName == 'CANVAS') {
       this.selectedFilter.imageData = takedPicture.src.split(',')[1];
       takedPicture.firstElementChild.remove();
     }
-    
   }
+
   swipe(event){
     console.log(event);
   }
 
   imageLoaded(event){
-    if(this.selectedFilter.filter != null) this.selectedFilter.imageData = event.detail.result.toDataURL('image/jpeg').split(',')[1];
+    if(this.selectedFilter.filter != null) {
+      this.selectedFilter.imageData = event.detail.result.toDataURL('image/jpeg').split(',')[1];
+      
+    }
   }
 
   filterLoaded(event, item){
@@ -219,6 +226,6 @@ export class CameraPreviewPage {
   }
 
   openSocialCreatePage(){
-    this.navCtrl.push('SocialCreatePage', {imageData: this.selectedFilter.imageData});
+    this.navCtrl.push('SocialCreatePage', {imageData: this.selectedFilter.imageData, thumbnail: this.selectedFilter.thumbnail, cafe: this.cafe});
   }
 }

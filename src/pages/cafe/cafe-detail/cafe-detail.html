@@ -18,7 +18,7 @@
     
     <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + cafe.images.background+ ')'}">
       <h2 class="card-list-title" > {{cafe.cafeName}}</h2>
-      <h2 class="card-list-subtitle">{{ cafe.address }}</h2>
+      <h2 class="card-list-address">{{ cafe.address }}</h2>
       <h2 class="card-list-distance">{{ cafe.distance }}</h2>
       
       <!-- <h2 class="card-list-like"></ion-icon></h2> -->
@@ -85,7 +85,7 @@
             <ion-col no-padding col-6>
               <ion-item no-lines>
                 <ion-label stacked color="lc-gray">Open Hours</ion-label>
-                <ion-input readonly value="{{ cafe.time.open }} ~ {{cafe.time.close}}" > </ion-input>
+                <ion-input readonly value="{{ cafe.time.open }}:00 ~ {{cafe.time.close}}:00" > </ion-input>
               </ion-item>
             </ion-col>
             <ion-col no-padding col-6>
@@ -111,21 +111,19 @@
     
   </ion-card>
 <!--     -->
-   
-      
         <!--***********  Thumbnail images ***********-->
-      <ion-list *ngIf="cafe.images.imgGallery?.length > 0 " class="photo">
+      <ion-list *ngIf="feeds.length > 0 " class="photo">
           <ion-list-header >
             PHOTOS
-            <button ion-button icon-only item-end clear>
+            <button ion-button icon-only item-end clear (click)="presentActionSheet()">
                 <ion-icon  name="lc-add"></ion-icon>
             </button>  
           </ion-list-header>
           <ion-grid no-padding >
                 <ion-row  wrap color="gray">
-                  <ion-col  tappable col-4 *ngFor="let image of cafe.images.imgGallery  ,let i = index" >
+                  <ion-col  tappable col-4 *ngFor="let feed of feeds  ,let i = index" >
                     
-                    <div class="square-image" [ngStyle]="{'background-image': 'url(' + image + ')'}" (click)="openFullImage(i)" ></div>
+                    <div class="square-image" [ngStyle]="{'background-image': 'url(' + feed.thumbnail + ')'}" (click)="openFullImage(i)" ></div>
                   <!-- <img class="square-image"  [src]="image" /> -->
                   </ion-col>
                 </ion-row>

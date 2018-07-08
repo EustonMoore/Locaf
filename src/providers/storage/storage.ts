@@ -79,18 +79,33 @@ export class StorageProvider {
   }
 
 
-  public uploadPhoto(userId: string, imageData: string, feedId: string): Promise<string>{
+  public uploadPhoto(userId: string, imageData: string, thumbnail:string, feedId: string): Promise<string[]>{
     return new Promise((resolve, reject)=>{
       this.loading.show();
+      let url = []
       let imgBlob = this.imgURItoBlob("data:image/jpeg;base64," + imageData);
-      let metadata = {
+      let imgMetadata = {
         'contentType': imgBlob.type
       };
 
-      firebase.storage().ref().child('images/feeds/' + feedId + '/' + this.generateFilename()).put(imgBlob, metadata).then((snapshot) => {
-        let url = snapshot.metadata.downloadURLs[0];
-        this.loading.hide();
-        resolve(url);
+      let thumbBlob = this.imgURItoBlob("data:image/jpeg;base64," + thumbnail);
+      let thumbMetadata = {
+        'contentType': thumbBlob.type
+      };
+
+      firebase.storage().ref().child('images/feeds/' + feedId + '/' + this.generateFilename()).put(imgBlob, imgMetadata).then((snapshot) => {
+        url.push(snapshot.metadata.downloadURLs[0]);
+
+        firebase.storage().ref().child('images/feeds/' + feedId + '/' + this.generateFilename()).put(thumbBlob, thumbMetadata).then((snapshot) => {
+          url.push(snapshot.metadata.downloadURLs[0]);
+          this.loading.hide();
+          resolve(url);
+
+        }).catch(err => {
+          console.log("ERROR STORAGE: " + JSON.stringify(err));
+          this.loading.hide();
+          reject();
+        });
       }).catch(err => {
         console.log("ERROR STORAGE: " + JSON.stringify(err));
         this.loading.hide();

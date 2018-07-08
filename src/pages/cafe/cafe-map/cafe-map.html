@@ -33,8 +33,8 @@
 <content-drawer [options]="drawerOptions">
    
     <ion-list margin-bottom>
-      <ion-item tappable mode="ios" (click)="openCafeDetailPage(cafe)" *ngFor="let cafe of cafes">
-        <ion-thumbnail item-left>
+      <ion-item tappable mode="ios"  *ngFor="let cafe of cafes" (click)="moveToCafe(cafe)">
+        <ion-thumbnail item-left (click)="openCafeDetailPage(cafe); $event.stopPropagation()">
           <img src="{{ cafe.images.background }}">
         </ion-thumbnail>
         <h2>{{ cafe.cafeName }}</h2>

@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Platform } from 'ionic-angular/platform/platform';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -24,6 +24,8 @@ export class CafeMapPage {
   public autocompleteItems = [];
   public googleAutocomplete = new google.maps.places.AutocompleteService();
   public myMarker: any;
+  public markers: any;
+  public infoWindows: any;
   public map: any;
   public drawerOptions;
   private cafes: Cafe[];
@@ -33,6 +35,7 @@ export class CafeMapPage {
     public zone: NgZone, 
     public geocoder: NativeGeocoder, 
     public platform: Platform,
+    public menuCtrl: MenuController,
     public geolocation: Geolocation) {
       
       this.drawerOptions = {
@@ -46,7 +49,7 @@ export class CafeMapPage {
   }
 
   ionViewDidLoad() {
-    
+    this.menuCtrl.enable(false);
     
     let coords = this.navParams.get('coords');
     this.cafes = this.navParams.get('cafes'); 
@@ -56,6 +59,11 @@ export class CafeMapPage {
 
     this.initMap(coords);
   
+  }
+
+  ionViewWillUnload(){
+    this.menuCtrl.enable(true);
+   
   }
 
 
@@ -74,13 +82,28 @@ export class CafeMapPage {
    
     this.myMarker = new naver.maps.Marker({
       position: latLng,
-      map: this.map
+      map: this.map,
+      animation: naver.maps.Animation.DROP
     });
 
-
-
-
+    this.cafes.forEach(cafe => {
+      let latLng = new naver.maps.LatLng(cafe.coords.latitude, cafe.coords.longitude);
+      this.markers = [];
+      this.infoWindows = [];
+      this.markers.push( new naver.maps.Marker({
+        position: latLng,
+        map: this.map,
+        title: cafe.cafeName
+        // icon: './assets/img/marker-selected.png'
+      }));
+      // let infoWindow = new naver.maps.InfoWindow({
+      //   content: '<div style="width:150px;text-align:center;padding:10px;">'+ cafe.cafeName +'</div>'
+      // });
+      // this.infoWindows.push(infoWindow);
+    })
+   
   }
+  
 
 
   getCurrentLocation(){
@@ -140,4 +163,14 @@ export class CafeMapPage {
     })
   }
 
+  openCafeDetailPage(cafe){
+    this.navCtrl.push('CafeDetailPage', {cafe: cafe});
+  }
+
+  moveToCafe(cafe){
+    let newCenter = new naver.maps.LatLng(cafe.coords.latitude, cafe.coords.longitude);
+      this.map.setCenter(newCenter)
+  }
+
+ 
 }
