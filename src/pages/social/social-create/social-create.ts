@@ -99,6 +99,13 @@ export class SocialCreatePage {
             if(this.navCtrl.getByIndex(1).name == 'CafeDetailPage') this.navCtrl.popTo(this.navCtrl.getByIndex(1)).then(() => {
               this.navCtrl.getByIndex(1)._didLoad();
             });
+
+            // else if(this.navCtrl.getByIndex(2).name == 'CafeDetailPage'){
+            //   this.navCtrl.popTo(this.navCtrl.getByIndex(2)).then(() => {
+            //     this.navCtrl.getByIndex(2)._didLoad();
+            //   });
+            // }
+
             else this.navCtrl.popToRoot().then(() => {
               this.navCtrl.getActiveChildNavs()[0]._tabs[1]._views[0]._didLoad();
             });
