@@ -224,7 +224,6 @@ export class CafeListPage {
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     let d = R * c;
 
-    console.log(Math.round(d * 1000));
     let result = d >= 1 ? d.toFixed(1) + 'Km' : Math.round(d * 1000) + 'm';
 
     return result;
